@@ -5,7 +5,11 @@ Linux shell scripts to simplify Linux deployment
 Thanks:
 
 https://github.com/rofl0r/proxychains-ng
+
 https://github.com/ohmyzsh/ohmyzsh
+
 https://github.com/vinceliuice/vimix-gtk-themes
+
 https://github.com/vinceliuice/Qogir-icon-theme
+
 https://github.com/vinceliuice/Orchis-theme
