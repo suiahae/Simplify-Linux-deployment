@@ -1,8 +1,12 @@
 # https://mirrors.tuna.tsinghua.edu.cn/
 # https://extensions.gnome.org/
+# https://rpmfusion.org/Howto/NVIDIA
 
 export http_proxy=http://192.168.160.1:7890;
 export https_proxy=http://192.168.160.1:7890;
+
+# export http_proxy=http://192.168.43.1:1080;
+# export https_proxy=http://192.168.43.1:1080;
 
 chmod +x scripts/*;
 
@@ -35,16 +39,17 @@ then
     sudo apt install git p7zip-full gnome-tweak-tool zsh wget curl;
 elif [ "$distributor" = "$distri_fedora" ];
 then
-    sudo dnf install git p7zip-full gnome-tweak-tool zsh wget curl make util-linux-user
+    sudo dnf install git p7zip gnome-tweak-tool zsh wget curl make util-linux-user
 elif [ "$distributor" = "$distri_arch" ];
 then
-    sudo pacman -S git p7zip-full gnome-tweak-tool zsh wget curl;
+    sudo pacman -S git p7zip gnome-tweak-tool zsh wget curl;
 fi
 
 # 安装 proxychains
 ./scripts/install-proxychains.sh;
 # 更改 proxychains 代理
 sudo sed -i 's/^socks.*/http\t192.168.160.1\t7890/g' /etc/proxychains.conf;
+sudo echo "http\t192.168.43.1\t1080" >> /etc/proxychains.conf;
 sed -i '$a alias pycs=proxychains4' ~/.bashrc;
 
 # 安装主题
