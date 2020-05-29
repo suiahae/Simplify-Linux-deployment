@@ -6,7 +6,6 @@ proxyhost="192.168.160.1";
 proxyport="7890";
 proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
 
-
 export http_proxy=$proxyaddress;
 export https_proxy=$proxyaddress;
 
