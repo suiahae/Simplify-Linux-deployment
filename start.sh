@@ -14,6 +14,7 @@ export https_proxy=$proxyaddress;
 
 chmod +x scripts/*;
 
+
 sudo dnf install redhat-lsb-core;
 
 lsb_release -a > /tmp/lsb_release_grep;
@@ -46,7 +47,7 @@ sudo pacman -S git p7zip zsh wget curl make;
 # 安装 proxychains
 ./scripts/install-proxychains.sh;
 # 更改 proxychains 代理
-sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
+#sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
 sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
 #sudo echo "http\t192.168.43.1\t1080" >> /etc/proxychains.conf;
 echo "alias pycs=proxychains4" >> ~/.bashrc;
