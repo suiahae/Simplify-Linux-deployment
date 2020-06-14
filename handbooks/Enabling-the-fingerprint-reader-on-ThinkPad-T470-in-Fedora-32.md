@@ -34,7 +34,7 @@ libfprint_t470='https://kojipkgs.fedoraproject.org//packages/libfprint/1.0/2.fc3
 
 wget $fprint_t470 $fprint_pam_t470 $libfprint_t470;
 
-sudo dnf install ./fprintd-0.9.0-1.fc32.x86_64.rpm ./pam-0.9.0-1.fc32.x86_64.rpm ./libfprint-1.0-2.fc32.x86_64.rpm;
+sudo dnf install ./fprintd-0.9.0-1.fc32.x86_64.rpm ./fprintd-pam-0.9.0-1.fc32.x86_64.rpm ./libfprint-1.0-2.fc32.x86_64.rpm;
 ```
 
 Add `exclude=fprint* libfprint` to the last line of `/etc/dnf/dnf.conf` to disable the update.
