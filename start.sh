@@ -15,7 +15,7 @@ export https_proxy=$proxyaddress;
 chmod +x scripts/*;
 
 
-sudo dnf install redhat-lsb-core;
+sudo dnf install redhat-lsb-core -y;
 
 lsb_release -a > /tmp/lsb_release_grep;
 distributor=$(grep -oP '(?<=Distributor ID:\s)\w*' /tmp/lsb_release_grep);
