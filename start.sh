@@ -32,7 +32,7 @@ elif [ "$distributor" = "$distri_fedora" ];
 then
     ./scripts/change-update-list-fedora.sh;
     sudo dnf makecache;
-    sudo dnf update
+    sudo dnf update;
 elif [ "$distributor" = "$distri_arch" ];
 then
     echo $distri_arch;
@@ -64,7 +64,6 @@ echo "alias supycs='sudo proxychains4'" >> ~/.bashrc;
 # 安装 oh-my-zsh
 # sudo dnf install util-linux-user;
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
-exit;
 sudo chsh -s $(which zsh)
 # 下载插件
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
