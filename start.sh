@@ -53,18 +53,19 @@ sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.c
 echo "alias pycs=proxychains4" >> ~/.bashrc;
 echo "alias supycs='sudo proxychains4'" >> ~/.bashrc;
 
-# 安装主题
-sudo apt install gnome-tweak-tool;
-sudo dnf install gnome-tweak-tool;
-sudo pacman -S gnome-tweak-tool;
+# # 安装主题
+# sudo apt install gnome-tweak-tool;
+# sudo dnf install gnome-tweak-tool;
+# sudo pacman -S gnome-tweak-tool;
 
-./scripts/update-Qogir-theme-online.sh;
-./scripts/update-Vimix-gtk-themes-online.sh;
+# ./scripts/update-Qogir-theme-online.sh;
+# ./scripts/update-Vimix-gtk-themes-online.sh;
 
 # 安装 oh-my-zsh
 # sudo dnf install util-linux-user;
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
-chsh -s $(which zsh)
+exit;
+sudo chsh -s $(which zsh)
 # 下载插件
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
