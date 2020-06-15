@@ -41,7 +41,7 @@ fi
 # 安装环境
 
 sudo apt install git p7zip-full zsh wget curl make;
-sudo dnf install git p7zip zsh wget curl make util-linux-user
+sudo dnf install git p7zip zsh wget curl make util-linux-user -y
 sudo pacman -S git p7zip zsh wget curl make;
 
 # 安装 proxychains
@@ -51,6 +51,7 @@ sudo pacman -S git p7zip zsh wget curl make;
 sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
 #sudo echo "http\t192.168.43.1\t1080" >> /etc/proxychains.conf;
 echo "alias pycs=proxychains4" >> ~/.bashrc;
+echo "alias supycs='sudo proxychains4'" >> ~/.bashrc;
 
 # 安装主题
 sudo apt install gnome-tweak-tool;
@@ -71,3 +72,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 sed -i 's/plugins=(.*/plugins=(vim-interaction pip git sudo extract z wd archlinux zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc;
 sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
 echo "alias pycs=proxychains4" >> ~/.zshrc;
+echo "alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'" >> ~/.zshrc;

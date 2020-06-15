@@ -1,6 +1,9 @@
 # Simplify-Linux-deployment
 Linux shell scripts to simplify Linux deployment
 
+https://github.com/suiahae/Simplify-Linux-deployment.git
+
+git@github.com:suiahae/Simplify-Linux-deployment.git
 
 
 Thanks:
