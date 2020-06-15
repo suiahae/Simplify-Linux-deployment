@@ -1,4 +1,4 @@
-sudo zip -r ~/yun.repos.d.bak.zip /etc/yum.repos.d
+zip -r ~/yun.repos.d.bak.zip /etc/yum.repos.d
 
 sudo sh -c 'echo "[fedora]
 name=Fedora \$releasever - \$basearch
