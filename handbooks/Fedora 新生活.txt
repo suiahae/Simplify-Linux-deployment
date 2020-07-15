@@ -1,0 +1,60 @@
+# Fedora 新生活
+## 
+代理设置
+镜像源更改
+系统更新
+
+驱动安装
+nvidia
+
+必要软件安装
+zsh&&oh-my-zsh
+oh-my-zsh插件下载
+zsh配置更改
+alias别名设置
+
+系统美化
+软件安装
+
+主题下载
+
+插件下载(https://extensions.gnome.org/)
+User Themes
+Dash to Dock
+Dash to Panel
+Desktop Icons NG (DING)
+Proxy Switcher
+NetSpeed by hedayaty
+KStatusNotifierItem/AppIndicator Support
+
+## 软件
+docker
+docker-compose
+clash
+yacd
+
+seahorse
+
+rclone
+Autorclone(添加图标 alacarte)
+emby(https://github.com/MediaBrowser/Emby.Releases/releases)
+
+motrix(https://github.com/agalwood/Motrix/releases)
+
+vlc
+
+Visual Studio Code on Linux (https://code.visualstudio.com/docs/setup/linux)
+
+
+dnf install qemu libvirt virt-manager
+
+vim .vmware/preferences
+
+mks.gl.allowBlacklistedDrivers = "TRUE"
+
+
+## fcitx
+皮肤(https://github.com/VOID001/ssf2fcitx)(https://pinyin.sogou.com/skins/)
+~/.config/fcitx/skin
+词库(https://www.cnblogs.com/luoshuitianyi/p/11669619.html)
+~/.config/fcitx/pinyin

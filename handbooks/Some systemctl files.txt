@@ -1,0 +1,18 @@
+sudo vim /etc/systemd/system/start-docker-compose-clash.service
+sudo vim /usr/lib/systemd/system/start-docker-compose-yacd.service
+sudo vim /usr/lib/systemd/system/rclone-movies.service 
+
+
+
+[Unit]
+Description=Rclone mount gdteam movies
+Before=start-docker-compose-clash.service
+
+[Service]
+Type=simple
+User=minux
+Environment="HTTPS_PROXY=http://127.0.0.1:7890" 
+ExecStart=/bin/rclone mount GDTeam_raye_movies: /home/emby/GDTeam_raye_movies --allow-other --allow-non-empty
+
+[Install]
+WantedBy=multi-user.target
