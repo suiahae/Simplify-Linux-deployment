@@ -36,7 +36,11 @@ WantedBy=multi-user.target
 
 ### 3.rclone
 
+#### 3.1 movies
+
 `sudo vim /usr/lib/systemd/system/rclone-movies.service`
+
+GDTeam_raye_movies
 
 ```
 [Unit]
@@ -48,6 +52,27 @@ Type=simple
 User=minux
 Environment="HTTPS_PROXY=http://127.0.0.1:7890" 
 ExecStart=/bin/rclone mount GDTeam_raye_movies: /home/emby/GDTeam_raye_movies --allow-other --allow-non-empty
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### 3.2 qinse
+
+`sudo vim /usr/lib/systemd/system/rclone-qinse.service`
+
+GDTeam_raye_qinse
+
+```
+[Unit]
+Description=Rclone mount gdteam qinse
+Before=start-docker-compose-clash.service
+
+[Service]
+Type=simple
+User=minux
+Environment="HTTPS_PROXY=http://127.0.0.1:7890" 
+ExecStart=/bin/rclone mount GDTeam_raye_qinse: /home/emby/GDTeam_raye_qinse --allow-other --allow-non-empty
 
 [Install]
 WantedBy=multi-user.target
