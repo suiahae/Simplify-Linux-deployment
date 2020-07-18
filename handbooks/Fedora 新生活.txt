@@ -58,3 +58,9 @@ mks.gl.allowBlacklistedDrivers = "TRUE"
 ~/.config/fcitx/skin
 词库(https://www.cnblogs.com/luoshuitianyi/p/11669619.html)
 ~/.config/fcitx/pinyin
+
+## 图片浏览器
+nomacs
+
+截图工具
+flameshot
