@@ -39,8 +39,6 @@ rclone
 Autorclone(添加图标 alacarte)
 emby(https://github.com/MediaBrowser/Emby.Releases/releases)
 
-motrix(https://github.com/agalwood/Motrix/releases)
-
 vlc
 
 Visual Studio Code on Linux (https://code.visualstudio.com/docs/setup/linux)
@@ -62,5 +60,15 @@ mks.gl.allowBlacklistedDrivers = "TRUE"
 ## 图片浏览器
 nomacs
 
-截图工具
+## 截图工具
 flameshot
+
+## 下载工具
+
+motrix(https://github.com/agalwood/Motrix/releases)
+
+uGet
+--enable-rpc=true -D --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=~/.config/aria2/aria2.conf
+
+
+aria2
