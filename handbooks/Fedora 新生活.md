@@ -1,5 +1,5 @@
 # Fedora 新生活
-## 
+
 代理设置
 镜像源更改
 系统更新
@@ -30,6 +30,7 @@ KStatusNotifierItem/AppIndicator Support
 TopIcons Plus by phocean
 
 ## 软件
+
 docker
 docker-compose
 clash
@@ -43,8 +44,7 @@ Autorclone(添加图标 alacarte)
 
 vlc
 
-[Visual Studio Code on Linux] (https://code.visualstudio.com/docs/setup/linux)
-
+[Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
 
 dnf install qemu libvirt virt-manager
 
@@ -52,17 +52,20 @@ vim .vmware/preferences
 
 mks.gl.allowBlacklistedDrivers = "TRUE"
 
-
 ## fcitx
-[皮肤](https://github.com/VOID001/ssf2fcitx)(https://pinyin.sogou.com/skins/)
+
+[皮肤文件转换](https://github.com/VOID001/ssf2fcitx) [搜狗皮肤下载](https://pinyin.sogou.com/skins/)
+
 ~/.config/fcitx/skin
 [词库](https://www.cnblogs.com/luoshuitianyi/p/11669619.html)
 ~/.config/fcitx/pinyin
 
 ## 图片浏览器
+
 nomacs
 
 ## 截图工具
+
 flameshot
 
 ## 下载工具
@@ -71,6 +74,5 @@ flameshot
 
 uGet
 --enable-rpc=true -D --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=~/.config/aria2/aria2.conf
-
 
 aria2
