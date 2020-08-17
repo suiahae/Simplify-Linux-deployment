@@ -26,6 +26,7 @@ Desktop Icons NG (DING)
 Proxy Switcher
 NetSpeed by hedayaty
 KStatusNotifierItem/AppIndicator Support
+TopIcons Plus by phocean
 
 ## 软件
 docker
