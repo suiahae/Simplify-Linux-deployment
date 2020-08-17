@@ -18,10 +18,11 @@ alias别名设置
 
 主题下载
 
-插件下载(https://extensions.gnome.org/)
+[插件下载](https://extensions.gnome.org/)
+
 User Themes
 Dash to Dock
-Dash to Panel
+[Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel)
 Desktop Icons NG (DING)
 Proxy Switcher
 NetSpeed by hedayaty
@@ -38,11 +39,11 @@ seahorse
 
 rclone
 Autorclone(添加图标 alacarte)
-emby(https://github.com/MediaBrowser/Emby.Releases/releases)
+[emby](https://github.com/MediaBrowser/Emby.Releases/releases)
 
 vlc
 
-Visual Studio Code on Linux (https://code.visualstudio.com/docs/setup/linux)
+[Visual Studio Code on Linux] (https://code.visualstudio.com/docs/setup/linux)
 
 
 dnf install qemu libvirt virt-manager
@@ -53,9 +54,9 @@ mks.gl.allowBlacklistedDrivers = "TRUE"
 
 
 ## fcitx
-皮肤(https://github.com/VOID001/ssf2fcitx)(https://pinyin.sogou.com/skins/)
+[皮肤](https://github.com/VOID001/ssf2fcitx)(https://pinyin.sogou.com/skins/)
 ~/.config/fcitx/skin
-词库(https://www.cnblogs.com/luoshuitianyi/p/11669619.html)
+[词库](https://www.cnblogs.com/luoshuitianyi/p/11669619.html)
 ~/.config/fcitx/pinyin
 
 ## 图片浏览器
@@ -66,7 +67,7 @@ flameshot
 
 ## 下载工具
 
-motrix(https://github.com/agalwood/Motrix/releases)
+[motrix](https://github.com/agalwood/Motrix/releases)
 
 uGet
 --enable-rpc=true -D --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=~/.config/aria2/aria2.conf
