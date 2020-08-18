@@ -30,9 +30,10 @@ then
     sudo apt update && sudo apt upgrade;
 elif [ "$distributor" = "$distri_fedora" ];
 then
-    ./scripts/change-update-list-fedora.sh;
-    sudo dnf makecache;
-    sudo dnf update;
+    # ./scripts/change-update-list-fedora.sh;
+    # sudo dnf makecache;
+    # sudo dnf update;
+    echo "$distri_fedora, Nothing to do"
 elif [ "$distributor" = "$distri_arch" ];
 then
     echo $distri_arch;
