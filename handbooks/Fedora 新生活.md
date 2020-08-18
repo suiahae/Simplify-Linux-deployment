@@ -13,6 +13,8 @@ oh-my-zsh插件下载
 zsh配置更改
 alias别名设置
 
+[typora rpm](https://github.com/RPM-Outpost/typora)
+
 系统美化
 软件安装
 
