@@ -27,6 +27,7 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=Start yacd (Yet Another Clash Dashboard) auto
+Wants=clash
 After=clash
 
 [Service]
@@ -49,6 +50,7 @@ GDTeam_raye_movies
 ```
 [Unit]
 Description=Rclone mount gdteam movies
+Wants=clash
 After=clash
 
 [Service]
@@ -70,6 +72,7 @@ GDTeam_raye_qinse
 ```
 [Unit]
 Description=Rclone mount gdteam qinse
+Wants=clash
 After=clash
 
 [Service]
@@ -89,6 +92,7 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=Rclone mount gdteam sundries
+Wants=clash
 After=clash
 
 [Service]
@@ -108,6 +112,7 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=A utility for downloading files which supports HTTP(S), FTP, SFTP, BitTorrent and Metalink
+Wants=clash
 After=clash
 
 [Service]
