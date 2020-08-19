@@ -9,7 +9,7 @@ See on https://github.com/suiahae/clash-premium-installer
 ```
 [Unit]
 Description=Start clash auto
-After=docker
+After=docker.service
 
 [Service]
 Type=simple
@@ -27,8 +27,8 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=Start yacd (Yet Another Clash Dashboard) auto
-Wants=clash
-After=clash
+Wants=clash.service
+After=clash.service
 
 [Service]
 Type=simple
@@ -50,8 +50,8 @@ GDTeam_raye_movies
 ```
 [Unit]
 Description=Rclone mount gdteam movies
-Wants=clash
-After=clash
+Wants=clash.service
+After=clash.service
 
 [Service]
 Type=simple
@@ -72,8 +72,8 @@ GDTeam_raye_qinse
 ```
 [Unit]
 Description=Rclone mount gdteam qinse
-Wants=clash
-After=clash
+Wants=clash.service
+After=clash.service
 
 [Service]
 Type=simple
@@ -92,8 +92,8 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=Rclone mount gdteam sundries
-Wants=clash
-After=clash
+Wants=clash.service
+After=clash.service
 
 [Service]
 Type=simple
@@ -112,8 +112,8 @@ WantedBy=multi-user.target
 ```
 [Unit]
 Description=A utility for downloading files which supports HTTP(S), FTP, SFTP, BitTorrent and Metalink
-Wants=clash
-After=clash
+Wants=clash.service
+After=clash.service
 
 [Service]
 Type=simple
@@ -122,5 +122,3 @@ ExecStart=/usr/bin/aria2c --enable-rpc=true --disable-ipv6 --check-certificate=f
 [Install]
 WantedBy=multi-user.target
 ```
-
-### 
