@@ -1,11 +1,15 @@
-### 1.clash
+`sudo systemctl daemon-reload`
 
-`sudo vim /etc/systemd/system/start-docker-compose-clash.service`
+### ~~1.clash~~
+
+See on https://github.com/suiahae/clash-premium-installer
+
+~~`sudo vim /etc/systemd/system/start-docker-compose-clash.service`~~
 
 ```
 [Unit]
 Description=Start clash auto
-Before=docker
+After=docker
 
 [Service]
 Type=simple
@@ -18,12 +22,12 @@ WantedBy=multi-user.target
 
 ### 2.yacd
 
-`sudo vim /usr/lib/systemd/system/start-docker-compose-yacd.service`
+`sudo vim /usr/lib/systemd/system/yacd-poweredby-docker_compose.service`
 
 ```
 [Unit]
-Description=Start yacd(Yet Another Clash Dashboard) auto
-Before=start-docker-compose-clash.service
+Description=Start yacd (Yet Another Clash Dashboard) auto
+After=clash
 
 [Service]
 Type=simple
@@ -45,7 +49,7 @@ GDTeam_raye_movies
 ```
 [Unit]
 Description=Rclone mount gdteam movies
-Before=start-docker-compose-clash.service
+After=clash
 
 [Service]
 Type=simple
@@ -66,7 +70,7 @@ GDTeam_raye_qinse
 ```
 [Unit]
 Description=Rclone mount gdteam qinse
-Before=start-docker-compose-clash.service
+After=clash
 
 [Service]
 Type=simple
@@ -77,3 +81,41 @@ ExecStart=/bin/rclone mount GDTeam_raye_qinse: /home/emby/GDTeam_raye_qinse --al
 [Install]
 WantedBy=multi-user.target
 ```
+
+#### 3.3 sundries
+
+`sudo vim /usr/lib/systemd/system/rclone-sundries.service`
+
+```
+[Unit]
+Description=Rclone mount gdteam sundries
+After=clash
+
+[Service]
+Type=simple
+User=minux
+Environment="HTTPS_PROXY=http://127.0.0.1:7890" 
+ExecStart=/bin/rclone mount GDTeam_raye_sundries: /home/emby/GDTeam_raye_sundries --allow-other --allow-non-empty
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 4.aria2c
+
+`sudo vim /usr/lib/systemd/system/aria2.service`
+
+```
+[Unit]
+Description=A utility for downloading files which supports HTTP(S), FTP, SFTP, BitTorrent and Metalink
+After=clash
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/aria2c --enable-rpc=true --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=/home/minux/.config/aria2/aria2.conf
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### 
