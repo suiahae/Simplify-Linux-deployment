@@ -56,6 +56,19 @@ options nvidia NVreg_DynamicPowerManagement=0x02
 EOF
 ```
 
+#### [DRM kernel mode setting](https://wiki.archlinux.org/index.php/NVIDIA#DRM_kernel_mode_setting)
+
+[nvidia](https://www.archlinux.org/packages/?name=nvidia) 364.16 adds support for DRM (Direct Rendering Manager) [kernel mode setting](https://wiki.archlinux.org/index.php/Kernel_mode_setting). To enable this feature, add the `nvidia-drm.modeset=1` [kernel parameter](https://wiki.archlinux.org/index.php/Kernel_parameter). For basic functionality that should suffice, if you want to ensure it's loaded at the earliest possible occasion, or are noticing startup issues you can add `nvidia`, `nvidia_modeset`, `nvidia_uvm` and `nvidia_drm` to the initramfs according to [Mkinitcpio#MODULES](https://wiki.archlinux.org/index.php/Mkinitcpio#MODULES).
+
+**[An easy solution to this.](https://www.reddit.com/r/SolusProject/comments/a3bnrd/having_nvidiadrmmodeset1_kernel_parameter_set/)**
+First, don't put it in /etc/kernel/cmdline. The best thing to do when you have an nvidia driver installed is to go to /usr/lib/modprobe.d and make a file called zz-nvidia-modeset.conf. You then put the following code within it:
+
+```bash
+options nvidia_drm modeset=1
+```
+
+then run `clr-boot-manager update`
+
 #### NVIDIA PrimaryGPU Support
 
 Using PrimaryGPU allows to use the NVIDIA driver by default instead of the iGPU. This is also required in order to use external display when internally connected from the NVIDIA hardware. Unfortunately, setting this option automatically when an external display is connected is not supported by NVIDIA at this time. To recover this previous behaviour, you can use:
