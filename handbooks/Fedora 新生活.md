@@ -1,7 +1,21 @@
 # Fedora 新生活
 
 代理设置
-镜像源更改
+
+## 镜像源更改
+
+from [rpmfusion.org](https://rpmfusion.org/Configuration)
+
+```bash
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+```
+
+from [rpm sphere](https://rpmsphere.github.io/)
+```bash
+sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-32-1.noarch.rpm
+```
+
+
 系统更新
 
 驱动安装

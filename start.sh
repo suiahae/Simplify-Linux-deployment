@@ -33,7 +33,8 @@ then
     # ./scripts/change-update-list-fedora.sh;
     # sudo dnf makecache;
     # sudo dnf update;
-    echo "$distri_fedora, Nothing to do"
+    sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y;
+    sudo dnf update;
 elif [ "$distributor" = "$distri_arch" ];
 then
     echo $distri_arch;
