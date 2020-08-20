@@ -59,6 +59,8 @@ Autorclone(添加图标 alacarte)
 
 vlc
 
+mpv
+
 [Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
 
 dnf install qemu libvirt virt-manager
