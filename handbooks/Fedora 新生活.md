@@ -15,7 +15,6 @@ from [rpm sphere](https://rpmsphere.github.io/)
 sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-32-1.noarch.rpm
 ```
 
-
 系统更新
 
 驱动安装
