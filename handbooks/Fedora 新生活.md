@@ -43,6 +43,7 @@ Proxy Switcher
 NetSpeed by hedayaty
 KStatusNotifierItem/AppIndicator Support
 TopIcons Plus by phocean
+Clipboard Indicator by Tudmotu
 
 ## 软件
 
