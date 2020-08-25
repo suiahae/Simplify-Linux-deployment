@@ -70,6 +70,11 @@ vim .vmware/preferences
 
 mks.gl.allowBlacklistedDrivers = "TRUE"
 
+thinkfan
+
+https://gist.github.com/suiahae/37fff654837e9959dacb39e5d0627369
+https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
+
 ## fcitx
 
 [皮肤文件转换](https://github.com/VOID001/ssf2fcitx) [搜狗皮肤下载](https://pinyin.sogou.com/skins/)
