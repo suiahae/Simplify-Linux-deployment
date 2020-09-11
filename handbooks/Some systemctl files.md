@@ -117,6 +117,7 @@ After=clash.service
 
 [Service]
 Type=simple
+User=minux
 ExecStart=/usr/bin/aria2c --enable-rpc=true --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=/home/minux/.config/aria2/aria2.conf
 
 [Install]

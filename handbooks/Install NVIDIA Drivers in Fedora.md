@@ -79,6 +79,10 @@ cp -p /usr/share/X11/xorg.conf.d/nvidia.conf /etc/X11/xorg.conf.d/nvidia.conf
 
 And edit the file to use: Option "PrimaryGPU" "yes", like this:
 
+```bash
+sudo gedit /etc/X11/xorg.conf.d/nvidia.conf
+```
+
 ```
 #This file is provided by xorg-x11-drv-nvidia
 #Do not edit
