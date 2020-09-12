@@ -1,0 +1,135 @@
+mixed-port: 7890
+
+rules:
+#  - DOMAIN-SUFFIX,360.cn,REJECT
+#  - DOMAIN-SUFFIX,360.com,REJECT
+#  - DOMAIN-SUFFIX,360.net,REJECT
+#  - DOMAIN-SUFFIX,speedtest.cn,REJECT
+#  - DOMAIN-SUFFIX,speedtest.com,REJECT
+#  - DOMAIN-SUFFIX,speedtest.net,REJECT
+#  - DOMAIN-SUFFIX,fast.cn,REJECT
+#  - DOMAIN-SUFFIX,fast.com,REJECT
+#  - DOMAIN-SUFFIX,fast.net,REJECT
+#  - DOMAIN-SUFFIX,so.cn,REJECT
+#  - DOMAIN-SUFFIX,so.com,REJECT
+#  - DOMAIN-SUFFIX,so.net,REJECT
+ - DOMAIN-SUFFIX,360.cn,DIRECT
+ - DOMAIN-SUFFIX,360.com,DIRECT
+ - DOMAIN-SUFFIX,360.net,DIRECT
+ - DOMAIN-SUFFIX,speedtest.cn,DIRECT
+ - DOMAIN-SUFFIX,speedtest.com,DIRECT
+ - DOMAIN-SUFFIX,speedtest.net,DIRECT
+ - DOMAIN-SUFFIX,fast.cn,DIRECT
+ - DOMAIN-SUFFIX,fast.com,DIRECT
+ - DOMAIN-SUFFIX,fast.net,DIRECT
+ - DOMAIN-SUFFIX,so.cn,DIRECT
+ - DOMAIN-SUFFIX,so.com,DIRECT
+ - DOMAIN-SUFFIX,so.net,DIRECT
+ - DOMAIN-SUFFIX,360tpcdn.com,DIRECT
+ - DOMAIN-SUFFIX,0w0.ooo,🔰 节点选择
+ - DOMAIN-SUFFIX,widgetbot.io,🔰 节点选择
+ - DOMAIN-SUFFIX,vmware.com,🔰 节点选择
+ - DOMAIN-SUFFIX,paypal.com,🔰 节点选择
+ - DOMAIN-SUFFIX,paypalobjects.com,🔰 节点选择
+ - DOMAIN-SUFFIX,steampowered.com,🔰 节点选择
+ - DOMAIN-SUFFIX,steam-chat.com,🔰 节点选择
+ - DOMAIN-SUFFIX,steamgames.com,🔰 节点选择
+ - DOMAIN-SUFFIX,steamusercontent.com,🔰 节点选择
+ - DOMAIN-SUFFIX,steamcontent.com,🔰 节点选择
+ - DOMAIN-SUFFIX,steamstatic.com,🔰 节点选择
+ - DOMAIN-SUFFIX,steamcdn-a.akamaihd.net,🔰 节点选择
+ - DOMAIN-SUFFIX,steamstat.us,🔰 节点选择
+ - DOMAIN-SUFFIX,f-droid.org,🔰 节点选择
+ - DOMAIN-SUFFIX,tjupt.org,🌏 国内媒体
+ - DOMAIN-SUFFIX,npupt.com,🌏 国内媒体
+ - DOMAIN-SUFFIX,bt.byr.cn,🌏 国内媒体
+ # - DOMAIN-SUFFIX,xboxlive.com,🌍 国外媒体
+ # - DOMAIN-SUFFIX,mp.microsoft.com,🌍 国外媒体
+ - DOMAIN-SUFFIX,vsassets.io,🌍 国外媒体
+ - DOMAIN-SUFFIX,microsoft.com,🌍 国外媒体
+ # - DOMAIN-SUFFIX,bilibili.com,🌍 国外媒体
+ - DOMAIN-SUFFIX,bilibiligame.net,🔰 节点选择
+ - DOMAIN-SUFFIX,livefilestore.com,🌍 国外媒体
+ - DOMAIN-SUFFIX,manhuagui.com,🌏 国内媒体
+ - DOMAIN-SUFFIX,i.hamreus.com,🌏 国内媒体
+ - DOMAIN-SUFFIX,google.cn,🐟 漏网之鱼
+ # - DOMAIN-SUFFIX,test-ipv6.com,🌏 国内媒体
+ - DOMAIN-SUFFIX,bbs.3dmgame.com,🎯 全球直连
+ - DOMAIN-KEYWORD,torrent,🎯 全球直连
+ - DOMAIN-SUFFIX,arkoselabs.cn,🔰 节点选择
+ - DOMAIN-SUFFIX,battle.net,🔰 节点选择
+
+
+ - GEOIP,CN,🎯 全球直连
+
+# ------------------------------------------------------------
+
+dns:
+  enable: true
+  ipv6: false # default is false
+  nameserver:
+    - https://1.1.1.1/dns-query # dns over https
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
+    - tls://dns.rubyfish.cn:853
+    - 1.1.1.1
+    - 1.0.0.1
+    - 223.5.5.5 # 这里开始的DNS可以换成其他DNS，尽可能多设置几个，无需考虑污染
+    - 192.168.1.1 # 建议添加默认网关下发的 DNS 保证响应
+#------------------------------------------------------------
+
+#------------------------------------------------------------
+mixin: # object
+  dns:
+    enable: true
+    listen: 0.0.0.0:53
+    # enhanced-mode: redir-host 
+    enhanced-mode: fake-ip
+    nameserver:
+      - https://1.1.1.1/dns-query # dns over https
+      - tls://1.0.0.1:853
+      - tls://dns.google:853
+      - tls://dns.rubyfish.cn:853
+      - 1.1.1.1
+      - 8.8.8.8
+      - 1.0.0.1
+      - 223.5.5.5 # 这里开始的DNS可以换成其他DNS，尽可能多设置几个，无需考虑污染
+      - 192.168.1.1 # 建议添加默认网关下发的 DNS 保证响应
+    fake-ip-filter:
+      - 'dns.msftncsi.com'
+      - 'www.msftncsi.com'
+      - 'www.msftconnecttest.com'
+  experimental:
+    interface-name: WLAN # WLAN 为物理网卡名
+
+#--------------------------------------------
+allow-lan: true
+ipv6: true
+redir-port: 7892
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  fake-ip-range: 198.18.0.1/16
+  enhanced-mode: redir-host
+  nameserver:
+    - https://1.1.1.1/dns-query # dns over https
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
+    - tls://dns.rubyfish.cn:853
+    - 1.1.1.1
+    - 8.8.8.8
+    - 1.0.0.1
+    - 223.5.5.5 # 这里开始的DNS可以换成其他DNS，尽可能多设置几个，无需考虑污染
+    - 192.168.1.1 # 建议添加默认网关下发的 DNS 保证响应
+  fallback:
+    - https://1.1.1.1/dns-query # dns over https
+    - tls://1.0.0.1:853
+    - tls://dns.google:853
+    - tls://dns.rubyfish.cn:853
+tun:
+  enable: true
+  stack: system
+  dns-hijack:
+    - tcp://8.8.8.8:53
+experimental:
+  interface-name: wlp4s0
