@@ -1,13 +1,14 @@
 # https://mirrors.tuna.tsinghua.edu.cn/
 # https://extensions.gnome.org/
 # https://rpmfusion.org/Howto/NVIDIA
+
 proxytype="http";
 proxyhost="192.168.160.1";
 proxyport="7890";
 proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
 
-export http_proxy=$proxyaddress;
-export https_proxy=$proxyaddress;
+# export http_proxy=$proxyaddress;
+# export https_proxy=$proxyaddress;
 
 # export http_proxy=http://192.168.43.1:1080;
 # export https_proxy=http://192.168.43.1:1080;
@@ -34,7 +35,7 @@ then
     # sudo dnf makecache;
     # sudo dnf update;
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y;
-    sudo dnf update;
+    sudo dnf upgrade;
 elif [ "$distributor" = "$distri_arch" ];
 then
     echo $distri_arch;
@@ -56,12 +57,12 @@ echo "alias pycs=proxychains4" >> ~/.bashrc;
 echo "alias supycs='sudo proxychains4'" >> ~/.bashrc;
 
 # # 安装主题
-# sudo apt install gnome-tweak-tool;
-# sudo dnf install gnome-tweak-tool;
-# sudo pacman -S gnome-tweak-tool;
+sudo apt install gnome-tweak-tool;
+sudo dnf install gnome-tweak-tool;
+sudo pacman -S gnome-tweak-tool;
 
-# ./scripts/update-Qogir-theme-online.sh;
-# ./scripts/update-Vimix-gtk-themes-online.sh;
+./scripts/update-Qogir-theme-online.sh;
+./scripts/update-Vimix-gtk-themes-online.sh;
 
 # 安装 oh-my-zsh
 # sudo dnf install util-linux-user;

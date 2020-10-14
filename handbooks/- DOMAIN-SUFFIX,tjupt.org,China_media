@@ -58,6 +58,7 @@ rules:
  - DOMAIN-KEYWORD,torrent,🎯 全球直连
  - DOMAIN-SUFFIX,arkoselabs.cn,🔰 节点选择
  - DOMAIN-SUFFIX,battle.net,🔰 节点选择
+ - DOMAIN-KEYWORD,parsecgaming.com,🎯 全球直连
 
 
  - GEOIP,CN,🎯 全球直连
@@ -66,7 +67,7 @@ rules:
 
 dns:
   enable: true
-  ipv6: false # default is false
+  # ipv6: true # default is false
   nameserver:
     - https://1.1.1.1/dns-query # dns over https
     - tls://1.0.0.1:853
@@ -82,6 +83,7 @@ dns:
 mixin: # object
   dns:
     enable: true
+    ipv6: true # default is false
     listen: 0.0.0.0:53
     # enhanced-mode: redir-host 
     enhanced-mode: fake-ip
@@ -103,6 +105,7 @@ mixin: # object
     interface-name: WLAN # WLAN 为物理网卡名
 
 #--------------------------------------------
+mixed-port: 7890
 allow-lan: true
 ipv6: true
 redir-port: 7892
