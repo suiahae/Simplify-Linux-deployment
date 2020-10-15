@@ -9,7 +9,7 @@
 cd /tmp;
 rm -Rf vimix-gtk-themes.zip 2>/dev/null; 
 rm -Rf vimix-gtk-themes-master/ 2>/dev/null; 
-wget https://github.com/vinceliuice/vimix-gtk-themes/archive/master.zip -O vimix-gtk-themes.zip; 
+wget https://github.com/vinceliuice/vimix-gtk-themes/archive/2020-02-24.zip -O vimix-gtk-themes.zip; 
 7za x vimix-gtk-themes.zip; 
 cd vimix-gtk-themes-master; 
 ./install.sh; 

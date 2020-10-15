@@ -9,7 +9,7 @@
 cd /tmp;
 rm -Rf Qogir-icon-theme.zip 2>/dev/null; 
 rm -Rf Qogir-icon-theme-master/ 2>/dev/null; 
-wget https://github.com/vinceliuice/Qogir-icon-theme/archive/master.zip -O Qogir-icon-theme.zip; 
+wget https://github.com/vinceliuice/Qogir-icon-theme/archive/2020-06-22.zip -O Qogir-icon-theme.zip; 
 7za x Qogir-icon-theme.zip; 
 cd Qogir-icon-theme-master; 
 ./install.sh; 
