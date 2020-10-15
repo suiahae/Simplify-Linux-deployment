@@ -5,6 +5,7 @@ git clone https://github.com/suiahae/Simplify-Linux-deployment.git
 
 git clone git@github.com:suiahae/Simplify-Linux-deployment.git
 
+**Just run**: `./start.sh`
 
 Thanks:
 

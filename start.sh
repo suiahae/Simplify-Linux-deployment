@@ -24,10 +24,22 @@ distri_ubuntu='Ubuntu';
 distri_fedora='Fedora';
 distri_arch='Arch Linux';
 
+# 安装 proxychains-ng
+sudo apt install proxychains4 2>/dev/null;
+sudo dnf install proxychains -y 2>/dev/null;
+sudo pacman -S proxychains4 2>/dev/null;
+
+# 更改 proxychains 代理
+#sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
+sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
+#sudo echo "http\t192.168.43.1\t1080" >> /etc/proxychains.conf;
+echo "alias pycs=proxychains4" >> ~/.bashrc;
+echo "alias supycs='sudo proxychains4'" >> ~/.bashrc;
+
 # 改变镜像源
 if [ "$distributor" = "$distri_ubuntu" ];
 then
-    ./scripts/change-update-list-ubuntu.sh;
+    ./scripts/change-update-list-ubuntu.sh; # for Ubuntu 20.04 LTS
     sudo apt update && sudo apt upgrade;
 elif [ "$distributor" = "$distri_fedora" ];
 then
@@ -39,35 +51,28 @@ then
 elif [ "$distributor" = "$distri_arch" ];
 then
     echo $distri_arch;
+    # 为 arch 安装 proxychains-ng
+    # ./scripts/install-proxychains-ng.sh;
 fi
 
 # 安装环境
+sudo apt install git p7zip-full zsh wget curl make 2>/dev/null; 
+sudo dnf install git p7zip zsh wget curl make util-linux-user -y 2>/dev/null; 
+sudo pacman -S git p7zip zsh wget curl make 2>/dev/null; 
 
-sudo apt install git p7zip-full zsh wget curl make;
-sudo dnf install git p7zip zsh wget curl make util-linux-user -y
-sudo pacman -S git p7zip zsh wget curl make;
-
-# 安装 proxychains
-./scripts/install-proxychains.sh;
-# 更改 proxychains 代理
-#sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
-sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
-#sudo echo "http\t192.168.43.1\t1080" >> /etc/proxychains.conf;
-echo "alias pycs=proxychains4" >> ~/.bashrc;
-echo "alias supycs='sudo proxychains4'" >> ~/.bashrc;
-
-# # 安装主题
+## 安装主题
 sudo apt install gnome-tweak-tool;
 sudo dnf install gnome-tweak-tool;
 sudo pacman -S gnome-tweak-tool;
 
-./scripts/update-Qogir-theme-online.sh;
-./scripts/update-Vimix-gtk-themes-online.sh;
+proxychains4 ./scripts/update-Qogir-theme-online.sh;
+proxychains4 ./scripts/update-Vimix-gtk-themes-online.sh;
 
 # 安装 oh-my-zsh
-# sudo dnf install util-linux-user;
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
-sudo chsh -s $(which zsh)
+# sudo chsh -s $(which zsh)  ${USER}
+# 如果上句话不起作用，请手动更改 /etc/passwd
+
 # 下载插件
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
