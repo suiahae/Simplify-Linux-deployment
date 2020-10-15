@@ -108,11 +108,29 @@ ExecStart=/bin/rclone mount GDTeam_raye_sundries: /home/emby/GDTeam_raye_sundrie
 WantedBy=multi-user.target
 ```
 
-## 4.clash
+## 4. vnc
+
+`/home/minux/.config/systemd/user/vncserver-minux.service`
+
+```
+[Unit]
+Description=Remote desktop service (VNC) for Minux
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/minux/.vnc/passwd -Geometry 1920x1080 -localhost
+
+[Install]
+WantedBy=multi-user.target
+```
+
+## clash
 
 See on <https://github.com/suiahae/clash-premium-installer>
 
-<!-- `sudo vim /etc/systemd/system/start-docker-compose-clash.service`
+<!-- 
+`sudo vim /etc/systemd/system/start-docker-compose-clash.service`
 
 ```bash
 [Unit]
@@ -126,4 +144,9 @@ ExecStart=/usr/bin/docker-compose -f /home/minux/Programs/Clash/docker-compose.y
 
 [Install]
 WantedBy=multi-user.target
-``` -->
+​``` 
+-->
+
+```
+
+
