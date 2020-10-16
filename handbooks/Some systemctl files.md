@@ -110,19 +110,21 @@ WantedBy=multi-user.target
 
 ## 4. vnc
 
-`/home/minux/.config/systemd/user/vncserver-minux.service`
+`/home/<USER>/.config/systemd/user/vncserver-<username>.service`
 
 ```
 [Unit]
-Description=Remote desktop service (VNC) for Minux
+Description=Remote desktop service (VNC) for <USER>
 After=syslog.target network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/minux/.vnc/passwd -Geometry 1920x1080 -localhost
+ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/<username>/.vnc/passwd -Geometry 1920x1080 -localhost
+Restart=on-failure
+RestartSec=5s
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
 
 ## clash

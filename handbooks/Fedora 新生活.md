@@ -165,32 +165,40 @@ If you were using Tigervnc before for your user and you already created a passwo
 $ restorecon -RFv /home/<USER>/.vnc
 ```
 
-创建用户 systemd.unit
+创建 systemd-user-service [参考](http://www.jinbuguo.com/systemd/systemd.service.html)
 
-`/home/minux/.config/systemd/user/vncserver-minux.service`
+`/home/<USER>/.config/systemd/user/vncserver-<username>.service`
 
 ```
 [Unit]
-Description=Remote desktop service (VNC) for Minux
+Description=Remote desktop service (VNC) for <username>
 After=syslog.target network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/minux/.vnc/passwd -Geometry 1920x1080 -localhost
+ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/<username>/.vnc/passwd -Geometry 1920x1080 -localhost
+Restart=on-failure
+RestartSec=5s
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 ```
 
 此时监听端口为`5900`
 
 **Note:** 
 
-`-localhost` 应与 ssh 一起使用
+1. `-localhost` 应与 ssh 一起使用
 
 ```
 ssh user@linux_sever -L 8900:localhost:5900
 vncviewer localhost:8900
+```
+
+2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
+
+```
+sudo loginctl enable-linger <username>
 ```
 
 重载
