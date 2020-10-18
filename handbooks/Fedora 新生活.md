@@ -64,6 +64,8 @@ Autorclone(添加图标 alacarte)
 
 vlc
 
+[Celluloid](https://celluloid-player.github.io/) (Simple GTK+ frontend for mpv)
+
 mpv
 
 ### 虚拟机平台
