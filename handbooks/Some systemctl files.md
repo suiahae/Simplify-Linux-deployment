@@ -124,7 +124,15 @@ Restart=on-failure
 RestartSec=5s
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
+```
+
+**Note:**
+
+为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
+
+```
+sudo loginctl enable-linger <username>
 ```
 
 ## clash

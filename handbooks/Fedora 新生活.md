@@ -181,7 +181,7 @@ Restart=on-failure
 RestartSec=5s
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
 ```
 
 此时监听端口为`5900`
