@@ -3,7 +3,7 @@
 # https://rpmfusion.org/Howto/NVIDIA
 
 proxytype="http";
-proxyhost="192.168.160.1";
+proxyhost="127.0.0.1";
 proxyport="7890";
 proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
 
@@ -15,26 +15,21 @@ proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
 
 chmod +x scripts/*;
 
-
-sudo dnf install redhat-lsb-core -y;
+sudo dnf install redhat-lsb-core -y 2>/dev/null;
 
 lsb_release -a > /tmp/lsb_release_grep;
 distributor=$(grep -oP '(?<=Distributor ID:\s)\w*' /tmp/lsb_release_grep);
 distri_ubuntu='Ubuntu';
 distri_fedora='Fedora';
-distri_arch='Arch Linux';
+# distri_arch='Arch Linux';
 
 # 安装 proxychains-ng
 sudo apt install proxychains4 2>/dev/null;
 sudo dnf install proxychains -y 2>/dev/null;
-sudo pacman -S proxychains4 2>/dev/null;
 
 # 更改 proxychains 代理
 #sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
 sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
-#sudo echo "http\t192.168.43.1\t1080" >> /etc/proxychains.conf;
-echo "alias pycs=proxychains4" >> ~/.bashrc;
-echo "alias supycs='sudo proxychains4'" >> ~/.bashrc;
 
 # 改变镜像源
 if [ "$distributor" = "$distri_ubuntu" ];
@@ -43,27 +38,25 @@ then
     sudo apt update && sudo apt upgrade;
 elif [ "$distributor" = "$distri_fedora" ];
 then
+    # # 更改为清华镜像源（https://mirrors.tuna.tsinghua.edu.cn/）
     # ./scripts/change-update-list-fedora.sh;
     # sudo dnf makecache;
-    # sudo dnf update;
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y;
     sudo dnf upgrade;
-elif [ "$distributor" = "$distri_arch" ];
-then
-    echo $distri_arch;
-    # 为 arch 安装 proxychains-ng
-    # ./scripts/install-proxychains-ng.sh;
+# elif [ "$distributor" = "$distri_arch" ];
+# then
+#     echo $distri_arch;
+#     # 为 arch 安装 proxychains-ng
+#     ./scripts/install-proxychains-ng.sh;
 fi
 
 # 安装环境
-sudo apt install git p7zip-full zsh wget curl make 2>/dev/null; 
+sudo apt install git p7zip-full zsh wget curl make -y 2>/dev/null; 
 sudo dnf install git p7zip zsh wget curl make util-linux-user -y 2>/dev/null; 
-sudo pacman -S git p7zip zsh wget curl make 2>/dev/null; 
 
 ## 安装主题
-sudo apt install gnome-tweak-tool;
-sudo dnf install gnome-tweak-tool;
-sudo pacman -S gnome-tweak-tool;
+sudo apt install gnome-tweak-tool -y 2>/dev/null; 
+sudo dnf install gnome-tweak-tool -y 2>/dev/null; 
 
 proxychains4 ./scripts/update-Qogir-theme-online.sh;
 proxychains4 ./scripts/update-Vimix-gtk-themes-online.sh;
