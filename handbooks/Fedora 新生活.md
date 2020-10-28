@@ -678,11 +678,13 @@ https://github.com/agalwood/Motrix/releases
     ```bash
     sudo dnf install screen git rclone -y
     ```
+
 2. 克隆仓库并安装python依赖包
 
     ```bash
     git clone https://github.com/xyou365/AutoRclone && cd AutoRclone && pip install -r requirements.txt --user
     ```
+
 3. 详细教程
 
 https://github.com/xyou365/AutoRclone/blob/master/Readme.md
