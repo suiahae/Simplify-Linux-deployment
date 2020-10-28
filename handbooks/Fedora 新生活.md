@@ -1,231 +1,763 @@
 # Fedora 新生活
 
-代理设置
+## 1. 初始化配置
 
-## 镜像源更改
+### 1.1 使用脚本
 
-from [rpmfusion.org](https://rpmfusion.org/Configuration)
+使用配置脚本初始化配置。
 
 ```bash
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+git clone https://github.com/suiahae/Simplify-Linux-deployment.git
+cd Simplify-Linux-deployment/
+./start.sh
 ```
 
-from [rpm sphere](https://rpmsphere.github.io/)
+以上仓库包括 `代理配置`、`软件仓库配置`、`工具下载`、`美化`、`别名设置`，按需修改。
+
+### 1.2 安装驱动
+#### 1.2.1 NVIDIA [1]
+
 ```bash
-sudo dnf install https://github.com/rpmsphere/noarch/raw/master/r/rpmsphere-release-32-1.noarch.rpm
+sudo dnf update -y # 如果不是最新的内核，请重新启动
+sudo dnf install akmod-nvidia 
+sudo dnf install xorg-x11-drv-nvidia-cuda #可选启用 cuda/nvdec/nvenc 支持
 ```
 
-系统更新
+#### 1.2.2 libfprint [2]
 
-驱动安装
-nvidia
+1. 安装环境
 
-必要软件安装
-zsh&&oh-my-zsh
-oh-my-zsh插件下载
-zsh配置更改
-alias别名设置
+    ```bash
+    sudo dnf install -y libusb*-devel libtool nss nss-devel gtk3-devel glib2-devel openssl openssl-devel libXv-devel gcc-c++ libgusb-devel
+    ```
 
-[typora rpm](https://github.com/RPM-Outpost/typora)
+##### a. 使用已修补文件
 
-系统美化
-软件安装
+2. 下载并解压
 
-主题下载
+    ```bash
+    mkdir libfprint2@3v1n0 && cd libfprint2@3v1n0
+    wget https://raw.githubusercontent.com/suiahae/Simplify-Linux-deployment/master/files/libfprint2%403v1n0.zip 
+    unzip libfprint2@3v1n0.zip && rm -v libfprint2@3v1n0.zip
+    ```
+
+3. 编译
+
+    ```bash
+    meson libfprint libfprint/_build
+    ```
+
+4. 安装
+
+    ```bash
+    sudo ninja -C libfprint/_build install
+    ```
+
+##### b. 使用原始仓库并手动修补
+
+2. 克隆仓库
+
+    ```bash
+    git clone https://github.com/3v1n0/libfprint
+    ```
+
+3. 编译
+
+    ```bash
+    meson libfprint libfprint/_build
+    ```
+
+4. 修补 vfs0090 驱动
+
+    ```bash
+    wget https://raw.githubusercontent.com/suiahae/Simplify-Linux-deployment/master/files/vfs0090_h@piotrekzurek.patch -O libfprint/vfs0090_h@piotrekzurek.patch
+    patch -p0 libfprint/libfprint/drivers/vfs0090/vfs0090.h libfprint/vfs0090_h@piotrekzurek.patch
+    ```
+
+5. 再次编译
+
+    ```bash
+    meson libfprint libfprint/_build
+    ```
+
+6. 安装
+
+    ```bash
+    sudo ninja -C libfprint/_build install
+    ```
+
+## 2. 推荐软件
+
+### 2.1 代理软件
+
+#### 2.1.1 Clash
+
+1. 克隆仓库
+
+   ```bash
+   https://github.com/suiahae/clash-premium-installer.git
+   ```
+
+2.  安装
+
+   ```bash
+   sudo clash-premium-installer/installer.sh install
+   ```
+
+3. 创建 config.yaml 后，请将其权限更改为rw -------，以避免节点信息泄漏。
+
+   ```bash
+   chmod 600 /usr/local/etc/clash/*
+   ```
+
+4. 下载 [yacd](https://github.com/haishanh/yacd) 管理面板
+
+   ```bash
+   mkdir yacd-gh-pages && cd yacd-gh-pages
+   https://github.com/haishanh/yacd/archive/gh-pages.zip
+   unzip gh-pages.zip && rm -v gh-pages.zip
+   ```
+
+   打开 index.html 即可
+
+### 2.2 gnome 插件
 
 [插件下载](https://extensions.gnome.org/)
 
-User Themes
-Dash to Dock
+[Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
 [Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel)
-Desktop Icons NG (DING)
-Proxy Switcher
-NetSpeed by hedayaty
-KStatusNotifierItem/AppIndicator Support
-TopIcons Plus by phocean
-Clipboard Indicator by Tudmotu
+[Desktop Icons NG (DING)](https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/)
+[AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
+[Proxy Switcher](https://extensions.gnome.org/extension/771/proxy-switcher/)
+[TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
 
-## 软件
+~~[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)~~
+~~[Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)~~
+~~[Input Method Panel](https://extensions.gnome.org/extension/261/kimpanel/)~~
 
-docker
-docker-compose
-clash
-yacd
+### 2.3 系统工具
 
-seahorse
-
-便签：xpad
-
-### 视频播放
-
-rclone
-Autorclone(添加图标 alacarte)
-[emby](https://github.com/MediaBrowser/Emby.Releases/releases)
-
-vlc
-
-[Celluloid](https://celluloid-player.github.io/) (Simple GTK+ frontend for mpv)
-
-mpv
-
-### 虚拟机平台
-
-dnf install qemu libvirt virt-manager
-
-#### VMware
-
-启用 3D 加速
-
-vim .vmware/preferences
-
-mks.gl.allowBlacklistedDrivers = "TRUE"
-
-### 系统工具
-
-thinkfan
+#### 2.3.1 thinkfan
 
 https://gist.github.com/suiahae/37fff654837e9959dacb39e5d0627369
 https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
 
-[Visual Studio Code on Linux](https://code.visualstudio.com/docs/setup/linux)
+1. 安装
 
-fcitx
+    ```bash
+    sudo dnf install thinkfan -y
+    ```
 
-[皮肤文件转换](https://github.com/VOID001/ssf2fcitx) [搜狗皮肤下载](https://pinyin.sogou.com/skins/)
+2. 安装内核模块
 
-~/.config/fcitx/skin
-[词库](https://www.cnblogs.com/luoshuitianyi/p/11669619.html)
-~/.config/fcitx/pinyin
+   ```bash
+   dnf -y install lm_sensors
+   sensors-detect --auto
+   ```
 
-### 图片浏览器
+3. 加载模块
 
-nomacs
+   ```bash
+   sudo systemctl restart systemd-modules-load
+   ```
 
-### 截图工具
+4. 更改 thinkfan.conf 
 
-flameshot
+   ```bash
+   sudo gedit /etc/thinkfan.conf
+   ```
 
-### 下载工具
+   ```
+   ######################################################################
+   # thinkfan 0.7 example config file
+   # ================================
+   #
+   # ATTENTION: There is only very basic sanity checking on the configuration.
+   # That means you can set your temperature limits as insane as you like. You
+   # can do anything stupid, e.g. turn off your fan when your CPU reaches 70°C.
+   #
+   # That's why this program is called THINKfan: You gotta think for yourself.
+   #
+   ######################################################################
+   #
+   # IBM/Lenovo Thinkpads (thinkpad_acpi, /proc/acpi/ibm)
+   # ====================================================
+   #
+   # IMPORTANT:
+   #
+   # To keep your HD from overheating, you have to specify a correction value for
+   # the sensor that has the HD's temperature. You need to do this because
+   # thinkfan uses only the highest temperature it can find in the system, and
+   # that'll most likely never be your HD, as most HDs are already out of spec
+   # when they reach 55 °C.
+   # Correction values are applied from left to right in the same order as the
+   # temperatures are read from the file.
+   #
+   # For example:
+   # tp_thermal /proc/acpi/ibm/thermal (0, 0, 10)
+   # will add a fixed value of 10 °C the 3rd value read from that file. Check out
+   # http://www.thinkwiki.org/wiki/Thermal_Sensors to find out how much you may
+   # want to add to certain temperatures.
+   
+   #  Syntax:
+   #  (LEVEL, LOW, HIGH)
+   #  LEVEL is the fan level to use (0-7 with thinkpad_acpi)
+   #  LOW is the temperature at which to step down to the previous level
+   #  HIGH is the temperature at which to step up to the next level
+   #  All numbers are integers.
+   #
+   
+   # I use this on my T61p:
+   #tp_fan /proc/acpi/ibm/fan
+   #tp_thermal /proc/acpi/ibm/thermal (0, 10, 15, 2, 10, 5, 0, 3, 0, 3)
+   
+   (0, 0, 50)
+   (1, 50, 60)
+   (3, 60, 70)
+   (127, 70, 32767)
+   ```
 
-[motrix](https://github.com/agalwood/Motrix/releases)
+5. 启用 thinkfan service
 
-uGet
---enable-rpc=true -D --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=~/.config/aria2/aria2.conf
+   ```bash
+   sudo systemctl enable thinkfan --now
+   ```
 
-aria2
+6. 设置 thinkfan service 自动重启
 
-### ssh
+   ```bash
+   sudo su
+   mkdir -p /etc/systemd/system/thinkfan.service.d
+   cat > /etc/systemd/system/thinkfan.service.d/10-restart-on-failure.conf << EOF
+   [Unit]
+   StartLimitIntervalSec=30
+   StartLimitBurst=3
+   
+   [Service]
+   Restart=on-failure
+   RestartSec=3
+   EOF
+   ```
 
-登陆
+7. 重载 systemd
+
+   ```
+   sudo systemctl daemon-reload
+   ```
+
+#### 2.3.2 GNOME 菜单编辑器
+
+```bash
+sudo dnf install alacarte -y
+```
+
+#### 2.3.3 密钥管理
+
+```bash
+sudo dnf install seahorse -y
+```
+
+### 2.4 输入法
+
+#### 2.4.1 Fcitx5
+
+##### 2.4.1.1 安装 Fcitx5
+
+1. 安装
+
+    ```bash
+    sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool -y
+    ```
+
+2. 添加系统变量
+
+    ```bash
+    sudo su
+    cat > /etc/profile.d/fcitx5.sh << EOF
+    export GTK_IM_MODULE=fcitx5
+    export QT_IM_MODULE=fcitx5
+    export XMODIFIERS="@im=fcitx5"
+    EOF
+    ```
+
+3. 在 gnomes-tweaks 设置 fcitx5 开机启动
+
+##### 2.4.1.2 设置皮肤
+
+https://github.com/hosxy/Fcitx5-Material-Color
+
+```bash
+mkdir -p ~/.local/share/fcitx5/themes/Material-Color
+git clone https://github.com/hosxy/Fcitx5-Material-Color.git ~/.local/share/fcitx5/themes/Material-Color
+```
+
+手动设置配色方案
+
+```bash
+cd ~/.local/share/fcitx5/themes/Material-Color
+ln -sf ./theme-deepPurple.conf theme.conf
+```
+
+启用主题
 
 ```
-ssh user@linux_sever
+cat > ~/.config/fcitx5/conf/classicui.conf << EOF
+# 垂直候选列表
+Vertical Candidate List=False
+# 按屏幕 DPI 使用
+PerScreenDPI=True
+# 使用鼠标滚轮翻页
+WheelForPaging=True
+# Font
+Font="思源黑体 CN Medium 10"
+# 主题
+Theme=Material-Color
+EOF
 ```
 
-生成密钥
+使用单行模式，
+
+修改 `~/.config/fcitx5/conf/pinyin.conf`, 加入/修改以下内容：
 
 ```
-ssh-keygen -t rsa -C "comment"
+# 可用时在应用程序中显示预编辑文本
+PreeditInApplication=True
 ```
 
-查看公钥
+**注意**：修改配置文件 `~/.config/fcitx5/profile` 时，请务必退出 fcitx5 输入法，否则会因为输入法退出时会覆盖配置文件导致之前的修改被覆盖；修改其他配置文件可以不用退出 fcitx5 输入法，重启生效。
 
-```
-cat ~/.ssh/id_rsa.pub
-```
+##### 2.4.1.2 启用词典
 
-用ssh-copy-id将公钥复制到远程机器的`~/.ssh/authorized_keys`中
+https://github.com/felixonmars/fcitx5-pinyin-zhwiki/releases
 
-```
-ssh-copy-id -i ～/.ssh/id_rsa.pub user@linux_sever
-```
+https://github.com/outloudvi/mw2fcitx/releases
 
-### 远程桌面/VNC
+下载词典文件至 Fcitx5 词典目录
 
-安装软件
-
-```
-sudo dnf install tigervnc-server tigervnc
+```bash
+mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 ```
 
-设置密码
+### 2.5 文字编辑
 
-You need to set a password for each user in order to be able to start the 
-Tigervnc server. In order to create a password, you just run
+#### 2.5.1 Visual Studio Code
 
+https://code.visualstudio.com/docs/setup/linux
+
+1. 安装 key and repository:
+
+    ```bash
+    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+    ```
+
+2. 更新缓存并安装 Visual Studio Code
+
+    ```bash
+    sudo dnf check-update
+    sudo dnf install code
+    ```
+
+#### 2.5.2 Typora
+
+[typora rpm](https://github.com/RPM-Outpost/typora)
+
+### 2.6 虚拟机平台
+
+#### 2.6.1 qemu+libvirt
+
+```bash
+dnf install qemu libvirt virt-manager -y
 ```
-$ vncpasswd
+
+#### 2.6.2 VMware
+
+##### 2.6.2.1 安装 VMware
+
+https://www.vmware.com/go/downloadworkstation
+
+##### 2.6.2.2 打内核补丁
+
+https://github.com/mkubecek/vmware-host-modules
+
+1. 克隆补丁
+
+    ```bash
+    git clone https://github.com/mkubecek/vmware-host-modules.git
+    cd vmware-host-modules
+    git checkout workstation-16.0.0
+    ```
+
+2. 创建内核tar文件
+
+    ```bash
+    tar -cf vmmon.tar vmmon-only
+    tar -cf vmnet.tar vmnet-only
+    ```
+
+3. 将文件复制到/usr/lib/vmware.modules.source (需要root权限)
+
+    ```bash
+    sudo cp -v vmmon.tar vmnet.tar /usr/lib/vmware/modules/source/
+    ```
+
+4. 安装模块
+
+    ```bash
+    sudo vmware-modconfig --console --install-all
+    ```
+
+##### 2.6.2.3 启用 3D 加速
+
+cat >> ~/.vmware/preferences << EOF
+mks.gl.allowBlacklistedDrivers = "TRUE"
+EOF
+
+##### 2.6.2.4 启用主机与虚拟机间的文件复制
+https://github.com/vmware/open-vm-tools/issues/427
+
+```bash
+sudo su
+systemctl enable run-vmblock\\x2dfuse.mount
+systemctl start run-vmblock\\x2dfuse.mount
+systemctl status -l run-vmblock\\x2dfuse.mount
 ```
 
-as the user you will be starting the server for. 
+##### 2.6.2.5 解决虚拟机桌面随机冻结
 
-**Note:**
+请从默认的Wayland X协议切换到X11协议。
+登录到桌面时，单击登录屏幕右下角的小菜单，然后选择“ Xorg上的Gnome”。 
 
-If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
+### 2.7 ssh
 
+1. 登陆
+
+    ```
+    ssh user@linux_sever
+    ```
+
+2. 生成密钥
+
+    ```
+    ssh-keygen -t rsa -C "comment"
+    ```
+
+3. 查看公钥
+
+    ```
+    cat ~/.ssh/id_rsa.pub
+    ```
+
+4. 用ssh-copy-id将公钥复制到远程机器的`~/.ssh/authorized_keys`中
+
+    ```
+    ssh-copy-id -i ~/.ssh/id_rsa.pub user@linux_sever
+    ```
+
+### 2.8 视频播放
+
+#### 2.8.1 emby
+
+https://github.com/MediaBrowser/Emby.Releases/releases/latest
+
+#### 2.8.2 Celluloid
+
+Simple GTK+ frontend for mpv
+
+https://celluloid-player.github.io/ 
+
+```bash
+sudo dnf install celluloid -y
 ```
-$ restorecon -RFv /home/<USER>/.vnc
+
+#### 2.8.3 vlc
+
+#### 2.8.4 mpv
+
+### 2.9 图片浏览器
+
+#### 2.9.1 nomacs
+
+```bash
+sudo dnf install nomacs -y
 ```
 
-创建 systemd-user-service [参考](http://www.jinbuguo.com/systemd/systemd.service.html)
+### 2.10 截图工具
 
-`/home/<USER>/.config/systemd/user/vncserver-<username>.service`
+#### 2.10.1 flameshot
 
+1. 安装
+
+    ```bash
+    sudo dnf install flameshot -y
+    ```
+    
+2. 配置快捷键
+
+    在`设置>键盘快捷键`添加自定义快捷键，命令为`flameshot gui`
+
+### 2.11 下载工具
+
+#### 2.11.1 aria2
+
+##### 2.11.1.1 安装 aria2
+
+```bash
+sudo dnf install aria2 -y
 ```
+
+##### 2.11.1.2 建立配置文件
+
+配置文件目录 `~/.config/aria2/`
+
+配置文件路径 `~/.config/aria2/aria2.conf`
+
+##### 2.11.1.3 设置 systemd service
+
+`sudo vim /usr/lib/systemd/system/aria2.service`
+
+```bash
 [Unit]
-Description=Remote desktop service (VNC) for <username>
-After=syslog.target network.target
+Description=A utility for downloading files which supports HTTP(S), FTP, SFTP, BitTorrent and Metalink
+Wants=clash.service
+After=clash.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/<username>/.vnc/passwd -Geometry 1920x1080 -localhost
-Restart=on-failure
-RestartSec=5s
+User=minux
+ExecStart=/usr/bin/aria2c --enable-rpc=true --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=/home/minux/.config/aria2/aria2.conf
 
 [Install]
-WantedBy=graphical-session.target
+WantedBy=multi-user.target
 ```
 
-此时监听端口为`5900`
+#### 2.11.2 motrix
 
-**Note:** 
+https://github.com/agalwood/Motrix/releases
 
-1. `-localhost` 应与 ssh 一起使用
+#### 2.11.3 uGet
 
-```
-ssh user@linux_sever -L 8900:localhost:5900
-vncviewer localhost:8900
-```
-
-2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
-
-```
-sudo loginctl enable-linger <username>
+```bash
+--enable-rpc=true -D --disable-ipv6 --check-certificate=false --all-proxy="http://127.0.0.1:7890" --conf-path=~/.config/aria2/aria2.conf
 ```
 
-重载
+### 2.12 远程桌面
 
+#### 2.12.1 VNC
+
+1. 安装软件
+
+    ```
+    sudo dnf install tigervnc-server tigervnc
+    ```
+
+2. 设置密码
+
+    You need to set a password for each user in order to be able to start the 
+    Tigervnc server. In order to create a password, you just run
+
+    ```
+    $ vncpasswd
+    ```
+
+    as the user you will be starting the server for. 
+
+    **Note:**
+
+    If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
+
+    ```
+    $ restorecon -RFv /home/<USER>/.vnc
+    ```
+
+3. 创建 systemd-user-service 
+
+    http://www.jinbuguo.com/systemd/systemd.service.html
+
+    `/home/<USER>/.config/systemd/user/vncserver-<username>.service`
+
+    ```
+    [Unit]
+    Description=Remote desktop service (VNC) for <username>
+    After=syslog.target network.target
+
+    [Service]
+    Type=simple
+    ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/<username>/.vnc/passwd -Geometry 1920x1080 -localhost
+    Restart=on-failure
+    RestartSec=5s
+
+    [Install]
+    WantedBy=graphical-session.target
+    ```
+
+    此时监听端口为`5900`
+
+    **Note:** 
+
+    1. `-localhost` 应与 ssh 一起使用
+
+    ```
+    ssh user@linux_sever -L 8900:localhost:5900
+    vncviewer localhost:8900
+    ```
+
+    2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
+
+    ```
+    sudo loginctl enable-linger <username>
+    ```
+
+    重载
+
+    ```
+    systemctl --user daemon-reload
+    ```
+
+    测试
+
+    ```
+    systemctl --user start vncserver-minux.service 
+    ```
+
+    测试无误默认开启
+
+    ```
+    systemctl --user enable vncserver-minux.service
+    ```
+
+    客户端连接
+
+    ```
+    vncviewer linux_sever:5800
+    ```
+
+#### 2.12.2 Teamviewer
+
+1. 导入key
+
+   ```bash
+   sudo rpm --import https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
+   ```
+
+2. 安装
+
+   ```bash
+   sudo dnf install https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+   ```
+
+#### 2.12.3 AnyDesk
+
+1. 导入仓库
+
+   ```bash
+   cat > /etc/yum.repos.d/AnyDesk-Fedora.repo << "EOF" 
+   [anydesk]
+   name=AnyDesk Fedora - stable
+   baseurl=http://rpm.anydesk.com/fedora/$basearch/
+   gpgcheck=1
+   repo_gpgcheck=1
+   gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY
+   EOF
+   ```
+
+2. 安装
+
+   ```bash
+   sudo dnf install anydesk
+   ```
+
+   
+
+### 2.13 网盘
+
+#### 2.13.1 Autorclone (添加图标 alacarte)
+
+1. 安装 rclone
+
+    ```bash
+    sudo dnf install screen git rclone -y
+    ```
+2. 克隆仓库并安装python依赖包
+
+    ```bash
+    git clone https://github.com/xyou365/AutoRclone && cd AutoRclone && pip install -r requirements.txt --user
+    ```
+3. 详细教程
+
+https://github.com/xyou365/AutoRclone/blob/master/Readme.md
+https://gsuitems.com/index.php/archives/13/
+
+#### 2.13.2 Rclone
+
+##### 2.13.2.1 安装 Rclone
+
+依照官方文档配置 Rclone
+
+https://rclone.org/drive/
+
+##### 2.13.2.2 通过 systemd service 实现开机自动挂载
+
+例如：
+
+`sudo vim /usr/lib/systemd/system/rclone-movies.service`
+
+GDTeam_raye_movies
+
+```bash
+[Unit]
+Description=Rclone mount gdteam movies
+Wants=clash.service
+After=clash.service
+
+[Service]
+Type=simple
+User=minux
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+ExecStart=/bin/rclone mount GDTeam_raye_movies: /home/emby/GDTeam_raye_movies --allow-other --allow-non-empty
+
+[Install]
+WantedBy=multi-user.target
 ```
-systemctl --user daemon-reload
+
+### 2.14 其他工具
+
+#### 2.14.1 便签：xpad
+
+```bash
+sudo dnf install xpad -y
 ```
 
-测试
+### 2.15容器
 
-```
-systemctl --user start vncserver-minux.service 
-```
+#### 2.15.1 docker
 
-测试无误默认开启
+实用教程：https://suiahae.me/docker-tutorial-1/
 
-```
-systemctl --user enable vncserver-minux.service
-```
+1. 安装最新版 [Moby Engine](https://mobyproject.org/)
 
-客户端连接
+    ```bash
+    sudo dnf install docker
+    ```
 
-```
-vncviewer linux_sever:5800
-```
+2. Cgroups Exception: 对于Fedora 31及更高版本，需要为Cgroups启用向后兼容。
 
+    ```bash
+    sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+    ```
 
+3. 开启docker.service
 
+   ```bash
+   sudo systemctl start docker
+   ```
+
+4. 验证Docker是否已正确安装
+
+    ```bash
+    sudo docker info
+    ```
+
+[1]: 专为 NVIDIA
+
+[2]: 专为 ThinkPad 470

@@ -41,6 +41,7 @@ then
     # # 更改为清华镜像源（https://mirrors.tuna.tsinghua.edu.cn/）
     # ./scripts/change-update-list-fedora.sh;
     # sudo dnf makecache;
+    # 添加 rpmfusion.org
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y;
     sudo dnf upgrade;
 # elif [ "$distributor" = "$distri_arch" ];
@@ -50,16 +51,16 @@ then
 #     ./scripts/install-proxychains-ng.sh;
 fi
 
-# 安装环境
-sudo apt install git p7zip-full zsh wget curl make -y 2>/dev/null; 
-sudo dnf install git p7zip zsh wget curl make util-linux-user -y 2>/dev/null; 
-
 ## 安装主题
-sudo apt install gnome-tweak-tool -y 2>/dev/null; 
-sudo dnf install gnome-tweak-tool -y 2>/dev/null; 
+sudo apt install gnome-tweak-tool p7zip-full wget -y 2>/dev/null; 
+sudo dnf install gnome-tweak-tool p7zip wget -y 2>/dev/null; 
 
 proxychains4 ./scripts/update-Qogir-theme-online.sh;
 proxychains4 ./scripts/update-Vimix-gtk-themes-online.sh;
+
+# 安装环境
+sudo apt install git zsh wget -y 2>/dev/null; 
+sudo dnf install git zsh wget util-linux-user -y 2>/dev/null; 
 
 # 安装 oh-my-zsh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
@@ -72,6 +73,8 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # 更改 plugins 配置
 sed -i 's/plugins=(.*/plugins=(vim-interaction pip git sudo extract z wd archlinux zsh-autosuggestions zsh-syntax-highlighting)/g' ~/.zshrc;
 sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
+
+# 设置别名
 echo "alias pycs=proxychains4" >> ~/.zshrc;
 echo "alias ll='ls -alF'
 alias la='ls -A'
