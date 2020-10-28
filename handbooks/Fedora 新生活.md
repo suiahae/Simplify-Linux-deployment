@@ -15,6 +15,7 @@ cd Simplify-Linux-deployment/
 以上仓库包括 `代理配置`、`软件仓库配置`、`工具下载`、`美化`、`别名设置`，按需修改。
 
 ### 1.2 安装驱动
+
 #### 1.2.1 NVIDIA [1]
 
 ```bash
@@ -84,6 +85,23 @@ sudo dnf install xorg-x11-drv-nvidia-cuda #可选启用 cuda/nvdec/nvenc 支持
 
     ```bash
     sudo ninja -C libfprint/_build install
+    ```
+
+### 1.3 grub 美化
+
+https://github.com/suiahae/grub2-themes
+
+1. 克隆仓库
+
+    ```bash
+    git clone https://github.com/suiahae/grub2-themes.git
+    cd grub2-theme
+    ```
+    
+2. 安装
+
+    ```bash
+    sudo ./install.sh -t
     ```
 
 ## 2. 推荐软件
@@ -245,13 +263,21 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    sudo systemctl daemon-reload
    ```
 
-#### 2.3.2 GNOME 菜单编辑器
+#### 2.3.2 timeshift
+
+备份
+
+```bash
+sudo dnf install timeshift -y
+```
+
+#### 2.3.3 GNOME 菜单编辑器
 
 ```bash
 sudo dnf install alacarte -y
 ```
 
-#### 2.3.3 密钥管理
+#### 2.3.4 密钥管理
 
 ```bash
 sudo dnf install seahorse -y
@@ -360,7 +386,21 @@ https://code.visualstudio.com/docs/setup/linux
 
 #### 2.5.2 Typora
 
-[typora rpm](https://github.com/RPM-Outpost/typora)
+https://github.com/RPM-Outpost/typora
+
+#### 2.5.3 WPS
+
+https://linux.wps.cn/
+
+#### 2.5.4 Marker
+
+A simple markdown editor for GTK+
+
+```bash
+sudo dnf install karker
+```
+
+
 
 ### 2.6 虚拟机平台
 
@@ -427,6 +467,14 @@ systemctl status -l run-vmblock\\x2dfuse.mount
 
 请从默认的Wayland X协议切换到X11协议。
 登录到桌面时，单击登录屏幕右下角的小菜单，然后选择“ Xorg上的Gnome”。 
+
+#### 2.6.3 VirtualBox
+
+```bash
+sudo dnf install VirtualBox -y
+```
+
+
 
 ### 2.7 ssh
 
@@ -530,6 +578,12 @@ ExecStart=/usr/bin/aria2c --enable-rpc=true --disable-ipv6 --check-certificate=f
 [Install]
 WantedBy=multi-user.target
 ```
+
+##### 2.11.1.4 AriaNg 
+
+Aria2 for Chrome
+
+https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn
 
 #### 2.11.2 motrix
 
@@ -724,13 +778,47 @@ WantedBy=multi-user.target
 
 ### 2.14 其他工具
 
-#### 2.14.1 便签：xpad
+#### 2.14.1 xpad
+
+便签
 
 ```bash
 sudo dnf install xpad -y
 ```
 
-### 2.15容器
+#### 2.14.2 Foliate
+
+简洁现代的电子书查看器
+
+```bash
+sudo dnf install foliate -y
+```
+
+#### 2.14.3 Qalculate
+
+计算器
+
+```bash
+sudo dnf install qalculate -y
+```
+
+#### 2.14.4 SimpleScreenRecorder
+
+录屏
+
+```bash
+sudo dnf install simplescreenrecorder -y
+```
+
+#### 2.14.5 Wine
+
+```bash
+sudo dnf install wine -y
+```
+
+
+
+### 2.15 容器
 
 #### 2.15.1 docker
 
@@ -759,6 +847,22 @@ sudo dnf install xpad -y
     ```bash
     sudo docker info
     ```
+
+### 2.16 游戏平台
+
+#### 2.16.1 Steam
+
+```bash
+sudo dnf install steam -y
+```
+
+#### 2.16.2 Lutris
+
+```bash
+sudo dnf install lutris -y
+```
+
+
 
 [1]: 专为 NVIDIA
 
