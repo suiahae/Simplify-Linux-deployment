@@ -87,7 +87,9 @@ sudo dnf install xorg-x11-drv-nvidia-cuda #可选启用 cuda/nvdec/nvenc 支持
     sudo ninja -C libfprint/_build install
     ```
 
-### 1.3 grub 美化
+### 1.3 美化
+
+#### 1.3.1 grub 主题
 
 https://github.com/suiahae/grub2-themes
 
@@ -103,6 +105,10 @@ https://github.com/suiahae/grub2-themes
     ```bash
     sudo ./install.sh -t
     ```
+
+#### 1.3.2 MaterialFox
+
+https://github.com/muckSponge/MaterialFox/
 
 ## 2. 推荐软件
 
