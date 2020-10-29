@@ -1,5 +1,12 @@
 # Fedora 新生活
 
+## 0. 分区
+
+/boot/efi   200MiB
+/boot       1GiB
+swap        20GiB
+/           remain
+
 ## 1. 初始化配置
 
 ### 1.1 使用脚本
