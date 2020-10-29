@@ -1,11 +1,43 @@
 # Fedora 新生活
 
-## 0. 分区
+## 0. 系统规划与准备
+
+### 0.1 分区
 
 /boot/efi   200MiB
 /boot       1GiB
 swap        20GiB
 /           remain
+
+### 0.2 重装前备份
+
+http://cn.linux.vbird.org/linux_basic/0580backup.php
+
+1. 推荐备份目录
+
+    /etc
+    /home
+    /usr/local
+
+2. 备份命令
+
+    ```bash
+    sudo su
+    tar -cvzf /mnt/data/backups/home_backup@`date +%Y-%m-%d`.tar.gz /home
+    tar -cvzf /mnt/data/backups/etc_backup@`date +%Y-%m-%d`.tar.gz /etc
+    tar -cvzf /mnt/data/backups/usr_local_backup@`date +%Y-%m-%d`.tar.gz /usr/local
+    ```
+
+    `tar -cvpzf` 可使属性不变
+
+3. 解压（不推荐）
+
+    ```bash
+    sudo su
+    tar -xvzf /mnt/data/backups/home_backup*.tar.gz /home
+    tar -xvzf /mnt/data/backups/etc_backup*tar.gz /etc
+    tar -xvzf /mnt/data/backups/usr_local_backup*.tar.gz /usr/local
+    ```
 
 ## 1. 初始化配置
 
