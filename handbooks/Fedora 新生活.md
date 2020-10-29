@@ -4,39 +4,71 @@
 
 ### 0.1 分区
 
+```bash
 /boot/efi   200MiB
 /boot       1GiB
 swap        20GiB
 /           remain
+```
 
 ### 0.2 重装前备份
 
 http://cn.linux.vbird.org/linux_basic/0580backup.php
 
-1. 推荐备份目录
+推荐备份目录
 
-    /etc
-    /home
-    /usr/local
+```bash
+/etc
+/home
+/usr/local
+```
 
-2. 备份命令
+#### 0.2.1 rsync
+
+```bash
+rsync -av /home /mnt/data/backups/
+rsync -av /etc /mnt/data/backups/
+rsync -av /usr/local /mnt/data/backups/usr
+```
+
+```bash
+[root@www ~]# rsync [-avrlptgoD] [-e ssh] [user@host:/dir] [/local/path]
+选项与参数：
+-v ：观察模式，可以列出更多的信息，包括镜像时的档案档名等；
+-q ：与 -v  相反，安静模式，略过正常信息，仅显示错误讯息；
+-r ：递归复制！可以针对『目录』来处理！很重要！
+-u ：仅更新 (update)，若目标档案较新，则保留新档案不会覆盖；
+-l ：复制链接文件的属性，而非链接的目标源文件内容；
+-p ：复制时，连同属性 (permission) 也保存不变！
+-g ：保存源文件的拥有群组；
+-o ：保存源文件的拥有人；
+-D ：保存源文件的装置属性 (device)
+-t ：保存源文件的时间参数；
+-I ：忽略更新时间 (mtime) 的属性，档案比对上会比较快速；
+-z ：在数据传输时，加上压缩的参数！
+-e ：使用的信道协议，例如使用 ssh 通道，则 -e ssh
+-a ：相当于 -rlptgoD ，所以这个 -a 是最常用的参数了！
+更多说明请参考 man rsync！
+```
+
+#### 0.2.2 tar
+
+1. 备份命令
 
     ```bash
     sudo su
-    tar -cvzf /mnt/data/backups/home_backup@`date +%Y-%m-%d`.tar.gz /home
-    tar -cvzf /mnt/data/backups/etc_backup@`date +%Y-%m-%d`.tar.gz /etc
-    tar -cvzf /mnt/data/backups/usr_local_backup@`date +%Y-%m-%d`.tar.gz /usr/local
+    tar -cvpzf /mnt/data/backups/home_backup@`date +%Y-%m-%d`.tar.gz /home
+    tar -cvpzf /mnt/data/backups/etc_backup@`date +%Y-%m-%d`.tar.gz /etc
+    tar -cvpzf /mnt/data/backups/usr_local_backup@`date +%Y-%m-%d`.tar.gz /usr/local
     ```
 
-    `tar -cvpzf` 可使属性不变
-
-3. 解压（不推荐）
+2. 解压（不推荐）
 
     ```bash
     sudo su
-    tar -xvzf /mnt/data/backups/home_backup*.tar.gz /home
-    tar -xvzf /mnt/data/backups/etc_backup*tar.gz /etc
-    tar -xvzf /mnt/data/backups/usr_local_backup*.tar.gz /usr/local
+    tar -xvpzf /mnt/data/backups/home_backup*.tar.gz /home
+    tar -xvpzf /mnt/data/backups/etc_backup*tar.gz /etc
+    tar -xvpzf /mnt/data/backups/usr_local_backup*.tar.gz /usr/local
     ```
 
 ## 1. 初始化配置
