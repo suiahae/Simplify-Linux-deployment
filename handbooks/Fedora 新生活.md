@@ -115,6 +115,8 @@ https://github.com/williamwlk/my-red-corner/blob/master/README_PAM.txt
 
 https://computingforgeeks.com/how-to-setup-built-in-fingerprint-reader-authentication-with-pam-on-any-linux/
 
+sudo authselect disable-feature with-fingerprint
+
 ##### a. use Ubuntu:ppa & alien convert
 
 http://ppa.launchpad.net/uunicorn/open-fprintd/ubuntu
