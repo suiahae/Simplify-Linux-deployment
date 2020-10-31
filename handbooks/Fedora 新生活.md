@@ -172,6 +172,7 @@ sudo systemctl start open-fprintd.service
 sudo systemctl enable open-fprintd-suspend.service
 sudo systemctl enable open-fprintd-resume.service
 sudo systemctl start python3-validity.service
+
 systemctl status open-fprintd.service
 systemctl status python3-validity.service
 ```
@@ -987,19 +988,19 @@ sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
     sudo dnf install docker
     ```
 
-2. Cgroups Exception: 对于Fedora 31及更高版本，需要为Cgroups启用向后兼容。
+<!-- 2. Cgroups Exception: 对于Fedora 31及更高版本，需要为Cgroups启用向后兼容。
 
     ```bash
     sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-    ```
+    ``` -->
 
-3. 开启docker.service
+2. 开启docker.service
 
    ```bash
    sudo systemctl start docker
    ```
 
-4. 验证Docker是否已正确安装
+3. 验证Docker是否已正确安装
 
     ```bash
     sudo docker info
@@ -1021,4 +1022,4 @@ sudo dnf install lutris -y
 
 [1]: 专为 NVIDIA
 
-[2]: 专为 ThinkPad 470
+[2]: 专为 `138a:0097` (such as ThinkPad 470)
