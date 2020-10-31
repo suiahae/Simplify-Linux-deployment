@@ -26,9 +26,9 @@ http://cn.linux.vbird.org/linux_basic/0580backup.php
 #### 0.2.1 rsync
 
 ```bash
-rsync -av /home /mnt/data/backups/
-rsync -av /etc /mnt/data/backups/
-rsync -av /usr/local /mnt/data/backups/usr
+sudo rsync -av /home /mnt/data/backups/
+sudo rsync -av /etc /mnt/data/backups/
+sudo rsync -av /usr/local /mnt/data/backups/usr
 ```
 
 ```bash
@@ -85,6 +85,15 @@ cd Simplify-Linux-deployment/
 
 以上仓库包括 `代理配置`、`软件仓库配置`、`工具下载`、`美化`、`别名设置`，按需修改。
 
+**Note:**
+
+1. 解决 zsh “zsh: no matches found *”
+
+    ```bash
+    echo "setopt no_nomatch" >> ~/.zshrc
+    source ~/.zshrc
+    ```
+
 ### 1.2 安装驱动
 
 #### 1.2.1 NVIDIA [1]
@@ -95,68 +104,57 @@ sudo dnf install akmod-nvidia
 sudo dnf install xorg-x11-drv-nvidia-cuda #可选启用 cuda/nvdec/nvenc 支持
 ```
 
-#### 1.2.2 libfprint [2]
+#### 1.2.2 fprintd-clients open-fprintd python-validity [2]
 
-1. 安装环境
+https://github.com/uunicorn/python-validity
 
-    ```bash
-    sudo dnf install -y libusb*-devel libtool nss nss-devel gtk3-devel glib2-devel openssl openssl-devel libXv-devel gcc-c++ libgusb-devel
-    ```
+https://gitter.im/Validity90/Lobby
 
-##### a. 使用已修补文件
+fedora pam_configuration: 
+https://github.com/williamwlk/my-red-corner/blob/master/README_PAM.txt
 
-2. 下载并解压
+https://computingforgeeks.com/how-to-setup-built-in-fingerprint-reader-authentication-with-pam-on-any-linux/
 
-    ```bash
-    mkdir libfprint2@3v1n0 && cd libfprint2@3v1n0
-    wget https://raw.githubusercontent.com/suiahae/Simplify-Linux-deployment/master/files/libfprint2%403v1n0.zip 
-    unzip libfprint2@3v1n0.zip && rm -v libfprint2@3v1n0.zip
-    ```
+https://aur.archlinux.org/packages/fprintd-clients-git/
 
-3. 编译
+```bash
+sudo dnf install -y libfprint-devel polkit-devel dbus-glib-devel systemd-devel pam-devel pam_wrapper
+```
 
-    ```bash
-    meson libfprint libfprint/_build
-    ```
+```bash
+patch -Np1 < ../disable-systemd-reactivated.diff
+meson . ./build
+sudo meson install -C build
+sudo install -d -m 700 /var/lib/fprint
+```
 
-4. 安装
+https://aur.archlinux.org/packages/open-fprintd/
 
-    ```bash
-    sudo ninja -C libfprint/_build install
-    ```
+```bash
+sudo python setup.py build
+sudo python setup.py install --prefix=/usr --root /
+sudo install -D -m 644 debian/open-fprintd.service /usr/lib/systemd/system/open-fprintd.service
+sudo install -D -m 644 debian/open-fprintd-resume.service /usr/lib/systemd/system/open-fprintd-resume.service
+sudo install -D -m 644 debian/open-fprintd-suspend.service /usr/lib/systemd/system/open-fprintd-suspend.service
+```
 
-##### b. 使用原始仓库并手动修补
+https://aur.archlinux.org/packages/python-validity/
 
-2. 克隆仓库
+```bash
+python setup.py build
+sudo python setup.py install --prefix=/usr --root /
+sudo install -D -m 644 debian/python3-validity.service /usr/lib/systemd/system/python3-validity.service
+sudo install -D -m 644 debian/python3-validity.udev /usr/lib/udev/rules.d/60-python-validity.rules
+```
 
-    ```bash
-    git clone https://github.com/3v1n0/libfprint
-    ```
+```bash
+sudo systemctl enable open-fprintd-suspend.service
+sudo systemctl enable open-fprintd-resume.service
+```
 
-3. 编译
-
-    ```bash
-    meson libfprint libfprint/_build
-    ```
-
-4. 修补 vfs0090 驱动
-
-    ```bash
-    wget https://raw.githubusercontent.com/suiahae/Simplify-Linux-deployment/master/files/vfs0090_h@piotrekzurek.patch -O libfprint/vfs0090_h@piotrekzurek.patch
-    patch -p0 libfprint/libfprint/drivers/vfs0090/vfs0090.h libfprint/vfs0090_h@piotrekzurek.patch
-    ```
-
-5. 再次编译
-
-    ```bash
-    meson libfprint libfprint/_build
-    ```
-
-6. 安装
-
-    ```bash
-    sudo ninja -C libfprint/_build install
-    ```
+```bash
+fprintd-enroll
+```
 
 ### 1.3 美化
 
@@ -175,6 +173,18 @@ https://github.com/suiahae/grub2-themes
 
     ```bash
     sudo ./install.sh -t
+    ```
+
+3. 更改 /etc/default/grub
+
+    ```bash
+    sudo gedit /etc/default/grub
+    ```
+
+    注释掉 GRUB_TERMINAL_OUTPUT="console"（这个控制是以哪种方式显示，不注释的话会以console窗口显示启动列表）
+
+    ```
+    # GRUB_TERMINAL_OUTPUT="console"
     ```
 
 #### 1.3.2 MaterialFox
@@ -220,14 +230,21 @@ https://github.com/muckSponge/MaterialFox/
 [插件下载](https://extensions.gnome.org/)
 
 [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
+
 [Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel)
+
 [Desktop Icons NG (DING)](https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/)
+
 [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
+
 [Proxy Switcher](https://extensions.gnome.org/extension/771/proxy-switcher/)
+
 [TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
 
 ~~[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)~~
+
 ~~[Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)~~
+
 ~~[Input Method Panel](https://extensions.gnome.org/extension/261/kimpanel/)~~
 
 ### 2.3 系统工具
@@ -246,8 +263,8 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
 2. 安装内核模块
 
    ```bash
-   dnf -y install lm_sensors
-   sensors-detect --auto
+   sudo dnf -y install lm_sensors
+   sudo sensors-detect --auto
    ```
 
 3. 加载模块
@@ -359,6 +376,10 @@ sudo dnf install alacarte -y
 ```bash
 sudo dnf install seahorse -y
 ```
+
+#### 2.3.5 grub
+
+grub-customizer
 
 ### 2.4 输入法
 
@@ -474,17 +495,15 @@ https://linux.wps.cn/
 A simple markdown editor for GTK+
 
 ```bash
-sudo dnf install karker
+sudo dnf install -y marker
 ```
-
-
 
 ### 2.6 虚拟机平台
 
 #### 2.6.1 qemu+libvirt
 
 ```bash
-dnf install qemu libvirt virt-manager -y
+dnf install -y qemu libvirt virt-manager
 ```
 
 #### 2.6.2 VMware
@@ -679,7 +698,7 @@ https://github.com/agalwood/Motrix/releases
 1. 安装软件
 
     ```
-    sudo dnf install tigervnc-server tigervnc
+    sudo dnf install tigervnc-server tigervnc -y
     ```
 
 2. 设置密码
@@ -892,8 +911,13 @@ sudo dnf install simplescreenrecorder -y
 ```bash
 sudo dnf install wine -y
 ```
+#### 2.14.6 dnf 使用技巧
 
-
+```bash
+rpm -i software-2.3.4.rpm --nodeps
+rpm -e software-2.3.4.rpm --nodeps
+sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
+```
 
 ### 2.15 容器
 
