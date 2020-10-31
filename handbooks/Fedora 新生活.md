@@ -28,7 +28,14 @@ http://cn.linux.vbird.org/linux_basic/0580backup.php
 ```bash
 sudo rsync -av /home /mnt/data/backups/fedora/
 sudo rsync -av /etc /mnt/data/backups/fedora/
-sudo rsync -av /usr/local /mnt/data/backups/fedora/usr
+sudo rsync -av /usr/local /mnt/data/backups/fedora/usr/
+```
+
+```bash
+# 将 /etc 文件夹同步至 /mnt/data/rsync/fedora/ （创建 etc 文件夹）
+rsync -av /etc /mnt/data/rsync/fedora/
+# 将 /etc 内容同步至 /mnt/data/rsync/fedora/ （不创建 etc 文件夹）
+rsync -av /etc/ /mnt/data/rsync/fedora/
 ```
 
 ```bash
@@ -51,7 +58,7 @@ sudo rsync -av /usr/local /mnt/data/backups/fedora/usr
 更多说明请参考 man rsync！
 ```
 
-#### 0.2.2 tar
+#### 0.2.2 tar （不推荐）
 
 1. 备份命令
 
@@ -62,7 +69,7 @@ sudo rsync -av /usr/local /mnt/data/backups/fedora/usr
     tar -cvpzf /mnt/data/backups/usr_local_backup@`date +%Y-%m-%d`.tar.gz /usr/local
     ```
 
-2. 解压（不推荐）
+2. 解压
 
     ```bash
     sudo su
@@ -115,20 +122,22 @@ https://github.com/williamwlk/my-red-corner/blob/master/README_PAM.txt
 
 https://computingforgeeks.com/how-to-setup-built-in-fingerprint-reader-authentication-with-pam-on-any-linux/
 
-sudo authselect disable-feature with-fingerprint
-
-##### a. use Ubuntu:ppa & alien convert
+<!-- ##### a. use Ubuntu:ppa & alien convert
 
 http://ppa.launchpad.net/uunicorn/open-fprintd/ubuntu
 
-https://www.tecmint.com/convert-from-rpm-to-deb-and-deb-to-rpm-package-using-alien/
+https://www.tecmint.com/convert-from-rpm-to-deb-and-deb-to-rpm-package-using-alien/ -->
 
-##### b. use AUR
+##### use AUR
+
+sudo dnf remove fprintd -y
+
+tar -zxvf *.tar.gz
 
 https://aur.archlinux.org/packages/fprintd-clients-git/
 
 ```bash
-sudo dnf install -y libfprint-devel polkit-devel dbus-glib-devel systemd-devel pam-devel pam_wrapper
+sudo dnf install -y libfprint-devel polkit-devel dbus-glib-devel systemd-devel pam-devel pam_wrapper meson patch
 ```
 
 ```bash
@@ -141,7 +150,7 @@ sudo install -d -m 700 /var/lib/fprint
 https://aur.archlinux.org/packages/open-fprintd/
 
 ```bash
-sudo python setup.py build
+python setup.py build
 sudo python setup.py install --prefix=/usr --root /
 sudo install -D -m 644 debian/open-fprintd.service /usr/lib/systemd/system/open-fprintd.service
 sudo install -D -m 644 debian/open-fprintd-resume.service /usr/lib/systemd/system/open-fprintd-resume.service
@@ -151,6 +160,7 @@ sudo install -D -m 644 debian/open-fprintd-suspend.service /usr/lib/systemd/syst
 https://aur.archlinux.org/packages/python-validity/
 
 ```bash
+sudo pip install pyyaml pyusb
 python setup.py build
 sudo python setup.py install --prefix=/usr --root /
 sudo install -D -m 644 debian/python3-validity.service /usr/lib/systemd/system/python3-validity.service
@@ -158,12 +168,21 @@ sudo install -D -m 644 debian/python3-validity.udev /usr/lib/udev/rules.d/60-pyt
 ```
 
 ```bash
+sudo systemctl start open-fprintd.service
 sudo systemctl enable open-fprintd-suspend.service
 sudo systemctl enable open-fprintd-resume.service
+sudo systemctl start python3-validity.service
+systemctl status open-fprintd.service
+systemctl status python3-validity.service
 ```
 
 ```bash
 fprintd-enroll
+```
+##### last but not least
+
+```bash
+sudo authselect enable-feature with-fingerprint
 ```
 
 ### 1.3 美化
@@ -195,6 +214,13 @@ https://github.com/suiahae/grub2-themes
 
     ```
     # GRUB_TERMINAL_OUTPUT="console"
+    ```
+
+
+    增加 GRUB_SAVEDEFAULT="true" 保存上次启动项
+
+    ```
+    GRUB_SAVEDEFAULT="true"
     ```
 
 #### 1.3.2 MaterialFox
@@ -241,7 +267,7 @@ https://github.com/muckSponge/MaterialFox/
 
 [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
 
-[Dash to Panel](https://github.com/home-sweet-gnome/dash-to-panel)
+[Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 
 [Desktop Icons NG (DING)](https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/)
 
@@ -389,7 +415,9 @@ sudo dnf install seahorse -y
 
 #### 2.3.5 grub
 
-grub-customizer
+```bash
+sudo dnf install grub-customizer -y
+```
 
 ### 2.4 输入法
 
@@ -488,7 +516,7 @@ https://code.visualstudio.com/docs/setup/linux
 2. 更新缓存并安装 Visual Studio Code
 
     ```bash
-    sudo dnf check-update
+    dnf check-update
     sudo dnf install code
     ```
 
@@ -522,7 +550,7 @@ dnf install -y qemu libvirt virt-manager
 
 https://www.vmware.com/go/downloadworkstation
 
-##### 2.6.2.2 打内核补丁
+<!-- ##### 2.6.2.2 打内核补丁
 
 https://github.com/mkubecek/vmware-host-modules
 
@@ -551,13 +579,15 @@ https://github.com/mkubecek/vmware-host-modules
 
     ```bash
     sudo vmware-modconfig --console --install-all
-    ```
+    ``` -->
 
 ##### 2.6.2.3 启用 3D 加速
 
+```bash
 cat >> ~/.vmware/preferences << EOF
 mks.gl.allowBlacklistedDrivers = "TRUE"
 EOF
+```
 
 ##### 2.6.2.4 启用主机与虚拟机间的文件复制
 https://github.com/vmware/open-vm-tools/issues/427
@@ -579,8 +609,6 @@ systemctl status -l run-vmblock\\x2dfuse.mount
 ```bash
 sudo dnf install VirtualBox -y
 ```
-
-
 
 ### 2.7 ssh
 
@@ -607,6 +635,13 @@ sudo dnf install VirtualBox -y
     ```
     ssh-copy-id -i ~/.ssh/id_rsa.pub user@linux_sever
     ```
+
+### 2.7-2 Git
+
+```bash
+git config --global user.name "yourname"
+git config --global user.email "youremail"
+```
 
 ### 2.8 视频播放
 
@@ -668,7 +703,7 @@ sudo dnf install aria2 -y
 
 ##### 2.11.1.3 设置 systemd service
 
-`sudo vim /usr/lib/systemd/system/aria2.service`
+`sudo gedit /usr/lib/systemd/system/aria2.service`
 
 ```bash
 [Unit]
@@ -683,6 +718,10 @@ ExecStart=/usr/bin/aria2c --enable-rpc=true --disable-ipv6 --check-certificate=f
 
 [Install]
 WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl enable aria2.service --now
 ```
 
 ##### 2.11.1.4 AriaNg 
@@ -796,38 +835,40 @@ https://github.com/agalwood/Motrix/releases
 
 1. 导入key
 
-   ```bash
-   sudo rpm --import https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
-   ```
+    ```bash
+    sudo rpm --import https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
+    ```
 
 2. 安装
 
-   ```bash
-   sudo dnf install https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
-   ```
+    ```bash
+    sudo dnf install https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+    ```
 
 #### 2.12.3 AnyDesk
 
+http://rpm.anydesk.com/howto.html
+
 1. 导入仓库
 
-   ```bash
-   cat > /etc/yum.repos.d/AnyDesk-Fedora.repo << "EOF" 
-   [anydesk]
-   name=AnyDesk Fedora - stable
-   baseurl=http://rpm.anydesk.com/fedora/$basearch/
-   gpgcheck=1
-   repo_gpgcheck=1
-   gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY
-   EOF
-   ```
+    ```bash
+    sudo su
+    cat > /etc/yum.repos.d/AnyDesk-Fedora.repo << "EOF" 
+    [anydesk]
+    name=AnyDesk Fedora - stable
+    baseurl=http://rpm.anydesk.com/fedora/$basearch/
+    gpgcheck=1
+    repo_gpgcheck=1
+    gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY
+    EOF
+    dnf check-update
+    ```
 
 2. 安装
 
-   ```bash
-   sudo dnf install anydesk
-   ```
-
-   
+    ```bash
+    sudo dnf install anydesk
+    ```
 
 ### 2.13 网盘
 
@@ -853,6 +894,10 @@ https://gsuitems.com/index.php/archives/13/
 #### 2.13.2 Rclone
 
 ##### 2.13.2.1 安装 Rclone
+
+```bash
+sudo dnf install rclone -y
+```
 
 依照官方文档配置 Rclone
 
@@ -921,6 +966,7 @@ sudo dnf install simplescreenrecorder -y
 ```bash
 sudo dnf install wine -y
 ```
+
 #### 2.14.6 dnf 使用技巧
 
 ```bash
@@ -972,8 +1018,6 @@ sudo dnf install steam -y
 ```bash
 sudo dnf install lutris -y
 ```
-
-
 
 [1]: 专为 NVIDIA
 
