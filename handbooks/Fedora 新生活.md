@@ -189,9 +189,11 @@ sudo authselect enable-feature with-fingerprint
 
 ### 1.3 美化
 
-#### 1.3.1 grub 主题
+#### 1.3.1 grub
 
 https://github.com/suiahae/grub2-themes
+
+##### 1.3.1.1 安装 grub2-themes 主题
 
 1. 克隆仓库
 
@@ -224,9 +226,37 @@ https://github.com/suiahae/grub2-themes
     GRUB_SAVEDEFAULT="true"
     ```
 
+##### 1.3.1.2 错误提示
+
+`问题描述：`开机的时候报了一个错误 error: ../../grub-core/fs/fshelp.c:257:file /EFL/Fedora/locale/zh.gmo not found. 但不影响启动 grub 也能正常显示
+
+`解决方案：`根据网上的帖子 (https://bugzilla.redhat.com/show_bug.cgi?id=817187#c42)运行下面的命令使这个错误信息消失了
+
+```bash
+sudo mkdir -p /boot/efi/EFI/fedora/locale
+sudo cp /usr/share/locale/zh_CN/LC_MESSAGES/grub.mo /boot/efi/EFI/fedora/locale/zh.gmo
+```
+
+还有一个解决方法是在生成grub.cfg时把语言变量设置为英文：
+
+```bash
+LANG=C grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+
 #### 1.3.2 MaterialFox
 
 https://github.com/muckSponge/MaterialFox/
+
+https://github.com/muckSponge/MaterialFox/archive/v80.0.zip
+
+********************
+
+The following content is from MaterialFox-76.2, ==but it is very important==
+
+2. [about:config] Set ```toolkit.legacyUserProfileCustomizations.stylesheets``` to ```true``` (default is ```false```).
+3. [about:config] Set ```svg.context-properties.content.enabled``` to ```true``` (default is ```false```).
+
+********************
 
 ## 2. 推荐软件
 
