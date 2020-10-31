@@ -115,6 +115,14 @@ https://github.com/williamwlk/my-red-corner/blob/master/README_PAM.txt
 
 https://computingforgeeks.com/how-to-setup-built-in-fingerprint-reader-authentication-with-pam-on-any-linux/
 
+##### a. use Ubuntu:ppa & alien convert
+
+http://ppa.launchpad.net/uunicorn/open-fprintd/ubuntu
+
+https://www.tecmint.com/convert-from-rpm-to-deb-and-deb-to-rpm-package-using-alien/
+
+##### b. use AUR
+
 https://aur.archlinux.org/packages/fprintd-clients-git/
 
 ```bash
