@@ -180,6 +180,7 @@ systemctl status python3-validity.service
 ```bash
 fprintd-enroll
 ```
+
 ##### last but not least
 
 ```bash
@@ -198,7 +199,7 @@ https://github.com/suiahae/grub2-themes
     git clone https://github.com/suiahae/grub2-themes.git
     cd grub2-theme
     ```
-    
+
 2. 安装
 
     ```bash
@@ -216,7 +217,6 @@ https://github.com/suiahae/grub2-themes
     ```
     # GRUB_TERMINAL_OUTPUT="console"
     ```
-
 
     增加 GRUB_SAVEDEFAULT="true" 保存上次启动项
 
@@ -240,7 +240,7 @@ https://github.com/muckSponge/MaterialFox/
    https://github.com/suiahae/clash-premium-installer.git
    ```
 
-2.  安装
+2. 安装
 
    ```bash
    sudo clash-premium-installer/installer.sh install
@@ -347,7 +347,7 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    # will add a fixed value of 10 °C the 3rd value read from that file. Check out
    # http://www.thinkwiki.org/wiki/Thermal_Sensors to find out how much you may
    # want to add to certain temperatures.
-   
+
    #  Syntax:
    #  (LEVEL, LOW, HIGH)
    #  LEVEL is the fan level to use (0-7 with thinkpad_acpi)
@@ -355,11 +355,11 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    #  HIGH is the temperature at which to step up to the next level
    #  All numbers are integers.
    #
-   
+
    # I use this on my T61p:
    #tp_fan /proc/acpi/ibm/fan
    #tp_thermal /proc/acpi/ibm/thermal (0, 10, 15, 2, 10, 5, 0, 3, 0, 3)
-   
+
    (0, 0, 50)
    (1, 50, 60)
    (3, 60, 70)
@@ -381,7 +381,7 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    [Unit]
    StartLimitIntervalSec=30
    StartLimitBurst=3
-   
+
    [Service]
    Restart=on-failure
    RestartSec=3
@@ -390,7 +390,7 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
 
 7. 重载 systemd
 
-   ```
+   ```bash
    sudo systemctl daemon-reload
    ```
 
@@ -463,7 +463,7 @@ ln -sf ./theme-deepPurple.conf theme.conf
 
 启用主题
 
-```
+```bash
 cat > ~/.config/fcitx5/conf/classicui.conf << EOF
 # 垂直候选列表
 Vertical Candidate List=False
@@ -615,25 +615,25 @@ sudo dnf install VirtualBox -y
 
 1. 登陆
 
-    ```
+    ```bash
     ssh user@linux_sever
     ```
 
 2. 生成密钥
 
-    ```
+    ```bash
     ssh-keygen -t rsa -C "comment"
     ```
 
 3. 查看公钥
 
-    ```
+    ```bash
     cat ~/.ssh/id_rsa.pub
     ```
 
 4. 用ssh-copy-id将公钥复制到远程机器的`~/.ssh/authorized_keys`中
 
-    ```
+    ```bash
     ssh-copy-id -i ~/.ssh/id_rsa.pub user@linux_sever
     ```
 
@@ -681,7 +681,7 @@ sudo dnf install nomacs -y
     ```bash
     sudo dnf install flameshot -y
     ```
-    
+
 2. 配置快捷键
 
     在`设置>键盘快捷键`添加自定义快捷键，命令为`flameshot gui`
@@ -747,16 +747,15 @@ https://github.com/agalwood/Motrix/releases
 
 1. 安装软件
 
-    ```
+    ```bash
     sudo dnf install tigervnc-server tigervnc -y
     ```
 
 2. 设置密码
 
-    You need to set a password for each user in order to be able to start the 
-    Tigervnc server. In order to create a password, you just run
+    You need to set a password for each user in order to be able to start the Tigervnc server. In order to create a password, you just run
 
-    ```
+    ```bash
     $ vncpasswd
     ```
 
@@ -766,7 +765,7 @@ https://github.com/agalwood/Motrix/releases
 
     If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
 
-    ```
+    ```bash
     $ restorecon -RFv /home/<USER>/.vnc
     ```
 
@@ -797,38 +796,38 @@ https://github.com/agalwood/Motrix/releases
 
     1. `-localhost` 应与 ssh 一起使用
 
-    ```
+    ```bash
     ssh user@linux_sever -L 8900:localhost:5900
     vncviewer localhost:8900
     ```
 
     2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
 
-    ```
+    ```bash
     sudo loginctl enable-linger <username>
     ```
 
     重载
 
-    ```
+    ```bash
     systemctl --user daemon-reload
     ```
 
     测试
 
-    ```
+    ```bash
     systemctl --user start vncserver-minux.service 
     ```
 
     测试无误默认开启
 
-    ```
+    ```bash
     systemctl --user enable vncserver-minux.service
     ```
 
     客户端连接
 
-    ```
+    ```bash
     vncviewer linux_sever:5800
     ```
 
