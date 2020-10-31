@@ -26,9 +26,9 @@ http://cn.linux.vbird.org/linux_basic/0580backup.php
 #### 0.2.1 rsync
 
 ```bash
-sudo rsync -av /home /mnt/data/backups/
-sudo rsync -av /etc /mnt/data/backups/
-sudo rsync -av /usr/local /mnt/data/backups/usr
+sudo rsync -av /home /mnt/data/backups/fedora/
+sudo rsync -av /etc /mnt/data/backups/fedora/
+sudo rsync -av /usr/local /mnt/data/backups/fedora/usr
 ```
 
 ```bash
