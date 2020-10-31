@@ -11,9 +11,9 @@ rm -Rf Qogir-icon-theme.zip 2>/dev/null;
 rm -Rf Qogir-icon-theme-master/ 2>/dev/null; 
 wget https://github.com/vinceliuice/Qogir-icon-theme/archive/2020-06-22.zip -O Qogir-icon-theme.zip; 
 7za x Qogir-icon-theme.zip; 
-cd Qogir-icon-theme-master; 
+cd Qogir-icon-theme-2020-06-22; 
 ./install.sh; 
 cd ..;
 rm -Rf Qogir-icon-theme.zip 2>/dev/null; 
-rm -Rf Qogir-icon-theme-master/ 2>/dev/null; 
+rm -Rf Qogir-icon-theme-2020-06-22/ 2>/dev/null; 
 # notify-send "All done!" "Enjoy the latest version of Qogir!" -i face-smile

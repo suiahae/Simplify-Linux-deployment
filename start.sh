@@ -76,6 +76,7 @@ sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
 
 # 设置别名
 echo "alias pycs=proxychains4" >> ~/.zshrc;
+echo "alias supycs='sudo proxychains4'" >> ~/.zshrc;
 echo "alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'" >> ~/.zshrc;
