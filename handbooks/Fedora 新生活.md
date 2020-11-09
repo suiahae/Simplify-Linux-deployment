@@ -245,7 +245,9 @@ LANG=C grub2-mkconfig -o /boot/grub2/grub.cfg
 
 ##### 1.3.1.3 图标不显示
 
-Fedora 的图标没有在 grub 中显示，甚至没有显示 Linux企鹅Tux图标 。
+参考：https://github.com/vinceliuice/grub2-themes/issues/100#issuecomment-722771012
+
+Fedora 的图标没有在 grub 中显示，甚至没有显示 Linux企鹅Tux图标。
 
 >grub文档:
 >The boot menu where GRUB displays the menu entries from the "grub.cfg" file. It is a list of items, where each item has a title and an optional icon. The icon is selected based on the classes specified for the menu entry. If there is a PNG file named "myclass.png" in the "grub/themes/icons" directory, it will be displayed for items which have the class "myclass"
