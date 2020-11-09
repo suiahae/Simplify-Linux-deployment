@@ -1,0 +1,33 @@
+在 Debian 系的 Linux 系统中，可以编辑 /etc/environment 文件，增加下面几行：
+
+mousepad
+172.16.37.1:7890
+
+http_proxy=http://myproxy.server.com:8080/
+https_proxy=http://myproxy.server.com:8080/
+ftp_proxy=http://myproxy.server.com:8080/
+no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+HTTP_PROXY=http://myproxy.server.com:8080/
+HTTPS_PROXY=http://myproxy.server.com:8080/
+FTP_PROXY=http://myproxy.server.com:8080/
+NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+
+然后执行
+
+$ source /etc/environment
+
+这时候，大部分的软件都可以通过代理上网了。
+
+还有一部分使用Gnome配置的软件仍然不能上网，可以这样解决，命令行：
+
+gsettings set org.gnome.system.proxy mode 'manual' 
+gsettings set org.gnome.system.proxy.http host 'myproxy.server.com'
+gsettings set org.gnome.system.proxy.http port 8080
+
+对于apt来说，还可以这样设定：
+
+在/etc/apt/apt.conf.d/下创建一个文件，比如可以是：95-proxy.conf，内容是：
+
+Acquire::http::proxy "http://myproxy.server.com:8080/";
+Acquire::ftp::proxy "ftp://myproxy.server.com:8080/";
+Acquire::https::proxy "https://myproxy.server.com:8080/";

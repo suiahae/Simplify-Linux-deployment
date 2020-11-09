@@ -243,6 +243,21 @@ sudo cp /usr/share/locale/zh_CN/LC_MESSAGES/grub.mo /boot/efi/EFI/fedora/locale/
 LANG=C grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
+##### 1.3.1.3 图标不显示
+
+Fedora 的图标没有在 grub 中显示，甚至没有显示 Linux企鹅Tux图标 。
+
+>grub文档:
+>The boot menu where GRUB displays the menu entries from the "grub.cfg" file. It is a list of items, where each item has a title and an optional icon. The icon is selected based on the classes specified for the menu entry. If there is a PNG file named "myclass.png" in the "grub/themes/icons" directory, it will be displayed for items which have the class "myclass"
+
+奇怪的是，在Fedora中该类被设置为 "kernel"。
+
+所以需要在主题文件夹创建从 fedora.png 到 kernel.png 的符号链接。重启即可看到图标。例如：
+
+```bash
+sudo ln -s /usr/share/grub/themes/Tela/icons/fedora.png /usr/share/grub/themes/Tela/icons/kernel.png
+```
+
 #### 1.3.2 MaterialFox
 
 https://github.com/muckSponge/MaterialFox/
@@ -462,7 +477,7 @@ sudo dnf install grub-customizer -y
     sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool -y
     ```
 
-2. 添加系统变量
+<!-- 2. 添加系统变量自动重启
 
     ```bash
     sudo su
@@ -473,7 +488,13 @@ sudo dnf install grub-customizer -y
     EOF
     ```
 
-3. 在 gnomes-tweaks 设置 fcitx5 开机启动
+3. 在 gnomes-tweaks 设置 fcitx5 开机启动 -->
+
+2. 自动重启
+
+    ```bash
+    sudo dnf install fcitx5-autostart -y
+    ```
 
 ##### 2.4.1.2 设置皮肤
 
@@ -537,6 +558,8 @@ mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 
 https://code.visualstudio.com/docs/setup/linux
 
+##### 2.5.1.1 安装
+
 1. 安装 key and repository:
 
     ```bash
@@ -551,7 +574,13 @@ https://code.visualstudio.com/docs/setup/linux
     sudo dnf install code
     ```
 
-#### 2.5.2 Typora
+##### 2.5.1.2 个性化
+
+1. 登陆 github/Micorsoft 同步设置
+
+2. 将 window.titleBarStyle 改为 custom
+
+#### 2.5.2 Typora (Not FOSS)
 
 https://github.com/RPM-Outpost/typora
 
@@ -566,6 +595,14 @@ A simple markdown editor for GTK+
 ```bash
 sudo dnf install -y marker
 ```
+
+<!-- #### 2.5.5 Remarkable
+
+https://remarkableapp.github.io/index.html
+
+```bash
+sudo dnf install https://remarkableapp.github.io/files/remarkable-1.87-1.rpm
+``` -->
 
 ### 2.6 虚拟机平台
 
