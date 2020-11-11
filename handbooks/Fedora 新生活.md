@@ -61,22 +61,22 @@ rsync -av /etc/ /mnt/data/rsync/fedora/
 #### 0.2.2 tar （不推荐）
 
 1. 备份命令
-
-    ```bash
+   
+   ```bash
     sudo su
     tar -cvpzf /mnt/data/backups/home_backup@`date +%Y-%m-%d`.tar.gz /home
     tar -cvpzf /mnt/data/backups/etc_backup@`date +%Y-%m-%d`.tar.gz /etc
     tar -cvpzf /mnt/data/backups/usr_local_backup@`date +%Y-%m-%d`.tar.gz /usr/local
-    ```
+   ```
 
 2. 解压
-
-    ```bash
+   
+   ```bash
     sudo su
     tar -xvpzf /mnt/data/backups/home_backup*.tar.gz /home
     tar -xvpzf /mnt/data/backups/etc_backup*tar.gz /etc
     tar -xvpzf /mnt/data/backups/usr_local_backup*.tar.gz /usr/local
-    ```
+   ```
 
 ## 1. 初始化配置
 
@@ -95,11 +95,11 @@ cd Simplify-Linux-deployment/
 **Note:**
 
 1. 解决 zsh “zsh: no matches found *”
-
-    ```bash
+   
+   ```bash
     echo "setopt no_nomatch" >> ~/.zshrc
     source ~/.zshrc
-    ```
+   ```
 
 ### 1.2 安装驱动
 
@@ -196,35 +196,35 @@ https://github.com/suiahae/grub2-themes
 ##### 1.3.1.1 安装 grub2-themes 主题
 
 1. 克隆仓库
-
-    ```bash
+   
+   ```bash
     git clone https://github.com/suiahae/grub2-themes.git
     cd grub2-theme
-    ```
+   ```
 
 2. 安装
-
-    ```bash
+   
+   ```bash
     sudo ./install.sh -t
-    ```
+   ```
 
 3. 更改 /etc/default/grub
-
-    ```bash
+   
+   ```bash
     sudo gedit /etc/default/grub
-    ```
-
+   ```
+   
     注释掉 GRUB_TERMINAL_OUTPUT="console"（这个控制是以哪种方式显示，不注释的话会以console窗口显示启动列表）
-
-    ```
+   
+   ```
     # GRUB_TERMINAL_OUTPUT="console"
-    ```
-
+   ```
+   
     增加 GRUB_SAVEDEFAULT="true" 保存上次启动项
-
-    ```
+   
+   ```
     GRUB_SAVEDEFAULT="true"
-    ```
+   ```
 
 ##### 1.3.1.2 错误提示
 
@@ -249,8 +249,8 @@ LANG=C grub2-mkconfig -o /boot/grub2/grub.cfg
 
 Fedora 的图标没有在 grub 中显示，甚至没有显示 Linux企鹅Tux图标。
 
->grub文档:
->The boot menu where GRUB displays the menu entries from the "grub.cfg" file. It is a list of items, where each item has a title and an optional icon. The icon is selected based on the classes specified for the menu entry. If there is a PNG file named "myclass.png" in the "grub/themes/icons" directory, it will be displayed for items which have the class "myclass"
+> grub文档:
+> The boot menu where GRUB displays the menu entries from the "grub.cfg" file. It is a list of items, where each item has a title and an optional icon. The icon is selected based on the classes specified for the menu entry. If there is a PNG file named "myclass.png" in the "grub/themes/icons" directory, it will be displayed for items which have the class "myclass"
 
 奇怪的是，在Fedora中该类被设置为 "kernel"。
 
@@ -282,31 +282,31 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 #### 2.1.1 Clash
 
 1. 克隆仓库
-
+   
    ```bash
    https://github.com/suiahae/clash-premium-installer.git
    ```
 
 2. 安装
-
+   
    ```bash
    sudo clash-premium-installer/installer.sh install
    ```
 
 3. 创建 config.yaml 后，请将其权限更改为rw -------，以避免节点信息泄漏。
-
+   
    ```bash
    chmod 600 /usr/local/etc/clash/*
    ```
 
 4. 下载 [yacd](https://github.com/haishanh/yacd) 管理面板
-
+   
    ```bash
    mkdir yacd-gh-pages && cd yacd-gh-pages
    https://github.com/haishanh/yacd/archive/gh-pages.zip
    unzip gh-pages.zip && rm -v gh-pages.zip
    ```
-
+   
    打开 index.html 即可
 
 ### 2.2 gnome 插件
@@ -339,30 +339,30 @@ https://gist.github.com/suiahae/37fff654837e9959dacb39e5d0627369
 https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
 
 1. 安装
-
-    ```bash
+   
+   ```bash
     sudo dnf install thinkfan -y
-    ```
+   ```
 
 2. 安装内核模块
-
+   
    ```bash
    sudo dnf -y install lm_sensors
    sudo sensors-detect --auto
    ```
 
 3. 加载模块
-
+   
    ```bash
    sudo systemctl restart systemd-modules-load
    ```
 
 4. 更改 thinkfan.conf 
-
+   
    ```bash
    sudo gedit /etc/thinkfan.conf
    ```
-
+   
    ```
    ######################################################################
    # thinkfan 0.7 example config file
@@ -394,7 +394,7 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    # will add a fixed value of 10 °C the 3rd value read from that file. Check out
    # http://www.thinkwiki.org/wiki/Thermal_Sensors to find out how much you may
    # want to add to certain temperatures.
-
+   
    #  Syntax:
    #  (LEVEL, LOW, HIGH)
    #  LEVEL is the fan level to use (0-7 with thinkpad_acpi)
@@ -402,11 +402,11 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    #  HIGH is the temperature at which to step up to the next level
    #  All numbers are integers.
    #
-
+   
    # I use this on my T61p:
    #tp_fan /proc/acpi/ibm/fan
    #tp_thermal /proc/acpi/ibm/thermal (0, 10, 15, 2, 10, 5, 0, 3, 0, 3)
-
+   
    (0, 0, 50)
    (1, 50, 60)
    (3, 60, 70)
@@ -414,13 +414,13 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    ```
 
 5. 启用 thinkfan service
-
+   
    ```bash
    sudo systemctl enable thinkfan --now
    ```
 
 6. 设置 thinkfan service 自动重启
-
+   
    ```bash
    sudo su
    mkdir -p /etc/systemd/system/thinkfan.service.d
@@ -428,7 +428,7 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    [Unit]
    StartLimitIntervalSec=30
    StartLimitBurst=3
-
+   
    [Service]
    Restart=on-failure
    RestartSec=3
@@ -436,7 +436,7 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    ```
 
 7. 重载 systemd
-
+   
    ```bash
    sudo systemctl daemon-reload
    ```
@@ -474,10 +474,10 @@ sudo dnf install grub-customizer -y
 ##### 2.4.1.1 安装 Fcitx5
 
 1. 安装
-
-    ```bash
+   
+   ```bash
     sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool -y
-    ```
+   ```
 
 <!-- 2. 添加系统变量自动重启
 
@@ -493,10 +493,10 @@ sudo dnf install grub-customizer -y
 3. 在 gnomes-tweaks 设置 fcitx5 开机启动 -->
 
 2. 自动重启
-
-    ```bash
+   
+   ```bash
     sudo dnf install fcitx5-autostart -y
-    ```
+   ```
 
 ##### 2.4.1.2 设置皮肤
 
@@ -563,18 +563,18 @@ https://code.visualstudio.com/docs/setup/linux
 ##### 2.5.1.1 安装
 
 1. 安装 key and repository:
-
-    ```bash
+   
+   ```bash
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
     sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
-    ```
+   ```
 
 2. 更新缓存并安装 Visual Studio Code
-
-    ```bash
+   
+   ```bash
     dnf check-update
     sudo dnf install code
-    ```
+   ```
 
 ##### 2.5.1.2 个性化
 
@@ -590,7 +590,7 @@ https://github.com/RPM-Outpost/typora
 
 https://linux.wps.cn/
 
-#### 2.5.4 Marker
+#### 2.5.4 Marker (Only English)
 
 A simple markdown editor for GTK+
 
@@ -605,6 +605,14 @@ https://remarkableapp.github.io/index.html
 ```bash
 sudo dnf install https://remarkableapp.github.io/files/remarkable-1.87-1.rpm
 ``` -->
+
+#### 2.5.5 Mark Text (Only English before v1.0.0)
+
+> [Internationalization of Mark Text · Issue #138 · marktext/marktext · GitHub](https://github.com/marktext/marktext/issues/138)
+
+https://marktext.app/
+
+[Releases · marktext/marktext · GitHub](https://github.com/marktext/marktext/releases)
 
 ### 2.6 虚拟机平台
 
@@ -660,6 +668,7 @@ EOF
 ```
 
 ##### 2.6.2.4 启用主机与虚拟机间的文件复制
+
 https://github.com/vmware/open-vm-tools/issues/427
 
 ```bash
@@ -683,28 +692,28 @@ sudo dnf install VirtualBox -y
 ### 2.7 ssh
 
 1. 登陆
-
-    ```bash
+   
+   ```bash
     ssh user@linux_sever
-    ```
+   ```
 
 2. 生成密钥
-
-    ```bash
+   
+   ```bash
     ssh-keygen -t rsa -C "comment"
-    ```
+   ```
 
 3. 查看公钥
-
-    ```bash
+   
+   ```bash
     cat ~/.ssh/id_rsa.pub
-    ```
+   ```
 
 4. 用ssh-copy-id将公钥复制到远程机器的`~/.ssh/authorized_keys`中
-
-    ```bash
+   
+   ```bash
     ssh-copy-id -i ~/.ssh/id_rsa.pub user@linux_sever
-    ```
+   ```
 
 ### 2.7-2 Git
 
@@ -746,13 +755,13 @@ sudo dnf install nomacs -y
 #### 2.10.1 flameshot
 
 1. 安装
-
-    ```bash
+   
+   ```bash
     sudo dnf install flameshot -y
-    ```
+   ```
 
 2. 配置快捷键
-
+   
     在`设置>键盘快捷键`添加自定义快捷键，命令为`flameshot gui`
 
 ### 2.11 下载工具
@@ -794,7 +803,7 @@ WantedBy=multi-user.target
 sudo systemctl enable aria2.service --now
 ```
 
-##### 2.11.1.4 AriaNg 
+##### 2.11.1.4 AriaNg
 
 Aria2 for Chrome
 
@@ -815,112 +824,112 @@ https://github.com/agalwood/Motrix/releases
 #### 2.12.1 VNC
 
 1. 安装软件
-
-    ```bash
+   
+   ```bash
     sudo dnf install tigervnc-server tigervnc -y
-    ```
+   ```
 
 2. 设置密码
-
+   
     You need to set a password for each user in order to be able to start the Tigervnc server. In order to create a password, you just run
-
-    ```bash
+   
+   ```bash
     $ vncpasswd
-    ```
-
+   ```
+   
     as the user you will be starting the server for. 
-
+   
     **Note:**
-
+   
     If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
-
-    ```bash
+   
+   ```bash
     $ restorecon -RFv /home/<USER>/.vnc
-    ```
+   ```
 
 3. 创建 systemd-user-service 
-
+   
     http://www.jinbuguo.com/systemd/systemd.service.html
-
+   
     `/home/<USER>/.config/systemd/user/vncserver-<username>.service`
-
-    ```
+   
+   ```
     [Unit]
     Description=Remote desktop service (VNC) for <username>
     After=syslog.target network.target
-
+   
     [Service]
     Type=simple
     ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/<username>/.vnc/passwd -Geometry 1920x1080 -localhost
     Restart=on-failure
     RestartSec=5s
-
+   
     [Install]
     WantedBy=graphical-session.target
-    ```
-
+   ```
+   
     此时监听端口为`5900`
-
+   
     **Note:** 
-
-    1. `-localhost` 应与 ssh 一起使用
-
-    ```bash
-    ssh user@linux_sever -L 8900:localhost:5900
-    vncviewer localhost:8900
-    ```
-
-    2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
-
-    ```bash
-    sudo loginctl enable-linger <username>
-    ```
-
-    重载
-
-    ```bash
-    systemctl --user daemon-reload
-    ```
-
-    测试
-
-    ```bash
-    systemctl --user start vncserver-minux.service 
-    ```
-
-    测试无误默认开启
-
-    ```bash
-    systemctl --user enable vncserver-minux.service
-    ```
-
-    客户端连接
-
-    ```bash
-    vncviewer linux_sever:5800
-    ```
+   
+   1. `-localhost` 应与 ssh 一起使用
+      
+      ```bash
+      ssh user@linux_sever -L 8900:localhost:5900
+      vncviewer localhost:8900
+      ```
+   
+   2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
+      
+      ```bash
+      sudo loginctl enable-linger <username>
+      ```
+      
+      重载
+      
+      ```bash
+      systemctl --user daemon-reload
+      ```
+      
+      测试
+      
+      ```bash
+      systemctl --user start vncserver-minux.service 
+      ```
+      
+      测试无误默认开启
+      
+      ```bash
+      systemctl --user enable vncserver-minux.service
+      ```
+      
+      客户端连接
+      
+      ```bash
+      vncviewer linux_sever:5800
+      ```
 
 #### 2.12.2 Teamviewer
 
 1. 导入key
-
-    ```bash
+   
+   ```bash
     sudo rpm --import https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
-    ```
+   ```
 
 2. 安装
-
-    ```bash
+   
+   ```bash
     sudo dnf install https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
-    ```
+   ```
 
 #### 2.12.3 AnyDesk
 
 http://rpm.anydesk.com/howto.html
 
 1. 导入仓库
-
-    ```bash
+   
+   ```bash
     sudo su
     cat > /etc/yum.repos.d/AnyDesk-Fedora.repo << "EOF" 
     [anydesk]
@@ -931,29 +940,29 @@ http://rpm.anydesk.com/howto.html
     gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY
     EOF
     dnf check-update
-    ```
+   ```
 
 2. 安装
-
-    ```bash
+   
+   ```bash
     sudo dnf install anydesk
-    ```
+   ```
 
 ### 2.13 网盘
 
 #### 2.13.1 Autorclone (添加图标 alacarte)
 
 1. 安装 rclone
-
-    ```bash
+   
+   ```bash
     sudo dnf install screen git rclone -y
-    ```
+   ```
 
 2. 克隆仓库并安装python依赖包
-
-    ```bash
+   
+   ```bash
     git clone https://github.com/xyou365/AutoRclone && cd AutoRclone && pip install -r requirements.txt --user
-    ```
+   ```
 
 3. 详细教程
 
@@ -1051,10 +1060,10 @@ sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
 实用教程：https://suiahae.me/docker-tutorial-1/
 
 1. 安装最新版 [Moby Engine](https://mobyproject.org/)
-
-    ```bash
+   
+   ```bash
     sudo dnf install docker
-    ```
+   ```
 
 <!-- 2. Cgroups Exception: 对于Fedora 31及更高版本，需要为Cgroups启用向后兼容。
 
@@ -1063,16 +1072,16 @@ sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
     ``` -->
 
 2. 开启docker.service
-
+   
    ```bash
    sudo systemctl start docker
    ```
 
 3. 验证Docker是否已正确安装
-
-    ```bash
+   
+   ```bash
     sudo docker info
-    ```
+   ```
 
 ### 2.16 游戏平台
 
