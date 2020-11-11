@@ -590,6 +590,21 @@ https://github.com/RPM-Outpost/typora
 
 https://linux.wps.cn/
 
+1. [From Flatpak](https://flathub.org/apps/details/com.wps.Office)
+
+   ```bash
+   # 安装flatpak
+   sudo dnf install flatpak -y
+   # 添加仓库
+   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+   # 安装
+   flatpak install flathub com.wps.Office
+   # 运行/点击图标运行
+   flatpak run com.wps.Office
+   ```
+
+2. https://linux.wps.cn/
+
 #### 2.5.4 Marker (Only English)
 
 A simple markdown editor for GTK+
@@ -612,7 +627,20 @@ sudo dnf install https://remarkableapp.github.io/files/remarkable-1.87-1.rpm
 
 https://marktext.app/
 
-[Releases · marktext/marktext · GitHub](https://github.com/marktext/marktext/releases)
+1. [From Flatpak](https://flathub.org/apps/details/com.github.marktext.marktext)
+   
+   ```bash
+   # 安装flatpak
+   sudo dnf install flatpak -y
+   # 添加仓库
+   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+   # 安装
+   flatpak install flathub com.github.marktext.marktext
+   # 运行/点击图标运行
+   flatpak run com.github.marktext.marktext
+   ```
+
+2. [Releases · marktext/marktext · GitHub](https://github.com/marktext/marktext/releases)
 
 ### 2.6 虚拟机平台
 
@@ -722,7 +750,7 @@ git config --global user.name "yourname"
 git config --global user.email "youremail"
 ```
 
-### 2.8 视频播放
+### 2.8-1 视频播放
 
 #### 2.8.1 emby
 
@@ -738,9 +766,38 @@ https://celluloid-player.github.io/
 sudo dnf install celluloid -y
 ```
 
+<!-- #### 2.8.3 mpv -->
+
 #### 2.8.3 vlc
 
-#### 2.8.4 mpv
+### 2.8-2 音乐播放
+
+#### 2.8.4 网易云音乐
+
+1. [From Flatpak](https://flathub.org/apps/details/com.netease.CloudMusic)
+   
+   ```bash
+   # 安装flatpak
+   sudo dnf install flatpak -y
+   # 添加仓库
+   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+   # 安装netease.CloudMusic
+   flatpak install flathub com.netease.CloudMusic
+   # 运行/点击图标运行
+   flatpak run com.netease.CloudMusic
+   ```
+
+<!-- 2. [GitHub - xuthus5/fedora-netease: fedora网易云音乐安装脚本。该脚本用于在Fedora上一键安装网易云音乐，测试于Fedora-KDE-30。](https://github.com/xuthus5/fedora-netease) -->
+
+2. API+gtk： [GitHub - gmg137/netease-cloud-music-gtk: Linux 平台下基于 Rust + GTK 开发的网易云音乐播放器](https://github.com/gmg137/netease-cloud-music-gtk)
+
+3. [AUR (en) - netease-cloud-music](https://aur.archlinux.org/packages/netease-cloud-music/)
+
+#### 2.8.5 All in One Music
+
+1. [GitHub - sunzongzheng/music: electron跨平台音乐播放器；可搜网易云、QQ音乐、虾米音乐；支持QQ、微博、Github登录，云歌单; 支持一键导入音乐平台歌单](https://github.com/sunzongzheng/music)
+
+2. [AUR (en) - musiclake-git](https://aur.archlinux.org/packages/musiclake-git/)
 
 ### 2.9 图片浏览器
 
