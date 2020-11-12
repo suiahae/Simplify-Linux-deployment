@@ -293,13 +293,19 @@ The following content is from MaterialFox-76.2, ==but it is very important==
    sudo clash-premium-installer/installer.sh install
    ```
 
-3. 创建 config.yaml 后，请将其权限更改为rw -------，以避免节点信息泄漏。
+3. 下载或创建配置文件 config.yaml
+
+   一些帮助
+
+   https://gist.github.com/suiahae/bfbc87fedea21ef8760e1ff8f02a567f
+
+4. 创建 config.yaml 后，请将其权限更改为rw -------，以避免节点信息泄漏。
    
    ```bash
    chmod 600 /usr/local/etc/clash/*
    ```
 
-4. 下载 [yacd](https://github.com/haishanh/yacd) 管理面板
+5. 下载 [yacd](https://github.com/haishanh/yacd) 管理面板
    
    ```bash
    mkdir yacd-gh-pages && cd yacd-gh-pages
