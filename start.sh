@@ -56,7 +56,7 @@ sudo apt install gnome-tweak-tool p7zip-full wget -y 2>/dev/null;
 sudo dnf install gnome-tweak-tool p7zip wget -y 2>/dev/null; 
 
 # proxychains4 ./scripts/update-Qogir-theme-online.sh;
-proxychains4 ./scripts/update-Qogir-icon-online.sh
+proxychains4 ./scripts/update-Qogir-icon-online.sh;
 proxychains4 ./scripts/update-Vimix-gtk-themes-online.sh;
 
 # 安装环境
