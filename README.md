@@ -1,9 +1,12 @@
 # Simplify-Linux-deployment
+
 Linux shell scripts to simplify Linux deployment
 
+```bash
 git clone https://github.com/suiahae/Simplify-Linux-deployment.git
-
+or
 git clone git@github.com:suiahae/Simplify-Linux-deployment.git
+```
 
 **Just run**: `./start.sh`
 
