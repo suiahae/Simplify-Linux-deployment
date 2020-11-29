@@ -3,9 +3,9 @@
 Linux shell scripts to simplify Linux deployment
 
 ```bash
-git clone https://github.com/suiahae/Simplify-Linux-deployment.git
-or
-git clone git@github.com:suiahae/Simplify-Linux-deployment.git
+wget https://github.com/suiahae/Simplify-Linux-deployment/archive/master.zip -O Simplify-Linux-deployment-master.zip
+unzip Simplify-Linux-deployment-master
+cd Simplify-Linux-deployment-master
 ```
 
 **Just run**: `./start.sh`
