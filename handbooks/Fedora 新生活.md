@@ -294,9 +294,9 @@ The following content is from MaterialFox-76.2, ==but it is very important==
    ```
 
 3. 下载或创建配置文件 config.yaml
-
+   
    一些帮助
-
+   
    https://gist.github.com/suiahae/bfbc87fedea21ef8760e1ff8f02a567f
 
 4. 创建 config.yaml 后，请将其权限更改为rw -------，以避免节点信息泄漏。
@@ -597,7 +597,7 @@ https://github.com/RPM-Outpost/typora
 https://linux.wps.cn/
 
 1. [From Flatpak](https://flathub.org/apps/details/com.wps.Office)
-
+   
    ```bash
    # 安装flatpak
    sudo dnf install flatpak -y
@@ -650,11 +650,61 @@ https://marktext.app/
 
 ### 2.6 虚拟机平台
 
-#### 2.6.1 qemu+libvirt
+#### 2.6.1 virt-manager
 
-```bash
-dnf install -y qemu libvirt virt-manager
-```
+<!-- ```bash
+dnf install qemu libvirt virt-manager -y
+``` -->
+
+https://zh.fedoracommunity.org/2019/07/23/full-virtualization-system-on-fedora-workstation-30.html
+
+1. 安装软件包
+   
+   ```
+   sudo dnf install @virtualization
+   ```
+
+2. 编辑 libvirtd 配置
+   
+   默认情况下，只有 root 用户才能进行系统管理，如果要为普通用户授权的话，则需要按以下步骤操作。
+   
+   编辑 /etc/libvirt/libvirtd.conf 这个文件。
+   
+   ```
+   sudo vi /etc/libvirt/libvirtd.conf
+   ```
+   
+   将域 socket 的所有组设置为 libvirt：
+   
+   ```
+   unix_sock_group = "libvirt"
+   ```
+   
+   修改 R/W socket 的 UNIX socket 权限：
+   
+   ```
+   unix_sock_rw_perms = "0770"
+   ```
+
+3. 运行 libvirtd 服务并设置为开机自启
+   
+   ```
+   sudo systemctl start libvirtd
+   
+   sudo systemctl enable libvirtd
+   ```
+
+4. 将用户添加到组
+   
+   如果想使用普通用户身份来管理 libvirt 的话，需要将该用户添加到 libvirt 组，不然的话每次启动虚拟管理器时，都得输入 sudo 密码。
+   
+   ```
+   sudo usermod -a -G libvirt $(whoami)
+   ```
+   
+   这一行命令就可以将当前用户添加到组。
+   
+   注意，这里需要注销后再登录才能生效。
 
 #### 2.6.2 VMware
 
@@ -719,6 +769,8 @@ systemctl status -l run-vmblock\\x2dfuse.mount
 
 #### 2.6.3 VirtualBox
 
+磁盘性能过差
+
 ```bash
 sudo dnf install VirtualBox -y
 ```
@@ -728,25 +780,40 @@ sudo dnf install VirtualBox -y
 1. 登陆
    
    ```bash
-    ssh user@linux_sever
+   ssh user@linux_sever
    ```
 
 2. 生成密钥
    
    ```bash
-    ssh-keygen -t rsa -C "comment"
+   ssh-keygen -t rsa -C "comment"
    ```
 
 3. 查看公钥
    
    ```bash
-    cat ~/.ssh/id_rsa.pub
+   cat ~/.ssh/id_rsa.pub
    ```
 
 4. 用ssh-copy-id将公钥复制到远程机器的`~/.ssh/authorized_keys`中
    
    ```bash
-    ssh-copy-id -i ~/.ssh/id_rsa.pub user@linux_sever
+   ssh-copy-id -i ~/.ssh/id_rsa.pub user@linux_sever
+   ```
+
+5. 启用 sshd.service
+   
+   ```bash
+   sudo systemctl enable sshd.service --now
+   ```
+
+6. 强制密钥登陆
+   
+   创建 /etc/ssh/sshd_config.d/99-<USER>-nopasswd.conf 文件，内容为：
+   
+   ```bash
+   Match User <USER>
+   PasswordAuthentication no
    ```
 
 ### 2.7-2 Git
