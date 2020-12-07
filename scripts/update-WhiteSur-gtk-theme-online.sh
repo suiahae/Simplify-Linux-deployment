@@ -5,6 +5,7 @@
 # sudo pacman -S p7zip-full
 sudo dnf install gtk-murrine-engine gtk2-engines sassc optipng inkscape glib2-devel
 
+# Rounded Dash to Dock: https://gist.github.com/suiahae/744be70c9d6944bfb4d67b3a54ec9efd
 
 # mkdir .tmp 2>/dev/null; 
 # cd .tmp;
@@ -35,5 +36,5 @@ cd ..;
 rm -Rf WhiteSur-icon-theme.zip 2>/dev/null; 
 rm -Rf WhiteSur-icon-theme-2020-10-11/ 2>/dev/null; 
 # notify-send "All done!" "Enjoy the latest version of WhiteSur!" -i face-smile
-
+mkdir -p $HOME/.local/share/backgrounds
 wget https://github.com/vinceliuice/WhiteSur-kde/raw/master/wallpaper/WhiteSur_4k.png -O $HOME/.local/share/backgrounds/WhiteSur_4k.png
