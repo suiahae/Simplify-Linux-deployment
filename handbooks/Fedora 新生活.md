@@ -260,7 +260,7 @@ Fedora 的图标没有在 grub 中显示，甚至没有显示 Linux企鹅Tux图�
 sudo ln -s /usr/share/grub/themes/Tela/icons/fedora.png /usr/share/grub/themes/Tela/icons/kernel.png
 ```
 
-#### 1.3.2 MaterialFox
+<!-- #### 1.3.2 MaterialFox
 
 https://github.com/muckSponge/MaterialFox/
 
@@ -273,7 +273,7 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 2. [about:config] Set ```toolkit.legacyUserProfileCustomizations.stylesheets``` to ```true``` (default is ```false```).
 3. [about:config] Set ```svg.context-properties.content.enabled``` to ```true``` (default is ```false```).
 
-********************
+******************** -->
 
 ## 2. 推荐软件
 
@@ -295,7 +295,7 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 3. 下载或创建配置文件 config.yaml
    
-   一些帮助
+   一些帮助 [NetNodes_Informations.md]
    
    https://gist.github.com/suiahae/bfbc87fedea21ef8760e1ff8f02a567f
 
@@ -328,6 +328,8 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
 
 [Proxy Switcher](https://extensions.gnome.org/extension/771/proxy-switcher/)
+
+[netspeed](https://extensions.gnome.org/extension/104/netspeed/)
 
 [TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
 
@@ -1012,7 +1014,7 @@ https://github.com/agalwood/Motrix/releases
    2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
       
       ```bash
-      sudo loginctl enable-linger <username>
+      sudo loginctl enable-linger $(whoami)
       ```
       
       重载
@@ -1110,6 +1112,10 @@ sudo dnf install rclone -y
 依照官方文档配置 Rclone
 
 https://rclone.org/drive/
+
+https://www.80tm.com/2020/04/10/debian-ubuntu用rclone挂载google-drive团队盘/
+
+Notes: 注意编辑`/etc/fuse.conf`文件 ---- “取消注释 user_allow_other”以允许非root用户挂载。
 
 ##### 2.13.2.2 通过 systemd service 实现开机自动挂载
 

@@ -64,6 +64,27 @@ ExecStart=/bin/rclone mount GDTeam_raye_movies: /home/emby/GDTeam_raye_movies --
 WantedBy=multi-user.target
 ```
 
+#### 3.2.2 movies --user
+
+`vim /home/minux/.config/systemd/user/rclone-movies.service`
+
+systemctl --user daemon-reload
+
+```
+[Unit]
+Description=Rclone mount gdteam movies
+Wants=clash.service
+After=clash.service
+
+[Service]
+Type=simple
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+ExecStart=/bin/rclone mount GDTeam_raye_movies: /home/emby/GDTeam_raye_movies --allow-other --allow-non-empty
+
+[Install]
+WantedBy=default.target
+```
+
 ### 3.2 qinse
 
 `sudo vim /usr/lib/systemd/system/rclone-qinse.service`
@@ -86,6 +107,27 @@ ExecStart=/bin/rclone mount GDTeam_raye_qinse: /home/emby/GDTeam_raye_qinse --al
 WantedBy=multi-user.target
 ```
 
+#### 3.2.2 qinse --user
+
+`vim /home/minux/.config/systemd/user/rclone-qinse.service`
+
+systemctl --user daemon-reload
+
+```
+[Unit]
+Description=Rclone mount gdteam qinse
+Wants=clash.service
+After=clash.service
+
+[Service]
+Type=simple
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+ExecStart=/bin/rclone mount GDTeam_raye_qinse: /home/emby/GDTeam_raye_qinse --allow-other --allow-non-empty
+
+[Install]
+WantedBy=default.target
+```
+
 ### 3.3 sundries
 
 `sudo vim /usr/lib/systemd/system/rclone-sundries.service`
@@ -106,6 +148,27 @@ ExecStart=/bin/rclone mount GDTeam_raye_sundries: /home/emby/GDTeam_raye_sundrie
 
 [Install]
 WantedBy=multi-user.target
+```
+
+#### 3.3.2 sundries --user
+
+`vim /home/minux/.config/systemd/user/rclone-sundries.service`
+
+systemctl --user daemon-reload
+
+```
+[Unit]
+Description=Rclone mount gdteam sundries
+Wants=clash.service
+After=clash.service
+
+[Service]
+Type=simple
+Environment="HTTPS_PROXY=http://127.0.0.1:7890"
+ExecStart=/bin/rclone mount GDTeam_raye_sundries: /home/emby/GDTeam_raye_sundries --allow-other --allow-non-empty
+
+[Install]
+WantedBy=default.target
 ```
 
 ## 4. vnc
