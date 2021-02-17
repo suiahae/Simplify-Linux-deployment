@@ -128,13 +128,13 @@ http://ppa.launchpad.net/uunicorn/open-fprintd/ubuntu
 
 https://www.tecmint.com/convert-from-rpm-to-deb-and-deb-to-rpm-package-using-alien/ -->
 
-##### use AUR
+##### 1). use AUR
 
 sudo dnf remove fprintd -y
 
 tar -zxvf *.tar.gz
 
-https://aur.archlinux.org/packages/fprintd-clients-git/
+https://aur.archlinux.org/packages/fprintd-clients/
 
 ```bash
 sudo dnf install -y libfprint-devel polkit-devel dbus-glib-devel systemd-devel pam-devel pam_wrapper meson patch
@@ -1140,6 +1140,116 @@ ExecStart=/bin/rclone mount GDTeam_raye_movies: /home/emby/GDTeam_raye_movies --
 [Install]
 WantedBy=multi-user.target
 ```
+
+#### 2.13.3 samba
+
+fedora samba
+
+1. install samba
+
+```
+sudo dnf install smaba -y
+```
+
+2. change config file
+backup `sudo cp smb.conf smb.conf.bak`
+add follow context to /etc/samba/smb.conf
+
+```
+sudo gedit /etc/samba/smb.conf
+......
+[global]
+......
+......
+[Arder]
+   comment = Arder Directories
+  path = /home/samba_test_user
+  browseable = yes
+  writable = yes
+  write list = samba_test_user
+```
+
+3. Run 'testparm' to verify the config is correct after you modified it.
+
+4. Create 'samba_test_user', and lock the account. Or use current user.
+
+```
+sudo useradd samba_test_user
+sudo passwd --lock samba_test_user
+```
+
+Set a Samba Password for this Test User (such as 'test'):
+
+```
+sudo smbpasswd -a samba_test_user
+```
+
+5. Set on SELinux rules
+
+5.1 view the SELinux rules about samba
+
+```
+~]# getsebool -a | grep samba
+samba_domain_controller --> off
+samba_enable_home_dirs --> off   <==开放用户使用home目录
+samba_export_all_ro --> off      <==允许只读文件系统的功能
+samba_export_all_rw --> off      <==允许读写文件系统的功能
+samba_share_fusefs --> off       <==允许读写ntfs/fusefs文件系统的功能
+samba_share_nfs --> off
+use_samba_home_dirs --> off      <==类似用户home目录的开放！
+virt_use_samba --> off
+```
+
+5.2 set the rules we need to on
+
+```
+sudo setsebool -P samba_enable_home_dirs=1
+sudo setsebool -P samba_export_all_ro=1
+sudo setsebool -P samba_export_all_rw=1
+sudo setsebool -P samba_share_fusefs=1
+```
+
+6. Configuring your firewall to enable Samba to pass through.
+
+```
+Allow Samba access through the firewall:
+~]# firewall-cmd --add-service=samba --permanent
+~]# firewall-cmd --reload
+
+Verify Samba is included in your active firewall:
+~]$ firewall-cmd --list-services
+
+Output (should include):
+samba
+```
+
+7. Enable and Start Services
+
+```
+sudo systemctl enable smb.service
+sudo systemctl start smb.service
+# Verify smb service:
+systemctl status smb.service
+```
+
+8. Addition: make samba follow symlink outside the shared path
+
+```
+sudo gedit /etc/samba/smb.conf
+......
+[global]
+......
+allow insecure wide links = yes
+......
+[Arder]
+......
+follow symlinks = yes
+wide links = yes
+```
+
+https://fedoramagazine.org/fedora-32-simple-local-file-sharing-with-samba/
+http://linux.vbird.org/linux_server/0370samba.php
+https://unix.stackexchange.com/questions/5120/how-do-you-make-samba-follow-symlink-outside-the-shared-path
 
 ### 2.14 其他工具
 

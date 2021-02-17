@@ -1,4 +1,6 @@
-mixed-port: 7890
+port: 7890
+socks-port: 7891
+#mixed-port: 7890
 
 rules:
 #  - DOMAIN-SUFFIX,360.cn,REJECT
@@ -105,7 +107,9 @@ mixin: # object
     interface-name: WLAN # WLAN 为物理网卡名
 
 #--------------------------------------------
-mixed-port: 7890
+port: 7890
+socks-port: 7891
+#mixed-port: 7890
 allow-lan: true
 ipv6: true
 redir-port: 7892
