@@ -13,7 +13,7 @@ swap        20GiB
 
 ### 0.2 重装前备份
 
-http://cn.linux.vbird.org/linux_basic/0580backup.php
+<http://cn.linux.vbird.org/linux_basic/0580backup.php>
 
 推荐备份目录
 
@@ -61,7 +61,7 @@ rsync -av /etc/ /mnt/data/rsync/fedora/
 #### 0.2.2 tar （不推荐）
 
 1. 备份命令
-   
+
    ```bash
     sudo su
     tar -cvpzf /mnt/data/backups/home_backup@`date +%Y-%m-%d`.tar.gz /home
@@ -70,7 +70,7 @@ rsync -av /etc/ /mnt/data/rsync/fedora/
    ```
 
 2. 解压
-   
+
    ```bash
     sudo su
     tar -xvpzf /mnt/data/backups/home_backup*.tar.gz /home
@@ -95,7 +95,7 @@ cd Simplify-Linux-deployment/
 **Note:**
 
 1. 解决 zsh “zsh: no matches found *”
-   
+
    ```bash
     echo "setopt no_nomatch" >> ~/.zshrc
     source ~/.zshrc
@@ -113,14 +113,14 @@ sudo dnf install xorg-x11-drv-nvidia-cuda #可选启用 cuda/nvdec/nvenc 支持
 
 #### 1.2.2 fprintd-clients open-fprintd python-validity [2]
 
-https://github.com/uunicorn/python-validity
+<https://github.com/uunicorn/python-validity>
 
-https://gitter.im/Validity90/Lobby
+<https://gitter.im/Validity90/Lobby>
 
-fedora pam_configuration: 
-https://github.com/williamwlk/my-red-corner/blob/master/README_PAM.txt
+fedora pam_configuration:
+<https://github.com/williamwlk/my-red-corner/blob/master/README_PAM.txt>
 
-https://computingforgeeks.com/how-to-setup-built-in-fingerprint-reader-authentication-with-pam-on-any-linux/
+<https://computingforgeeks.com/how-to-setup-built-in-fingerprint-reader-authentication-with-pam-on-any-linux/>
 
 <!-- ##### a. use Ubuntu:ppa & alien convert
 
@@ -134,7 +134,7 @@ sudo dnf remove fprintd -y
 
 tar -zxvf *.tar.gz
 
-https://aur.archlinux.org/packages/fprintd-clients/
+<https://aur.archlinux.org/packages/fprintd-clients/>
 
 ```bash
 sudo dnf install -y libfprint-devel polkit-devel dbus-glib-devel systemd-devel pam-devel pam_wrapper meson patch
@@ -147,7 +147,7 @@ sudo meson install -C build
 sudo install -d -m 700 /var/lib/fprint
 ```
 
-https://aur.archlinux.org/packages/open-fprintd/
+<https://aur.archlinux.org/packages/open-fprintd/>
 
 ```bash
 python setup.py build
@@ -157,7 +157,7 @@ sudo install -D -m 644 debian/open-fprintd-resume.service /usr/lib/systemd/syste
 sudo install -D -m 644 debian/open-fprintd-suspend.service /usr/lib/systemd/system/open-fprintd-suspend.service
 ```
 
-https://aur.archlinux.org/packages/python-validity/
+<https://aur.archlinux.org/packages/python-validity/>
 
 ```bash
 sudo pip install pyyaml pyusb
@@ -191,38 +191,38 @@ sudo authselect enable-feature with-fingerprint
 
 #### 1.3.1 grub
 
-https://github.com/suiahae/grub2-themes
+<https://github.com/suiahae/grub2-themes>
 
 ##### 1.3.1.1 安装 grub2-themes 主题
 
 1. 克隆仓库
-   
+
    ```bash
     git clone https://github.com/suiahae/grub2-themes.git
     cd grub2-theme
    ```
 
 2. 安装
-   
+
    ```bash
     sudo ./install.sh -t
    ```
 
 3. 更改 /etc/default/grub
-   
+
    ```bash
     sudo gedit /etc/default/grub
    ```
-   
+
     注释掉 GRUB_TERMINAL_OUTPUT="console"（这个控制是以哪种方式显示，不注释的话会以console窗口显示启动列表）
-   
-   ```
+
+   ```conf
     # GRUB_TERMINAL_OUTPUT="console"
    ```
-   
+
     增加 GRUB_SAVEDEFAULT="true" 保存上次启动项
-   
-   ```
+
+   ```conf
     GRUB_SAVEDEFAULT="true"
    ```
 
@@ -230,7 +230,7 @@ https://github.com/suiahae/grub2-themes
 
 `问题描述：`开机的时候报了一个错误 error: ../../grub-core/fs/fshelp.c:257:file /EFL/Fedora/locale/zh.gmo not found. 但不影响启动 grub 也能正常显示
 
-`解决方案：`根据网上的帖子 (https://bugzilla.redhat.com/show_bug.cgi?id=817187#c42)运行下面的命令使这个错误信息消失了
+`解决方案：`根据网上的帖子 (<https://bugzilla.redhat.com/show_bug.cgi?id=817187#c42>)运行下面的命令使这个错误信息消失了
 
 ```bash
 sudo mkdir -p /boot/efi/EFI/fedora/locale
@@ -245,7 +245,7 @@ LANG=C grub2-mkconfig -o /boot/grub2/grub.cfg
 
 ##### 1.3.1.3 图标不显示
 
-参考：https://github.com/vinceliuice/grub2-themes/issues/100#issuecomment-722771012
+参考：<https://github.com/vinceliuice/grub2-themes/issues/100#issuecomment-722771012>
 
 Fedora 的图标没有在 grub 中显示，甚至没有显示 Linux企鹅Tux图标。
 
@@ -282,37 +282,37 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 #### 2.1.1 Clash
 
 1. 克隆仓库
-   
+
    ```bash
    https://github.com/suiahae/clash-premium-installer.git
    ```
 
 2. 安装
-   
+
    ```bash
    sudo clash-premium-installer/installer.sh install
    ```
 
 3. 下载或创建配置文件 config.yaml
-   
+
    一些帮助 [NetNodes_Informations.md]
-   
-   https://gist.github.com/suiahae/bfbc87fedea21ef8760e1ff8f02a567f
+
+   <https://gist.github.com/suiahae/bfbc87fedea21ef8760e1ff8f02a567f>
 
 4. 创建 config.yaml 后，请将其权限更改为rw -------，以避免节点信息泄漏。
-   
+
    ```bash
    chmod 600 /usr/local/etc/clash/*
    ```
 
 5. 下载 [yacd](https://github.com/haishanh/yacd) 管理面板
-   
+
    ```bash
    mkdir yacd-gh-pages && cd yacd-gh-pages
    https://github.com/haishanh/yacd/archive/gh-pages.zip
    unzip gh-pages.zip && rm -v gh-pages.zip
    ```
-   
+
    打开 index.html 即可
 
 ### 2.2 gnome 插件
@@ -333,6 +333,8 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 [TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
 
+[Touchpad Indicator](https://extensions.gnome.org/extension/131/touchpad-indicator/)
+
 ~~[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)~~
 
 ~~[Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)~~
@@ -343,35 +345,36 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 #### 2.3.1 thinkfan
 
-https://gist.github.com/suiahae/37fff654837e9959dacb39e5d0627369
-https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
+<https://gist.github.com/suiahae/37fff654837e9959dacb39e5d0627369>
+
+<https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html>
 
 1. 安装
-   
+
    ```bash
     sudo dnf install thinkfan -y
    ```
 
 2. 安装内核模块
-   
+
    ```bash
    sudo dnf -y install lm_sensors
    sudo sensors-detect --auto
    ```
 
 3. 加载模块
-   
+
    ```bash
    sudo systemctl restart systemd-modules-load
    ```
 
-4. 更改 thinkfan.conf 
-   
+4. 更改 thinkfan.conf
+
    ```bash
    sudo gedit /etc/thinkfan.conf
    ```
-   
-   ```
+
+   ```conf
    ######################################################################
    # thinkfan 0.7 example config file
    # ================================
@@ -414,21 +417,27 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    # I use this on my T61p:
    #tp_fan /proc/acpi/ibm/fan
    #tp_thermal /proc/acpi/ibm/thermal (0, 10, 15, 2, 10, 5, 0, 3, 0, 3)
-   
-   (0, 0, 50)
-   (1, 50, 60)
-   (3, 60, 70)
+   # (0, 0, 50)
+   # (1, 50, 60)
+   # (3, 60, 70)
+   # (127, 70, 32767)
+   (0, 0, 22)
+   (1, 22, 33)
+   (2, 33, 38)
+   (3, 38, 44)
+   (6, 44, 60)
+   (64, 60, 70)
    (127, 70, 32767)
    ```
 
 5. 启用 thinkfan service
-   
+
    ```bash
    sudo systemctl enable thinkfan --now
    ```
 
 6. 设置 thinkfan service 自动重启
-   
+
    ```bash
    sudo su
    mkdir -p /etc/systemd/system/thinkfan.service.d
@@ -444,7 +453,7 @@ https://www.cnblogs.com/henryau/archive/2012/03/03/ubuntu_thinkfan.html
    ```
 
 7. 重载 systemd
-   
+
    ```bash
    sudo systemctl daemon-reload
    ```
@@ -482,33 +491,33 @@ sudo dnf install grub-customizer -y
 ##### 2.4.1.1 安装 Fcitx5
 
 1. 安装
-   
+
    ```bash
     sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool -y
    ```
 
-<!-- 2. 添加系统变量自动重启
-
-    ```bash
-    sudo su
-    cat > /etc/profile.d/fcitx5.sh << EOF
-    export GTK_IM_MODULE=fcitx5
-    export QT_IM_MODULE=fcitx5
-    export XMODIFIERS="@im=fcitx5"
-    EOF
-    ```
-
-3. 在 gnomes-tweaks 设置 fcitx5 开机启动 -->
-
 2. 自动重启
-   
+
    ```bash
     sudo dnf install fcitx5-autostart -y
    ```
 
+<!-- 2. 添加系统变量自动重启
+
+   ```bash
+   sudo su
+   cat > /etc/profile.d/fcitx5.sh << EOF
+   export GTK_IM_MODULE=fcitx5
+   export QT_IM_MODULE=fcitx5
+   export XMODIFIERS="@im=fcitx5"
+   EOF
+   ```
+
+3. 在 gnomes-tweaks 设置 fcitx5 开机启动 -->
+
 ##### 2.4.1.2 设置皮肤
 
-https://github.com/hosxy/Fcitx5-Material-Color
+<https://github.com/hosxy/Fcitx5-Material-Color>
 
 ```bash
 mkdir -p ~/.local/share/fcitx5/themes/Material-Color
@@ -543,7 +552,7 @@ EOF
 
 修改 `~/.config/fcitx5/conf/pinyin.conf`, 加入/修改以下内容：
 
-```
+```conf
 # 可用时在应用程序中显示预编辑文本
 PreeditInApplication=True
 ```
@@ -552,9 +561,9 @@ PreeditInApplication=True
 
 ##### 2.4.1.2 启用词典
 
-https://github.com/felixonmars/fcitx5-pinyin-zhwiki/releases
+<https://github.com/felixonmars/fcitx5-pinyin-zhwiki/releases>
 
-https://github.com/outloudvi/mw2fcitx/releases
+<https://github.com/outloudvi/mw2fcitx/releases>
 
 下载词典文件至 Fcitx5 词典目录
 
@@ -566,19 +575,19 @@ mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 
 #### 2.5.1 Visual Studio Code
 
-https://code.visualstudio.com/docs/setup/linux
+<https://code.visualstudio.com/docs/setup/linux>
 
 ##### 2.5.1.1 安装
 
 1. 安装 key and repository:
-   
+
    ```bash
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
     sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
    ```
 
 2. 更新缓存并安装 Visual Studio Code
-   
+
    ```bash
     dnf check-update
     sudo dnf install code
@@ -592,14 +601,14 @@ https://code.visualstudio.com/docs/setup/linux
 
 #### 2.5.2 Typora (Not FOSS)
 
-https://github.com/RPM-Outpost/typora
+<https://github.com/RPM-Outpost/typora>
 
 #### 2.5.3 WPS
 
-https://linux.wps.cn/
+<https://linux.wps.cn/>
 
 1. [From Flatpak](https://flathub.org/apps/details/com.wps.Office)
-   
+
    ```bash
    # 安装flatpak
    sudo dnf install flatpak -y
@@ -611,7 +620,7 @@ https://linux.wps.cn/
    flatpak run com.wps.Office
    ```
 
-2. https://linux.wps.cn/
+2. <https://linux.wps.cn/>
 
 #### 2.5.4 Marker (Only English)
 
@@ -633,10 +642,10 @@ sudo dnf install https://remarkableapp.github.io/files/remarkable-1.87-1.rpm
 
 > [Internationalization of Mark Text · Issue #138 · marktext/marktext · GitHub](https://github.com/marktext/marktext/issues/138)
 
-https://marktext.app/
+<https://marktext.app/>
 
 1. [From Flatpak](https://flathub.org/apps/details/com.github.marktext.marktext)
-   
+
    ```bash
    # 安装flatpak
    sudo dnf install flatpak -y
@@ -658,61 +667,61 @@ https://marktext.app/
 dnf install qemu libvirt virt-manager -y
 ``` -->
 
-https://zh.fedoracommunity.org/2019/07/23/full-virtualization-system-on-fedora-workstation-30.html
+<https://zh.fedoracommunity.org/2019/07/23/full-virtualization-system-on-fedora-workstation-30.html>
 
 1. 安装软件包
-   
-   ```
+
+   ```bash
    sudo dnf install @virtualization
    ```
 
 2. 编辑 libvirtd 配置
-   
+
    默认情况下，只有 root 用户才能进行系统管理，如果要为普通用户授权的话，则需要按以下步骤操作。
-   
+
    编辑 /etc/libvirt/libvirtd.conf 这个文件。
-   
-   ```
+
+   ```bash
    sudo vi /etc/libvirt/libvirtd.conf
    ```
-   
+
    将域 socket 的所有组设置为 libvirt：
-   
-   ```
+
+   ```conf
    unix_sock_group = "libvirt"
    ```
-   
+
    修改 R/W socket 的 UNIX socket 权限：
-   
-   ```
+
+   ```conf
    unix_sock_rw_perms = "0770"
    ```
 
 3. 运行 libvirtd 服务并设置为开机自启
-   
-   ```
+
+   ```bash
    sudo systemctl start libvirtd
    
    sudo systemctl enable libvirtd
    ```
 
 4. 将用户添加到组
-   
+
    如果想使用普通用户身份来管理 libvirt 的话，需要将该用户添加到 libvirt 组，不然的话每次启动虚拟管理器时，都得输入 sudo 密码。
-   
-   ```
+
+   ```bash
    sudo usermod -a -G libvirt $(whoami)
    ```
-   
+
    这一行命令就可以将当前用户添加到组。
-   
+
    注意，这里需要注销后再登录才能生效。
 
 #### 2.6.2 VMware
 
 ##### 2.6.2.1 安装 VMware
 
-https://www.vmware.com/go/downloadworkstation
+<https://www.vmware.com/go/downloadworkstation>
 
 <!-- ##### 2.6.2.2 打内核补丁
 
@@ -755,7 +764,7 @@ EOF
 
 ##### 2.6.2.4 启用主机与虚拟机间的文件复制
 
-https://github.com/vmware/open-vm-tools/issues/427
+<https://github.com/vmware/open-vm-tools/issues/427>
 
 ```bash
 sudo su
@@ -767,7 +776,7 @@ systemctl status -l run-vmblock\\x2dfuse.mount
 ##### 2.6.2.5 解决虚拟机桌面随机冻结
 
 请从默认的Wayland X协议切换到X11协议。
-登录到桌面时，单击登录屏幕右下角的小菜单，然后选择“ Xorg上的Gnome”。 
+登录到桌面时，单击登录屏幕右下角的小菜单，然后选择“ Xorg上的Gnome”。
 
 #### 2.6.3 VirtualBox
 
@@ -780,41 +789,41 @@ sudo dnf install VirtualBox -y
 ### 2.7 ssh
 
 1. 登陆
-   
+
    ```bash
    ssh user@linux_sever
    ```
 
 2. 生成密钥
-   
+
    ```bash
    ssh-keygen -t rsa -C "comment"
    ```
 
 3. 查看公钥
-   
+
    ```bash
    cat ~/.ssh/id_rsa.pub
    ```
 
 4. 用ssh-copy-id将公钥复制到远程机器的`~/.ssh/authorized_keys`中
-   
+
    ```bash
    ssh-copy-id -i ~/.ssh/id_rsa.pub user@linux_sever
    ```
 
 5. 启用 sshd.service
-   
+
    ```bash
    sudo systemctl enable sshd.service --now
    ```
 
 6. 强制密钥登陆
-   
-   创建 /etc/ssh/sshd_config.d/99-<USER>-nopasswd.conf 文件，内容为：
-   
+
+   创建 /etc/ssh/sshd_config.d/99-[USER]-nopasswd.conf 文件，内容为：
+
    ```bash
-   Match User <USER>
+   Match User [USER]
    PasswordAuthentication no
    ```
 
@@ -829,13 +838,13 @@ git config --global user.email "youremail"
 
 #### 2.8.1 emby
 
-https://github.com/MediaBrowser/Emby.Releases/releases/latest
+<https://github.com/MediaBrowser/Emby.Releases/releases/latest>
 
 #### 2.8.2 Celluloid
 
 Simple GTK+ frontend for mpv
 
-https://celluloid-player.github.io/ 
+<https://celluloid-player.github.io/>
 
 ```bash
 sudo dnf install celluloid -y
@@ -850,7 +859,7 @@ sudo dnf install celluloid -y
 #### 2.8.4 网易云音乐
 
 1. [From Flatpak](https://flathub.org/apps/details/com.netease.CloudMusic)
-   
+
    ```bash
    # 安装flatpak
    sudo dnf install flatpak -y
@@ -862,11 +871,11 @@ sudo dnf install celluloid -y
    flatpak run com.netease.CloudMusic
    ```
 
-<!-- 2. [GitHub - xuthus5/fedora-netease: fedora网易云音乐安装脚本。该脚本用于在Fedora上一键安装网易云音乐，测试于Fedora-KDE-30。](https://github.com/xuthus5/fedora-netease) -->
-
 2. API+gtk： [GitHub - gmg137/netease-cloud-music-gtk: Linux 平台下基于 Rust + GTK 开发的网易云音乐播放器](https://github.com/gmg137/netease-cloud-music-gtk)
 
 3. [AUR (en) - netease-cloud-music](https://aur.archlinux.org/packages/netease-cloud-music/)
+
+<!-- 2. [GitHub - xuthus5/fedora-netease: fedora网易云音乐安装脚本。该脚本用于在Fedora上一键安装网易云音乐，测试于Fedora-KDE-30。](https://github.com/xuthus5/fedora-netease) -->
 
 #### 2.8.5 All in One Music
 
@@ -887,13 +896,13 @@ sudo dnf install nomacs -y
 #### 2.10.1 flameshot
 
 1. 安装
-   
+
    ```bash
     sudo dnf install flameshot -y
    ```
 
 2. 配置快捷键
-   
+
     在`设置>键盘快捷键`添加自定义快捷键，命令为`flameshot gui`
 
 ### 2.11 下载工具
@@ -939,11 +948,11 @@ sudo systemctl enable aria2.service --now
 
 Aria2 for Chrome
 
-https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn
+<https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn>
 
 #### 2.11.2 motrix
 
-https://github.com/agalwood/Motrix/releases
+<https://github.com/agalwood/Motrix/releases>
 
 #### 2.11.3 uGet
 
@@ -956,36 +965,36 @@ https://github.com/agalwood/Motrix/releases
 #### 2.12.1 VNC
 
 1. 安装软件
-   
+
    ```bash
     sudo dnf install tigervnc-server tigervnc -y
    ```
 
 2. 设置密码
-   
+
     You need to set a password for each user in order to be able to start the Tigervnc server. In order to create a password, you just run
-   
+
    ```bash
-    $ vncpasswd
-   ```
-   
-    as the user you will be starting the server for. 
-   
-    **Note:**
-   
-    If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
-   
-   ```bash
-    $ restorecon -RFv /home/<USER>/.vnc
+    vncpasswd
    ```
 
-3. 创建 systemd-user-service 
-   
-    http://www.jinbuguo.com/systemd/systemd.service.html
-   
-    `/home/<USER>/.config/systemd/user/vncserver-<username>.service`
-   
+    as the user you will be starting the server for.
+
+    **Note:**
+
+    If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
+
+   ```bash
+    restorecon -RFv /home/[USER]/.vnc
    ```
+
+3. 创建 systemd-user-service
+
+    <http://www.jinbuguo.com/systemd/systemd.service.html>
+
+    `/home/[USER]/.config/systemd/user/vncserver-<username>.service`
+
+   ```conf
     [Unit]
     Description=Remote desktop service (VNC) for <username>
     After=syslog.target network.target
@@ -999,44 +1008,44 @@ https://github.com/agalwood/Motrix/releases
     [Install]
     WantedBy=graphical-session.target
    ```
-   
+
     此时监听端口为`5900`
-   
-    **Note:** 
-   
+
+    **Note:**
+
    1. `-localhost` 应与 ssh 一起使用
-      
+
       ```bash
       ssh user@linux_sever -L 8900:localhost:5900
       vncviewer localhost:8900
       ```
-   
+
    2. 为使 systemd-user-service 可以开机运行，需要以管理员身份启用此功能。[参考](https://serverfault.com/questions/739451/systemd-user-service-doesnt-autorun-on-user-login)
-      
+
       ```bash
       sudo loginctl enable-linger $(whoami)
       ```
-      
+
       重载
-      
+
       ```bash
       systemctl --user daemon-reload
       ```
-      
+
       测试
-      
+
       ```bash
       systemctl --user start vncserver-minux.service 
       ```
-      
+
       测试无误默认开启
-      
+
       ```bash
       systemctl --user enable vncserver-minux.service
       ```
-      
+
       客户端连接
-      
+
       ```bash
       vncviewer linux_sever:5800
       ```
@@ -1044,23 +1053,23 @@ https://github.com/agalwood/Motrix/releases
 #### 2.12.2 Teamviewer
 
 1. 导入key
-   
+
    ```bash
     sudo rpm --import https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
    ```
 
 2. 安装
-   
+
    ```bash
     sudo dnf install https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
    ```
 
 #### 2.12.3 AnyDesk
 
-http://rpm.anydesk.com/howto.html
+<http://rpm.anydesk.com/howto.html>
 
 1. 导入仓库
-   
+
    ```bash
     sudo su
     cat > /etc/yum.repos.d/AnyDesk-Fedora.repo << "EOF" 
@@ -1075,7 +1084,7 @@ http://rpm.anydesk.com/howto.html
    ```
 
 2. 安装
-   
+
    ```bash
     sudo dnf install anydesk
    ```
@@ -1085,21 +1094,21 @@ http://rpm.anydesk.com/howto.html
 #### 2.13.1 Autorclone (添加图标 alacarte)
 
 1. 安装 rclone
-   
+
    ```bash
     sudo dnf install screen git rclone -y
    ```
 
 2. 克隆仓库并安装python依赖包
-   
+
    ```bash
     git clone https://github.com/xyou365/AutoRclone && cd AutoRclone && pip install -r requirements.txt --user
    ```
 
 3. 详细教程
 
-https://github.com/xyou365/AutoRclone/blob/master/Readme.md
-https://gsuitems.com/index.php/archives/13/
+<https://github.com/xyou365/AutoRclone/blob/master/Readme.md>
+<https://gsuitems.com/index.php/archives/13/>
 
 #### 2.13.2 Rclone
 
@@ -1111,9 +1120,9 @@ sudo dnf install rclone -y
 
 依照官方文档配置 Rclone
 
-https://rclone.org/drive/
+<https://rclone.org/drive/>
 
-https://www.80tm.com/2020/04/10/debian-ubuntu用rclone挂载google-drive团队盘/
+<https://www.80tm.com/2020/04/10/debian-ubuntu用rclone挂载google-drive团队盘/>
 
 Notes: 注意编辑`/etc/fuse.conf`文件 ---- “取消注释 user_allow_other”以允许非root用户挂载。
 
@@ -1147,109 +1156,109 @@ fedora samba
 
 1. install samba
 
-```
-sudo dnf install smaba -y
-```
+   ```bash
+   sudo dnf install smaba -y
+   ```
 
 2. change config file
-backup `sudo cp smb.conf smb.conf.bak`
-add follow context to /etc/samba/smb.conf
+   backup `sudo cp smb.conf smb.conf.bak`
+   add follow context to /etc/samba/smb.conf
 
-```
-sudo gedit /etc/samba/smb.conf
-......
-[global]
-......
-......
-[Arder]
-   comment = Arder Directories
-  path = /home/samba_test_user
-  browseable = yes
-  writable = yes
-  write list = samba_test_user
-```
+   ```bash
+   sudo gedit /etc/samba/smb.conf
+   ......
+   [global]
+   ......
+   ......
+   [Arder]
+      comment = Arder Directories
+   path = /home/samba_test_user
+   browseable = yes
+   writable = yes
+   write list = samba_test_user
+   ```
 
 3. Run 'testparm' to verify the config is correct after you modified it.
 
 4. Create 'samba_test_user', and lock the account. Or use current user.
 
-```
-sudo useradd samba_test_user
-sudo passwd --lock samba_test_user
-```
+   ```bash
+   sudo useradd samba_test_user
+   sudo passwd --lock samba_test_user
+   ```
 
-Set a Samba Password for this Test User (such as 'test'):
+   Set a Samba Password for this Test User (such as 'test'):
 
-```
-sudo smbpasswd -a samba_test_user
-```
+   ```bash
+   sudo smbpasswd -a samba_test_user
+   ```
 
 5. Set on SELinux rules
 
-5.1 view the SELinux rules about samba
+   5.1 view the SELinux rules about samba
 
-```
-~]# getsebool -a | grep samba
-samba_domain_controller --> off
-samba_enable_home_dirs --> off   <==开放用户使用home目录
-samba_export_all_ro --> off      <==允许只读文件系统的功能
-samba_export_all_rw --> off      <==允许读写文件系统的功能
-samba_share_fusefs --> off       <==允许读写ntfs/fusefs文件系统的功能
-samba_share_nfs --> off
-use_samba_home_dirs --> off      <==类似用户home目录的开放！
-virt_use_samba --> off
-```
+   ```bash
+   ~]# getsebool -a | grep samba
+   samba_domain_controller --> off
+   samba_enable_home_dirs --> off   <==开放用户使用home目录
+   samba_export_all_ro --> off      <==允许只读文件系统的功能
+   samba_export_all_rw --> off      <==允许读写文件系统的功能
+   samba_share_fusefs --> off       <==允许读写ntfs/fusefs文件系统的功能
+   samba_share_nfs --> off
+   use_samba_home_dirs --> off      <==类似用户home目录的开放！
+   virt_use_samba --> off
+   ```
 
-5.2 set the rules we need to on
+   5.2 set the rules we need to on
 
-```
-sudo setsebool -P samba_enable_home_dirs=1
-sudo setsebool -P samba_export_all_ro=1
-sudo setsebool -P samba_export_all_rw=1
-sudo setsebool -P samba_share_fusefs=1
-```
+   ```bash
+   sudo setsebool -P samba_enable_home_dirs=1
+   sudo setsebool -P samba_export_all_ro=1
+   sudo setsebool -P samba_export_all_rw=1
+   sudo setsebool -P samba_share_fusefs=1
+   ```
 
 6. Configuring your firewall to enable Samba to pass through.
 
-```
-Allow Samba access through the firewall:
-~]# firewall-cmd --add-service=samba --permanent
-~]# firewall-cmd --reload
+   ```bash
+   Allow Samba access through the firewall:
+   ~]# firewall-cmd --add-service=samba --permanent
+   ~]# firewall-cmd --reload
 
-Verify Samba is included in your active firewall:
-~]$ firewall-cmd --list-services
+   Verify Samba is included in your active firewall:
+   ~]$ firewall-cmd --list-services
 
-Output (should include):
-samba
-```
+   Output (should include):
+   samba
+   ```
 
 7. Enable and Start Services
 
-```
-sudo systemctl enable smb.service
-sudo systemctl start smb.service
-# Verify smb service:
-systemctl status smb.service
-```
+   ```bash
+   sudo systemctl enable smb.service
+   sudo systemctl start smb.service
+   # Verify smb service:
+   systemctl status smb.service
+   ```
 
 8. Addition: make samba follow symlink outside the shared path
 
-```
-sudo gedit /etc/samba/smb.conf
-......
-[global]
-......
-allow insecure wide links = yes
-......
-[Arder]
-......
-follow symlinks = yes
-wide links = yes
-```
+   ```bash
+   sudo gedit /etc/samba/smb.conf
+   ......
+   [global]
+   ......
+   allow insecure wide links = yes
+   ......
+   [Arder]
+   ......
+   follow symlinks = yes
+   wide links = yes
+   ```
 
-https://fedoramagazine.org/fedora-32-simple-local-file-sharing-with-samba/
-http://linux.vbird.org/linux_server/0370samba.php
-https://unix.stackexchange.com/questions/5120/how-do-you-make-samba-follow-symlink-outside-the-shared-path
+<https://fedoramagazine.org/fedora-32-simple-local-file-sharing-with-samba/>
+<http://linux.vbird.org/linux_server/0370samba.php>
+<https://unix.stackexchange.com/questions/5120/how-do-you-make-samba-follow-symlink-outside-the-shared-path>
 
 ### 2.14 其他工具
 
@@ -1303,12 +1312,24 @@ sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
 
 #### 2.15.1 docker
 
-实用教程：https://suiahae.me/docker-tutorial-1/
+实用教程：<https://suiahae.me/docker-tutorial-1/>
 
 1. 安装最新版 [Moby Engine](https://mobyproject.org/)
-   
+
    ```bash
     sudo dnf install docker
+   ```
+
+2. 开启docker.service
+
+   ```bash
+   sudo systemctl start docker
+   ```
+
+3. 验证Docker是否已正确安装
+
+   ```bash
+    sudo docker info
    ```
 
 <!-- 2. Cgroups Exception: 对于Fedora 31及更高版本，需要为Cgroups启用向后兼容。
@@ -1316,18 +1337,6 @@ sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
     ```bash
     sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
     ``` -->
-
-2. 开启docker.service
-   
-   ```bash
-   sudo systemctl start docker
-   ```
-
-3. 验证Docker是否已正确安装
-   
-   ```bash
-    sudo docker info
-   ```
 
 ### 2.16 游戏平台
 
@@ -1345,4 +1354,4 @@ sudo dnf install lutris -y
 
 [1]: 专为 NVIDIA
 
-[2]: 专为 `138a:0097` (such as ThinkPad 470)
+[2]: 专为 `138a:0097` (例如 ThinkPad T470)
