@@ -26,6 +26,9 @@ distri_ubuntu='Ubuntu';
 distri_fedora='Fedora';
 # distri_arch='Arch Linux';
 
+# https://tylersguides.com/guides/using-a-proxy-with-dnf/
+# echo proxy=$proxyaddress | sudo tee -a /etc/dnf/dnf.conf
+
 # 安装 proxychains-ng
 sudo apt install proxychains4 2>/dev/null;
 sudo dnf install proxychains -y 2>/dev/null;

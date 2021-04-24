@@ -118,6 +118,7 @@ sudo dnf install xorg-x11-drv-nvidia-cuda #可选启用 cuda/nvdec/nvenc 支持
 <https://gitter.im/Validity90/Lobby>
 
 fedora pam_configuration:
+
 <https://github.com/williamwlk/my-red-corner/blob/master/README_PAM.txt>
 
 <https://computingforgeeks.com/how-to-setup-built-in-fingerprint-reader-authentication-with-pam-on-any-linux/>
@@ -160,7 +161,7 @@ sudo install -D -m 644 debian/open-fprintd-suspend.service /usr/lib/systemd/syst
 <https://aur.archlinux.org/packages/python-validity/>
 
 ```bash
-sudo pip install pyyaml pyusb
+sudo pip install pyyaml pyusb cryptography
 python setup.py build
 sudo python setup.py install --prefix=/usr --root /
 sudo install -D -m 644 debian/python3-validity.service /usr/lib/systemd/system/python3-validity.service
@@ -183,7 +184,10 @@ fprintd-enroll
 
 ##### last but not least
 
+<https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html-single/configuring_authentication_and_authorization_in_rhel/index>
+
 ```bash
+sudo authselect select sssd
 sudo authselect enable-feature with-fingerprint
 ```
 
