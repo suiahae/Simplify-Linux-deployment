@@ -7,8 +7,8 @@ proxyhost="127.0.0.1";
 proxyport="7890";
 proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
 
-# export http_proxy=$proxyaddress;
-# export https_proxy=$proxyaddress;
+export http_proxy=$proxyaddress;
+export https_proxy=$proxyaddress;
 
 # export http_proxy=http://192.168.43.1:1080;
 # export https_proxy=http://192.168.43.1:1080;
