@@ -78,6 +78,23 @@ rsync -av /etc/ /mnt/data/rsync/fedora/
     tar -xvpzf /mnt/data/backups/usr_local_backup*.tar.gz /usr/local
    ```
 
+### 0.3 备份各种列表
+
+#### 0.3.1 导出已安装的软件包
+
+```bash
+# 所有已安装的软件列表
+dnf list --installed > fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)-installed-list.txt
+# 由用户安装的软件列表
+dnf history userinstalled > fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)-user-installed-list.txt
+```
+
+#### 0.3.2 导出命令历史
+
+```bash
+history > fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)-command-history.txt
+```
+
 ## 1. 初始化配置
 
 ### 1.1 使用脚本
