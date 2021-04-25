@@ -26,9 +26,11 @@ swap        20GiB
 #### 0.2.1 rsync
 
 ```bash
-sudo rsync -av /home /mnt/data/backups/fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)/
-sudo rsync -av /etc /mnt/data/backups/fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)/
-sudo rsync -av /usr/local /mnt/data/backups/fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)/usr/
+today=$(date +%Y%m%d)
+mkdir /mnt/data/backups/fedora-$(rpm -E %fedora)-$today/
+sudo rsync -av /home /mnt/data/backups/fedora-$(rpm -E %fedora)-$today/
+sudo rsync -av /etc /mnt/data/backups/fedora-$(rpm -E %fedora)-$today/
+sudo rsync -av /usr/local /mnt/data/backups/fedora-$(rpm -E %fedora)-$today/usr/
 ```
 
 ```bash
