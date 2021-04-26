@@ -47,8 +47,9 @@ then
     # # 更改为清华镜像源（https://mirrors.tuna.tsinghua.edu.cn/）
     # ./scripts/change-update-list-fedora.sh;
     # sudo dnf makecache;
-    # 添加 rpmfusion.org
-    sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y;
+    
+    # 添加 https://rpmfusion.org/Configuration
+    sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y;
     sudo dnf upgrade -y;
 # elif [ "$distributor" = "$distri_arch" ];
 # then
@@ -62,8 +63,8 @@ sudo apt install gnome-tweak-tool p7zip-full wget -y 2>/dev/null;
 sudo dnf install gnome-tweak-tool p7zip wget -y 2>/dev/null; 
 
 # proxychains4 ./scripts/update-Qogir-theme-online.sh;
-proxychains4 ./scripts/update-Qogir-icon-online.sh;
-proxychains4 ./scripts/update-Vimix-gtk-themes-online.sh;
+proxychains ./scripts/update-Qogir-icon-online.sh;
+proxychains ./scripts/update-Vimix-gtk-themes-online.sh;
 
 # 安装环境
 sudo apt install git zsh wget -y 2>/dev/null; 
@@ -77,15 +78,15 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 # 下载插件
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting;
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions;
-git clone https://github.com/bilelmoussaoui/flatpak-zsh-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/flatpak
+git clone https://github.com/bilelmoussaoui/flatpak-zsh-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/flatpak;
 
 # 更改 plugins 配置
 sed -i 's/plugins=(.*/plugins=(vim-interaction pip git sudo extract z wd archlinux zsh-autosuggestions zsh-syntax-highlighting flatpak)/g' ~/.zshrc;
 sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
 
 # 设置别名
-echo "alias pycs=proxychains4" >> ~/.zshrc;
-echo "alias supycs='sudo proxychains4'" >> ~/.zshrc;
+echo "alias pycs=proxychains" >> ~/.zshrc;
+echo "alias supycs='sudo proxychains'" >> ~/.zshrc;
 echo "alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'" >> ~/.zshrc;

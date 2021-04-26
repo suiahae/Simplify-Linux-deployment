@@ -65,19 +65,19 @@ rsync -av /etc/ /mnt/data/rsync/fedora/
 1. 备份命令
 
    ```bash
-    sudo su
-    tar -cvpzf /mnt/data/backups/home_backup@`date +%Y-%m-%d`.tar.gz /home
-    tar -cvpzf /mnt/data/backups/etc_backup@`date +%Y-%m-%d`.tar.gz /etc
-    tar -cvpzf /mnt/data/backups/usr_local_backup@`date +%Y-%m-%d`.tar.gz /usr/local
+   sudo su
+   tar -cvpzf /mnt/data/backups/home_backup@`date +%Y-%m-%d`.tar.gz /home
+   tar -cvpzf /mnt/data/backups/etc_backup@`date +%Y-%m-%d`.tar.gz /etc
+   tar -cvpzf /mnt/data/backups/usr_local_backup@`date +%Y-%m-%d`.tar.gz /usr/local
    ```
 
 2. 解压
 
    ```bash
-    sudo su
-    tar -xvpzf /mnt/data/backups/home_backup*.tar.gz /home
-    tar -xvpzf /mnt/data/backups/etc_backup*tar.gz /etc
-    tar -xvpzf /mnt/data/backups/usr_local_backup*.tar.gz /usr/local
+   sudo su
+   tar -xvpzf /mnt/data/backups/home_backup*.tar.gz /home
+   tar -xvpzf /mnt/data/backups/etc_backup*tar.gz /etc
+   tar -xvpzf /mnt/data/backups/usr_local_backup*.tar.gz /usr/local
    ```
 
 ### 0.3 备份各种列表
@@ -116,8 +116,8 @@ cd Simplify-Linux-deployment/
 1. 解决 zsh “zsh: no matches found *”
 
    ```bash
-    echo "setopt no_nomatch" >> ~/.zshrc
-    source ~/.zshrc
+   echo "setopt no_nomatch" >> ~/.zshrc
+   source ~/.zshrc
    ```
 
 ### 1.2 安装驱动
@@ -221,50 +221,78 @@ sudo authselect enable-feature with-fingerprint
 1. 克隆仓库
 
    ```bash
-    git clone https://github.com/suiahae/grub2-themes.git
-    cd grub2-theme
+   git clone https://github.com/suiahae/grub2-themes.git
+   cd grub2-theme
    ```
 
 2. 安装
 
    ```bash
-    sudo ./install.sh -t
+   sudo ./install.sh -t
    ```
 
 3. 更改 /etc/default/grub
 
    ```bash
-    sudo gedit /etc/default/grub
+   sudo gedit /etc/default/grub
    ```
 
     注释掉 GRUB_TERMINAL_OUTPUT="console"（这个控制是以哪种方式显示，不注释的话会以console窗口显示启动列表）
 
    ```conf
-    # GRUB_TERMINAL_OUTPUT="console"
+   # GRUB_TERMINAL_OUTPUT="console"
    ```
 
     增加 GRUB_SAVEDEFAULT="true" 保存上次启动项
 
    ```conf
-    GRUB_SAVEDEFAULT="true"
+   GRUB_SAVEDEFAULT="true"
    ```
+
+4. 重新生成 grub.cfg
+
+    ```bash
+    sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
+
+    Fedora 34 作了调整，UEFI 和 BIOS 都将使用 /boot/grub2/grub.cfg
+
+    原本在 UEFI 下，其命令为`sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg`
 
 ##### 1.3.1.2 错误提示
 
-`问题描述：`开机的时候报了一个错误 error: ../../grub-core/fs/fshelp.c:257:file /EFL/Fedora/locale/zh.gmo not found. 但不影响启动 grub 也能正常显示
+1. `问题描述：`开机的时候报了一个错误 error: ../../grub-core/fs/fshelp.c:257:file /EFL/Fedora/locale/zh.gmo not found. 但不影响启动 grub 也能正常显示
 
-`解决方案：`根据网上的帖子 (<https://bugzilla.redhat.com/show_bug.cgi?id=817187#c42>)运行下面的命令使这个错误信息消失了
+    `解决方案：`根据网上的帖子 (<https://bugzilla.redhat.com/show_bug.cgi?id=817187#c42>)运行下面的命令使这个错误信息消失了
 
-```bash
-sudo mkdir -p /boot/efi/EFI/fedora/locale
-sudo cp /usr/share/locale/zh_CN/LC_MESSAGES/grub.mo /boot/efi/EFI/fedora/locale/zh.gmo
-```
+    ```bash
+    sudo mkdir -p /boot/efi/EFI/fedora/locale
+    sudo cp /usr/share/locale/zh_CN/LC_MESSAGES/grub.mo /boot/efi/EFI/fedora/locale/zh.gmo
+    ```
 
-还有一个解决方法是在生成grub.cfg时把语言变量设置为英文：
+    还有一个解决方法是在生成grub.cfg时把语言变量设置为英文：
 
-```bash
-LANG=C grub2-mkconfig -o /boot/grub2/grub.cfg
-```
+    ```bash
+    LANG=C grub2-mkconfig -o /boot/grub2/grub.cfg
+    ```
+
+2. `问题描述：`错误 “error: ../../grub-core/commands/loadenv.c:216:sparse file not allowed.”
+
+    `解决方案` <https://forum.manjaro.org/t/grub-error-sparse-file-not-allowed/20267/4>
+
+    暂时关闭“保存上次启动项”功能，编辑 /etc/default/grub
+
+    原来：
+
+    ```conf
+    GRUB_SAVEDEFAULT="true"
+    ```
+
+    改为：
+
+    ```conf
+    # GRUB_SAVEDEFAULT="true"
+    ```
 
 ##### 1.3.1.3 图标不显示
 
@@ -358,6 +386,10 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 [Touchpad Indicator](https://extensions.gnome.org/extension/131/touchpad-indicator/)
 
+[GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/)
+
+需要 openssl
+
 ~~[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)~~
 
 ~~[Horizontal workspaces](https://extensions.gnome.org/extension/2141/horizontal-workspaces/)~~
@@ -375,13 +407,13 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 1. 安装
 
    ```bash
-    sudo dnf install thinkfan -y
+   sudo dnf install thinkfan -y
    ```
 
 2. 安装内核模块
 
    ```bash
-   sudo dnf -y install lm_sensors
+   sudo dnf install lm_sensors -y
    sudo sensors-detect --auto
    ```
 
@@ -396,6 +428,8 @@ The following content is from MaterialFox-76.2, ==but it is very important==
    ```bash
    sudo gedit /etc/thinkfan.conf
    ```
+
+   ==以下配置不适合 1.2.1==
 
    ```conf
    ######################################################################
@@ -516,13 +550,13 @@ sudo dnf install grub-customizer -y
 1. 安装
 
    ```bash
-    sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool -y
+   sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool -y
    ```
 
 2. 自动重启
 
    ```bash
-    sudo dnf install fcitx5-autostart -y
+   sudo dnf install fcitx5-autostart -y
    ```
 
 <!-- 2. 添加系统变量自动重启
@@ -605,15 +639,15 @@ mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 1. 安装 key and repository:
 
    ```bash
-    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-    sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+   sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
    ```
 
 2. 更新缓存并安装 Visual Studio Code
 
    ```bash
-    dnf check-update
-    sudo dnf install code
+   dnf check-update
+   sudo dnf install code
    ```
 
 ##### 2.5.1.2 个性化
@@ -621,6 +655,32 @@ mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 1. 登陆 github/Micorsoft 同步设置
 
 2. 将 window.titleBarStyle 改为 custom
+
+#### 2.5.3 PyCharm-Community
+
+<https://flathub.org/apps/details/com.jetbrains.PyCharm-Community>
+
+```bash
+# 安装
+flatpak install flathub com.jetbrains.PyCharm-Community
+# 命令运行或点击图标运行，运行命令如下：
+flatpak run com.jetbrains.PyCharm-Community
+```
+
+#### 2.5.2 Okular
+
+<https://apps.kde.org/okular/>
+
+1. 对于 KDE，默认安装
+
+2. 对于 GNOME，使用 Flatpak 安装
+
+   ```bash
+   # 安装
+   flatpak install flathub org.kde.okular
+   # 命令运行或点击图标运行，运行命令如下：
+   flatpak run org.kde.okular
+   ```
 
 #### 2.5.2 Typora (Not FOSS)
 
@@ -636,10 +696,14 @@ mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
    # 安装flatpak
    sudo dnf install flatpak -y
    # 添加仓库
-   flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+   sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+   # 更换 flathub 镜像
+   sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
+   # 恢复默认
+   sudo flatpak remote-modify flathub --url=https://dl.flathub.org/repo/
    # 安装
    flatpak install flathub com.wps.Office
-   # 运行/点击图标运行
+   # 命令运行或点击图标运行，运行命令如下：
    flatpak run com.wps.Office
    ```
 
@@ -676,7 +740,7 @@ sudo dnf install https://remarkableapp.github.io/files/remarkable-1.87-1.rpm
    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
    # 安装
    flatpak install flathub com.github.marktext.marktext
-   # 运行/点击图标运行
+   # 命令运行或点击图标运行，运行命令如下：
    flatpak run com.github.marktext.marktext
    ```
 
@@ -748,7 +812,15 @@ dnf install qemu libvirt virt-manager -y
 
 <!-- ##### 2.6.2.2 打内核补丁
 
+https://docs.fedoraproject.org/en-US/quick-docs/how-to-use-vmware/
+
 https://github.com/mkubecek/vmware-host-modules
+
+依赖环境
+
+```bash
+sudo dnf install kernel-devel kernel-headers gcc gcc-c++ make git
+```
 
 1. 克隆补丁
 
@@ -879,6 +951,17 @@ sudo dnf install celluloid -y
 
 ### 2.8-2 音乐播放
 
+#### 2.8.4 Spotify
+
+[From Flatpak](https://flathub.org/apps/details/com.spotify.Client)
+
+```bash
+# 安装
+flatpak install flathub com.spotify.Client
+# 运行/点击图标运行
+flatpak run com.spotify.Client
+```
+
 #### 2.8.4 网易云音乐
 
 1. [From Flatpak](https://flathub.org/apps/details/com.netease.CloudMusic)
@@ -921,7 +1004,7 @@ sudo dnf install nomacs -y
 1. 安装
 
    ```bash
-    sudo dnf install flameshot -y
+   sudo dnf install flameshot -y
    ```
 
 2. 配置快捷键
@@ -990,51 +1073,51 @@ Aria2 for Chrome
 1. 安装软件
 
    ```bash
-    sudo dnf install tigervnc-server tigervnc -y
+   sudo dnf install tigervnc-server tigervnc -y
    ```
 
 2. 设置密码
 
-    You need to set a password for each user in order to be able to start the Tigervnc server. In order to create a password, you just run
+   You need to set a password for each user in order to be able to start the Tigervnc server. In order to create a password, you just run
 
    ```bash
-    vncpasswd
+   vncpasswd
    ```
 
-    as the user you will be starting the server for.
+   as the user you will be starting the server for.
 
-    **Note:**
+   **Note:**
 
-    If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
+   If you were using Tigervnc before for your user and you already created a password, then you will have to make sure the `$HOME/.vnc` folder created by `vncpasswd` will have the correct *SELinux* context. You either can delete this folder and recreate it again by creating the password one more time, or alternatively you can run
 
    ```bash
-    restorecon -RFv /home/[USER]/.vnc
+   restorecon -RFv /home/[USER]/.vnc
    ```
 
 3. 创建 systemd-user-service
 
-    <http://www.jinbuguo.com/systemd/systemd.service.html>
+   <http://www.jinbuguo.com/systemd/systemd.service.html>
 
-    `/home/[USER]/.config/systemd/user/vncserver-<username>.service`
+   `/home/[USER]/.config/systemd/user/vncserver-<username>.service`
 
    ```conf
-    [Unit]
-    Description=Remote desktop service (VNC) for <username>
-    After=syslog.target network.target
-   
-    [Service]
-    Type=simple
-    ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/<username>/.vnc/passwd -Geometry 1920x1080 -localhost
-    Restart=on-failure
-    RestartSec=5s
-   
-    [Install]
-    WantedBy=graphical-session.target
+   [Unit]
+   Description=Remote desktop service (VNC) for <username>
+   After=syslog.target network.target
+
+   [Service]
+   Type=simple
+   ExecStart=/usr/bin/x0vncserver -display :1 -passwordfile /home/<username>/.vnc/passwd -Geometry 1920x1080 -localhost
+   Restart=on-failure
+   RestartSec=5s
+
+   [Install]
+   WantedBy=graphical-session.target
    ```
 
-    此时监听端口为`5900`
+   此时监听端口为`5900`
 
-    **Note:**
+   **Note:**
 
    1. `-localhost` 应与 ssh 一起使用
 
@@ -1075,16 +1158,18 @@ Aria2 for Chrome
 
 #### 2.12.2 Teamviewer
 
+<https://community.teamviewer.com/English/kb/articles/6318-how-to-install-teamviewer-for-linux>
+
 1. 导入key
 
    ```bash
-    sudo rpm --import https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
+   sudo rpm --import https://download.teamviewer.com/download/linux/signature/TeamViewer2017.asc
    ```
 
 2. 安装
 
    ```bash
-    sudo dnf install https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+   sudo dnf install https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
    ```
 
 #### 2.12.3 AnyDesk
@@ -1094,22 +1179,22 @@ Aria2 for Chrome
 1. 导入仓库
 
    ```bash
-    sudo su
-    cat > /etc/yum.repos.d/AnyDesk-Fedora.repo << "EOF" 
-    [anydesk]
-    name=AnyDesk Fedora - stable
-    baseurl=http://rpm.anydesk.com/fedora/$basearch/
-    gpgcheck=1
-    repo_gpgcheck=1
-    gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY
-    EOF
-    dnf check-update
+   sudo su
+   cat > /etc/yum.repos.d/AnyDesk-Fedora.repo << "EOF" 
+   [anydesk]
+   name=AnyDesk Fedora - stable
+   baseurl=http://rpm.anydesk.com/fedora/$basearch/
+   gpgcheck=1
+   repo_gpgcheck=1
+   gpgkey=https://keys.anydesk.com/repos/RPM-GPG-KEY
+   EOF
+   dnf check-update
    ```
 
 2. 安装
 
    ```bash
-    sudo dnf install anydesk
+   sudo dnf install anydesk
    ```
 
 ### 2.13 网盘
@@ -1119,13 +1204,13 @@ Aria2 for Chrome
 1. 安装 rclone
 
    ```bash
-    sudo dnf install screen git rclone -y
+   sudo dnf install screen git rclone -y
    ```
 
 2. 克隆仓库并安装python依赖包
 
    ```bash
-    git clone https://github.com/xyou365/AutoRclone && cd AutoRclone && pip install -r requirements.txt --user
+   git clone https://github.com/xyou365/AutoRclone && cd AutoRclone && pip install -r requirements.txt --user
    ```
 
 3. 详细教程
@@ -1340,7 +1425,7 @@ sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
 1. 安装最新版 [Moby Engine](https://mobyproject.org/)
 
    ```bash
-    sudo dnf install docker
+   sudo dnf install docker
    ```
 
 2. 开启docker.service
@@ -1352,7 +1437,7 @@ sudo sh -c 'echo "exclude=fprintd" >> /etc/dnf/dnf.conf'
 3. 验证Docker是否已正确安装
 
    ```bash
-    sudo docker info
+   sudo docker info
    ```
 
 <!-- 2. Cgroups Exception: 对于Fedora 31及更高版本，需要为Cgroups启用向后兼容。
