@@ -11,10 +11,10 @@ sudo dnf install gtk-murrine-engine gtk2-engines sassc optipng inkscape glib2-de
 # cd .tmp;
 cd /tmp;
 rm -Rf WhiteSur-gtk-theme.zip 2>/dev/null; 
-rm -Rf WhiteSur-gtk-theme-2020-12-03/ 2>/dev/null; 
-wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/2020-12-03.zip -O WhiteSur-gtk-theme.zip; 
+rm -Rf WhiteSur-gtk-theme-2021-04-20/ 2>/dev/null; 
+wget https://github.com/vinceliuice/WhiteSur-gtk-theme/archive/refs/tags/2021-04-20.zip -O WhiteSur-gtk-theme.zip; 
 7za x WhiteSur-gtk-theme.zip; 
-cd WhiteSur-gtk-theme-2020-12-03; 
+cd WhiteSur-gtk-theme-2021-04-20; 
 ./install.sh; 
 # Install GDM theme
 sudo ./install.sh -g;
@@ -22,7 +22,7 @@ sudo ./install.sh -g;
 # sudo ./install.sh -r;
 cd ..;
 rm -Rf WhiteSur-gtk-theme.zip 2>/dev/null; 
-rm -Rf WhiteSur-gtk-theme-2020-12-03/ 2>/dev/null; 
+rm -Rf WhiteSur-gtk-theme-2021-04-20/ 2>/dev/null; 
 # notify-send "All done!" "Enjoy the latest version of WhiteSur!" -i face-smile
 
 cd /tmp;
