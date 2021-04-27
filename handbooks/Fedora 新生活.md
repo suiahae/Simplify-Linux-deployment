@@ -368,27 +368,43 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 ### 2.2 gnome 插件
 
-[插件下载](https://extensions.gnome.org/)
+1. Option A. 通过 dnf 安装
 
-[Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
+```bash
+# AppIndicator/KStatusNotifierItem support for GNOME Shell
+sudo dnf install -y gnome-shell-extension-appindicator
+# Move all legacy tray icons to the top panel
+sudo dnf install -y gnome-shell-extension-topicons-plus
+# KDE Connect implementation for GNOME Shell
+sudo dnf install -y gnome-shell-extension-gsconnect
+# A gnome-shell extension to show speed of the internet
+sudo dnf install -y gnome-shell-extension-netspeed
+```
 
-[Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 
-[Desktop Icons NG (DING)](https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/)
+2. Option B. 从 [extensions.gnome.org](https://extensions.gnome.org/) 下载
 
 [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
+
+[TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
+
+<https://github.com/kofemann/TopIcons-plus>
+
+[GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/)
+
+需要 openssl
+
+[Desktop Icons NG (DING)](https://extensions.gnome.org/extension/2087/desktop-icons-ng-ding/)
 
 [Proxy Switcher](https://extensions.gnome.org/extension/771/proxy-switcher/)
 
 [netspeed](https://extensions.gnome.org/extension/104/netspeed/)
 
-[TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
-
 [Touchpad Indicator](https://extensions.gnome.org/extension/131/touchpad-indicator/)
 
-[GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/)
+[Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
 
-需要 openssl
+[Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 
 ~~[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)~~
 
@@ -661,6 +677,14 @@ mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 <https://flathub.org/apps/details/com.jetbrains.PyCharm-Community>
 
 ```bash
+# 安装flatpak
+sudo dnf install flatpak -y
+# 添加仓库
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+# 更换 flathub 镜像
+sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
+# 恢复默认
+sudo flatpak remote-modify flathub --url=https://dl.flathub.org/repo/
 # 安装
 flatpak install flathub com.jetbrains.PyCharm-Community
 # 命令运行或点击图标运行，运行命令如下：
@@ -693,14 +717,6 @@ flatpak run com.jetbrains.PyCharm-Community
 1. [From Flatpak](https://flathub.org/apps/details/com.wps.Office)
 
    ```bash
-   # 安装flatpak
-   sudo dnf install flatpak -y
-   # 添加仓库
-   sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-   # 更换 flathub 镜像
-   sudo flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub
-   # 恢复默认
-   sudo flatpak remote-modify flathub --url=https://dl.flathub.org/repo/
    # 安装
    flatpak install flathub com.wps.Office
    # 命令运行或点击图标运行，运行命令如下：
