@@ -89,6 +89,8 @@ rsync -av /etc/ /mnt/data/rsync/fedora/
 dnf list --installed > fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)-installed-list.txt
 # 由用户安装的软件列表
 dnf history userinstalled > fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)-user-installed-list.txt
+# flatpak 包
+flatpak list > fedora-$(rpm -E %fedora)-$(date +%Y-%m-%d)-flatpak-installed-list.txt
 ```
 
 #### 0.3.2 导出命令历史
