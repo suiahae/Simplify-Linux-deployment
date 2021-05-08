@@ -368,21 +368,7 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 ### 2.2 gnome 插件
 
-1. Option A. 通过 dnf 安装
-
-```bash
-# AppIndicator/KStatusNotifierItem support for GNOME Shell
-sudo dnf install -y gnome-shell-extension-appindicator
-# Move all legacy tray icons to the top panel
-sudo dnf install -y gnome-shell-extension-topicons-plus
-# KDE Connect implementation for GNOME Shell
-sudo dnf install -y gnome-shell-extension-gsconnect
-# A gnome-shell extension to show speed of the internet
-sudo dnf install -y gnome-shell-extension-netspeed
-```
-
-
-2. Option B. 从 [extensions.gnome.org](https://extensions.gnome.org/) 下载
+从 [extensions.gnome.org](https://extensions.gnome.org/) 下载
 
 [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
 
@@ -398,9 +384,11 @@ sudo dnf install -y gnome-shell-extension-netspeed
 
 [Proxy Switcher](https://extensions.gnome.org/extension/771/proxy-switcher/)
 
+https://github.com/tomflannaghan/proxy-switcher
+
 [netspeed](https://extensions.gnome.org/extension/104/netspeed/)
 
-[Touchpad Indicator](https://extensions.gnome.org/extension/131/touchpad-indicator/)
+[x11-gestures](https://extensions.gnome.org/extension/4033/x11-gestures/)
 
 [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
 
@@ -691,6 +679,34 @@ flatpak install flathub com.jetbrains.PyCharm-Community
 flatpak run com.jetbrains.PyCharm-Community
 ```
 
+#### 2.5.2 LaTeX
+
+[overleaf](https://www.overleaf.com/)
+
+https://www.latex-project.org/
+
+https://www.tug.org/texlive/
+
+http://ar.nyx.link/tex/utf8/
+
+https://fedoraproject.org/wiki/Features/TeXLive
+
+https://docs.fedoraproject.org/en-US/neurofedora/latex/
+
+sudo dnf install texlive-scheme-full
+
+sudo dnf install texlive
+
+https://github.com/James-Yu/LaTeX-Workshop
+
+sudo dnf install latexmk
+
+[使用VSCode编写LaTeX](https://zhuanlan.zhihu.com/p/38178015)
+
+[TexLive 2021 安装指南](https://www.bilibili.com/read/cv10635025/)
+
+[万灵药 VS Code 的常用妙方之 LaTeX 写论文](https://baileyswu.github.io/2019/12/vscode-tutorials/)
+
 #### 2.5.2 Okular
 
 <https://apps.kde.org/okular/>
@@ -724,6 +740,9 @@ flatpak run com.jetbrains.PyCharm-Community
    ```
 
 2. <https://linux.wps.cn/>
+
+问题：字体缺失
+解决方案：将 files/wps_symbol_fonts.zip 解压至 $HOME/.local/share/fonts 中。
 
 #### 2.5.4 Marker (Only English)
 
