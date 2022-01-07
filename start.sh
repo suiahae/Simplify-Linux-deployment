@@ -31,7 +31,7 @@ distri_fedora='Fedora';
 
 # 安装 proxychains-ng
 sudo apt install proxychains4 2>/dev/null;
-sudo dnf install proxychains -y 2>/dev/null;
+sudo dnf install proxychains-ng -y 2>/dev/null;
 
 # 更改 proxychains 代理
 #sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
@@ -59,8 +59,8 @@ then
 fi
 
 ## 安装主题
-sudo apt install gnome-tweak-tool p7zip-full wget -y 2>/dev/null; 
-sudo dnf install gnome-tweak-tool p7zip wget -y 2>/dev/null; 
+sudo apt install gnome-extensions-app gnome-tweak-tool p7zip-full wget -y 2>/dev/null; 
+sudo dnf install gnome-extensions-app gnome-tweak-tool p7zip wget -y 2>/dev/null; 
 
 # proxychains4 ./scripts/update-Qogir-theme-online.sh;
 proxychains ./scripts/update-Qogir-icon-online.sh;
