@@ -81,7 +81,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/bilelmoussaoui/flatpak-zsh-completion ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/flatpak;
 
 # 更改 plugins 配置
-sed -i 's/plugins=(.*/plugins=(vim-interaction pip git sudo extract z wd archlinux zsh-autosuggestions zsh-syntax-highlighting flatpak)/g' ~/.zshrc;
+sed -i 's/plugins=(.*/plugins=(vim-interaction pip git sudo extract z wd archlinux zsh-autosuggestions zsh-syntax-highlighting flatpak command-not-found)/g' ~/.zshrc;
 sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
 
 # 设置别名
