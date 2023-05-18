@@ -4,13 +4,13 @@
 # sudo apt install p7zip
 # sudo pacman -S p7zip-full
 
-VIT_VERSION="2023-02-23";
+QIT_VERSION="2023-02-23";
 
 # mkdir .tmp 2>/dev/null; 
 # cd .tmp; 
 cd /tmp;
 rm -Rf Qogir-icon-theme* 2>/dev/null; 
-wget https://github.com/vinceliuice/Qogir-icon-theme/archive/refs/tags/$VIT_VERSION.zip -O Qogir-icon-theme.zip; 
+wget https://github.com/vinceliuice/Qogir-icon-theme/archive/refs/tags/$QIT_VERSION.zip -O Qogir-icon-theme.zip; 
 7za x Qogir-icon-theme.zip; 
 cd Qogir-icon-theme-*; 
 ./install.sh; 
