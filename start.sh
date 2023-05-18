@@ -10,11 +10,8 @@ proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
 export http_proxy=$proxyaddress;
 export https_proxy=$proxyaddress;
 
-# export http_proxy=http://192.168.43.1:1080;
-# export https_proxy=http://192.168.43.1:1080;
-
-# export http_proxy=http://192.168.1.94:8080
-# https://m.yht7.com/news/12653
+# export http_proxy=http://127.0.0.1:1080;
+# export https_proxy=http://127.0.0.1:1080;
 
 chmod +x scripts/*;
 
@@ -90,3 +87,5 @@ echo "alias supycs='sudo proxychains'" >> ~/.zshrc;
 echo "alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'" >> ~/.zshrc;
+
+source ~/.zshrc
