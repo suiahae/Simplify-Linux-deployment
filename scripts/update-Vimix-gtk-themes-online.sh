@@ -19,5 +19,5 @@ cd vimix-gtk-themes-*;
 ./install.sh -t doder -c light -l; 
 cd ..;
 rm -Rf vimix-gtk-themes.zip 2>/dev/null; 
-rm -Rf vimix-gtk-themes-$VGT_VERSION/ 2>/dev/null; 
+rm -Rf vimix-gtk-themes-*/ 2>/dev/null; 
 # notify-send "All done!" "Enjoy the latest version of Vimix!" -i face-smile
