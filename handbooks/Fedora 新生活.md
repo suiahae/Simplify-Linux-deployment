@@ -372,11 +372,9 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 从 [extensions.gnome.org](https://extensions.gnome.org/) 下载
 
+[User Themes](https://extensions.gnome.org/extension/19/user-themes/)
+
 [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
-
-[TopIcons Plus](https://extensions.gnome.org/extension/1031/topicons/)
-
-<https://github.com/kofemann/TopIcons-plus>
 
 [GSConnect](https://extensions.gnome.org/extension/1319/gsconnect/)
 
@@ -386,9 +384,9 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 [Proxy Switcher](https://extensions.gnome.org/extension/771/proxy-switcher/)
 
-https://github.com/tomflannaghan/proxy-switcher
+[Removable Drive Menu](https://extensions.gnome.org/extension/7/removable-drive-menu/)
 
-[netspeed](https://extensions.gnome.org/extension/104/netspeed/)
+[Net speed Simplified](https://extensions.gnome.org/extension/3724/net-speed-simplified/)
 
 [x11-gestures](https://extensions.gnome.org/extension/4033/x11-gestures/)
 
