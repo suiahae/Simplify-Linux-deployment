@@ -64,7 +64,7 @@ proxychains ./scripts/update-Qogir-icon-online.sh;
 proxychains ./scripts/update-vimix-gtk-themes-online.sh;
 
 ## 在 Flatpak 应用程序上应用 GTK 主题 [[itsfoss](https://itsfoss.com/flatpak-app-apply-theme/)]，例如：
-sudo flatpak override --filesystem=$HOME/.local/share/themes
+sudo flatpak override --filesystem=$HOME/.themes
 sudo flatpak override --filesystem=$HOME/.local/share/icons
 sudo flatpak override --env=GTK_THEME=vimix-light-doder
 sudo flatpak override --env=ICON_THEME=Qogir
