@@ -14,9 +14,9 @@ wget https://github.com/vinceliuice/vimix-gtk-themes/archive/refs/tags/$VGT_VERS
 7za x vimix-gtk-themes.zip; 
 cd vimix-gtk-themes-*; 
 mkdir -p $HOME/.local/share/themes
-./install.sh -t doder -d $HOME/.local/share/themes; 
+./install.sh -t doder; 
 # Link installed gtk-4.0 theme to config folder for all libadwaita app use this Vimix-light-doder
-./install.sh -t doder -c light -l -d $HOME/.local/share/themes; 
+./install.sh -t doder -c light -l; 
 cd ..; 
 rm -Rf vimix-gtk-themes-* 2>/dev/null; 
 # notify-send "All done!" "Enjoy the latest version of Vimix!" -i face-smile
