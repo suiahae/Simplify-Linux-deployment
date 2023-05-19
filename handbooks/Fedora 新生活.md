@@ -313,6 +313,15 @@ Fedora 的图标没有在 grub 中显示，甚至没有显示 Linux企鹅Tux图�
 sudo ln -s /usr/share/grub/themes/Tela/icons/fedora.png /usr/share/grub/themes/Tela/icons/kernel.png
 ```
 
+#### 1.3.2 gnome theme
+
+https://github.com/suiahae/Simplify-Linux-deployment/blob/master/scripts/update-vimix-gtk-themes-online.sh
+
+https://github.com/suiahae/Simplify-Linux-deployment/blob/master/scripts/update-Qogir-icon-online.sh
+
+https://github.com/lassekongo83/adw-gtk3
+
+
 <!-- #### 1.3.2 MaterialFox
 
 https://github.com/muckSponge/MaterialFox/
@@ -332,7 +341,7 @@ The following content is from MaterialFox-76.2, ==but it is very important==
 
 ### 2.1 代理软件
 
-#### 2.1.1 Clash
+#### 2.1.1 Clash (deprecated, waiting update)
 
 1. 克隆仓库
 
@@ -367,6 +376,16 @@ The following content is from MaterialFox-76.2, ==but it is very important==
    ```
 
    打开 index.html 即可
+
+#### 2.1.1 Clash for Windows
+
+https://github.com/Fndroid/clash_for_windows_pkg
+
+   ```bash
+   flatpak install flathub io.github.Fndroid.clash_for_windows
+   ```
+   
+[Service Mode not working on Flathub](https://github.com/Fndroid/clash_for_windows_pkg/issues/3298)
 
 ### 2.2 gnome 插件
 
