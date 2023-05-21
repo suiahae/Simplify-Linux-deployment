@@ -573,7 +573,7 @@ sudo dnf install grub-customizer -y
 1. 安装
 
    ```bash
-   sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool -y
+   sudo dnf install fcitx5 fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-configtool fcitx5-lua -y
    ```
 
 2. 自动重启
@@ -657,13 +657,16 @@ mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 
 1. 解除系统 ibus 快捷键占用
 
-   “设置” -- “键盘” -- “键盘快捷键” -- “打字” -- 点一下之后按 backspace -- 点设置
+   - “设置” -- “键盘” -- “键盘快捷键” -- “打字” -- 点一下之后按 “Backspace” -- 点设置
 
 2. 更改 Fcitx 快捷键设置
-   
-   “配置” -- “全局选项” -- 点第一行的 “control + 空格” -- 按下 “super + 空格” -- “设置” -- 点 “临时在当前和第一个输入法之间切换” 中 “左 shift” 后的 “+” -- 点刚出现的 “空” -- 
-按下 “右 shift”
 
+   1. “配置” -- “输入法” -- 添加分组 “纯英语” -- 添加输入法 “键盘-汉语”
+   
+   2. “配置” -- “全局选项” -- 删掉 “切换启用/禁用输入法” 后的所有选项 -- 添加 “左 shift” 和 “右 shift”
+   
+   3. 删掉 “临时在当前和第一个输入法之间切换” 后的 “左 shift” 
+   
 ### 2.5 文字编辑
 
 #### 2.5.1 Visual Studio Code
