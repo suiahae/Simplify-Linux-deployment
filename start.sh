@@ -19,15 +19,20 @@ sudo dnf install redhat-lsb-core -y 2>/dev/null;
 
 lsb_release -a > /tmp/lsb_release_grep;
 distributor=$(grep -oP '(?<=Distributor ID:\s)\w*' /tmp/lsb_release_grep);
-distri_ubuntu='Ubuntu';
 distri_fedora='Fedora';
+# distri_ubuntu='Ubuntu';
 # distri_arch='Arch Linux';
 
+if [ "$distributor" != "$distri_fedora" ];
+then
+    print("Your system is not Fedora")
+    exit
+fi
 # https://tylersguides.com/guides/using-a-proxy-with-dnf/
 # echo proxy=$proxyaddress | sudo tee -a /etc/dnf/dnf.conf
 
 # 安装 proxychains-ng
-sudo apt install proxychains4 2>/dev/null;
+# sudo apt install proxychains4 2>/dev/null;
 sudo dnf install proxychains-ng -y 2>/dev/null;
 
 # 更改 proxychains 代理
@@ -35,12 +40,12 @@ sudo dnf install proxychains-ng -y 2>/dev/null;
 sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
 
 # 改变镜像源
-if [ "$distributor" = "$distri_ubuntu" ];
-then
+# if [ "$distributor" = "$distri_ubuntu" ];
+# then
     ./scripts/change-update-list-ubuntu.sh; # for Ubuntu 20.04 LTS
     sudo apt update && sudo apt upgrade;
-elif [ "$distributor" = "$distri_fedora" ];
-then
+# elif [ "$distributor" = "$distri_fedora" ];
+# then
     # # 更改为清华镜像源（https://mirrors.tuna.tsinghua.edu.cn/）
     # ./scripts/change-update-list-fedora.sh;
     # sudo dnf makecache;
@@ -53,10 +58,10 @@ then
 #     echo $distri_arch;
 #     # 为 arch 安装 proxychains-ng
 #     ./scripts/install-proxychains-ng.sh;
-fi
+# fi
 
 ## 安装主题
-sudo apt install gnome-extensions-app gnome-tweak-tool p7zip-full wget -y 2>/dev/null; 
+# sudo apt install gnome-extensions-app gnome-tweak-tool p7zip-full wget -y 2>/dev/null; 
 sudo dnf install gnome-extensions-app gnome-tweak-tool p7zip wget -y 2>/dev/null; 
 
 # proxychains4 ./scripts/update-Qogir-theme-online.sh;
@@ -74,7 +79,7 @@ sudo flatpak override --env=ICON_THEME=Qogir
 
 
 # 安装环境
-sudo apt install git zsh wget -y 2>/dev/null; 
+# sudo apt install git zsh wget -y 2>/dev/null; 
 sudo dnf install git zsh wget util-linux-user -y 2>/dev/null; 
 
 # 安装 oh-my-zsh
@@ -90,6 +95,9 @@ git clone https://github.com/bilelmoussaoui/flatpak-zsh-completion ${ZSH_CUSTOM:
 # 更改 plugins 配置
 sed -i 's/plugins=(.*/plugins=(vim-interaction pip git sudo extract z wd archlinux zsh-autosuggestions zsh-syntax-highlighting flatpak command-not-found)/g' ~/.zshrc;
 sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
+
+# 安装 sqlite 以支持 zsh command-not-found
+sudo dnf install sqlite -y 2>/dev/null; 
 
 # 设置别名
 echo "alias pycs=proxychains" >> ~/.zshrc;
