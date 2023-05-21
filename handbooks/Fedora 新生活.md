@@ -599,6 +599,8 @@ sudo dnf install grub-customizer -y
 
 <https://github.com/hosxy/Fcitx5-Material-Color>
 
+两年没更新了，不过还能用
+
 ```bash
 mkdir -p ~/.local/share/fcitx5/themes/Material-Color
 git clone https://github.com/hosxy/Fcitx5-Material-Color.git ~/.local/share/fcitx5/themes/Material-Color
@@ -611,7 +613,7 @@ cd ~/.local/share/fcitx5/themes/Material-Color
 ln -sf ./theme-deepPurple.conf theme.conf
 ```
 
-启用主题
+~~启用主题~~ (在附加组件里选一下主题就行，其他无需修改，已默认)
 
 ```bash
 cat > ~/.config/fcitx5/conf/classicui.conf << EOF
@@ -628,7 +630,7 @@ Theme=Material-Color
 EOF
 ```
 
-使用单行模式，
+~~使用单行模式~~ (无需修改，已默认)
 
 修改 `~/.config/fcitx5/conf/pinyin.conf`, 加入/修改以下内容：
 
@@ -650,6 +652,17 @@ PreeditInApplication=True
 ```bash
 mkdir -p ~/.local/share/fcitx5/pinyin/dictionaries
 ```
+
+##### 2.4.1.3 更改快捷键符合 Windows 10/11 习惯
+
+1. 解除系统 ibus 快捷键占用
+
+   “设置” -- “键盘” -- “键盘快捷键” -- “打字” -- 点一下之后按 backspace -- 点设置
+
+2. 更改 Fcitx 快捷键设置
+   
+   “配置” -- “全局选项” -- 点第一行的 “control + 空格” -- 按下 “super + 空格” -- “设置” -- 点 “临时在当前和第一个输入法之间切换” 中 “左 shift” 后的 “+” -- 点刚出现的 “空” -- 
+按下 “右 shift”
 
 ### 2.5 文字编辑
 
