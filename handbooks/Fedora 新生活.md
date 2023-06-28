@@ -1099,7 +1099,7 @@ sudo dnf install aria2 -y
 
 ##### 2.11.1.3 设置 systemd service
 
-`sudo gedit /usr/lib/systemd/system/aria2.service`
+`sudo gedit /etc/systemd/system/aria2.service`
 
 ```bash
 [Unit]
