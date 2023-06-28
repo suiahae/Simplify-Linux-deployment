@@ -1308,7 +1308,7 @@ Notes: 注意编辑`/etc/fuse.conf`文件 ---- “取消注释 user_allow_other�
 
 例如：
 
-`sudo vim /usr/lib/systemd/system/rclone-movies.service`
+`sudo vim /etc/systemd/system/rclone-movies.service`
 
 GDTeam_raye_movies
 
