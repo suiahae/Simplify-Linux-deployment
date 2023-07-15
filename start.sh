@@ -2,7 +2,7 @@
 # https://extensions.gnome.org/
 # https://rpmfusion.org/Howto/NVIDIA
 
-proxytype="http";
+proxytype="scoks5";
 proxyhost="127.0.0.1";
 proxyport="7890";
 proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
@@ -31,13 +31,18 @@ fi
 # https://tylersguides.com/guides/using-a-proxy-with-dnf/
 # echo proxy=$proxyaddress | sudo tee -a /etc/dnf/dnf.conf
 
-# 安装 proxychains-ng
+## 安装 proxychains-ng
 # sudo apt install proxychains4 2>/dev/null;
-sudo dnf install proxychains-ng -y 2>/dev/null;
+# sudo dnf install proxychains-ng -y 2>/dev/null;
 
-# 更改 proxychains 代理
-#sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
-sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
+## 更改 proxychains 代理
+# sudo sed -i "s/^socks.*/http\t192.168.160.1\t7890/g" /etc/proxychains.conf;
+# sudo sed -i "s/^socks.*/$proxytype\t$proxyhost\t$proxyport/g" /etc/proxychains.conf;
+
+# 安装 gg (go-graft)
+sudo sh -c "$(curl -L https://github.com/mzz2017/gg/raw/main/release/go.sh)";
+# 设置节点
+gg config -w node=proxyaddress
 
 # 改变镜像源
 # if [ "$distributor" = "$distri_ubuntu" ];
@@ -100,10 +105,16 @@ sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
 sudo dnf install sqlite -y 2>/dev/null; 
 
 # 设置别名
-echo "alias pycs=proxychains" >> ~/.zshrc;
-echo "alias supycs='sudo proxychains'" >> ~/.zshrc;
+# echo "alias pycs=proxychains" >> ~/.zshrc;
+# echo "alias supycs='sudo proxychains'" >> ~/.zshrc;
+# zsh gg 化
+echo "unalias gg
+compdef _precommand gg
+" >> ~/.zshrc;
+
 echo "alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'" >> ~/.zshrc;
+
 
 source ~/.zshrc
