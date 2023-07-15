@@ -107,7 +107,9 @@ sudo dnf install sqlite -y 2>/dev/null;
 # 设置别名
 # echo "alias pycs=proxychains" >> ~/.zshrc;
 # echo "alias supycs='sudo proxychains'" >> ~/.zshrc;
-# zsh gg 化
+
+# zsh setting for gg
+sed -i '1i\autoload -Uz compinit\ncompinit' ~/.zshrc
 echo "unalias gg
 compdef _precommand gg
 " >> ~/.zshrc;
