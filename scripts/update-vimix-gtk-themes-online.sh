@@ -4,7 +4,7 @@
 # sudo apt install p7zip
 # sudo pacman -S p7zip-full
 
-VGT_VERSION="2023-03-23";
+VGT_VERSION="2024-04-20";
 
 # mkdir .tmp 2>/dev/null; 
 # cd .tmp; 
