@@ -4,7 +4,7 @@
 # sudo apt install p7zip
 # sudo pacman -S p7zip-full
 
-QIT_VERSION="2023-02-23";
+QIT_VERSION="2023-06-05";
 
 # mkdir .tmp 2>/dev/null; 
 # cd .tmp; 
