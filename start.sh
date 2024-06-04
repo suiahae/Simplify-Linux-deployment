@@ -2,7 +2,7 @@
 # https://extensions.gnome.org/
 # https://rpmfusion.org/Howto/NVIDIA
 
-proxytype="scoks5";
+proxytype="socks5";
 proxyhost="127.0.0.1";
 proxyport="7890";
 proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
