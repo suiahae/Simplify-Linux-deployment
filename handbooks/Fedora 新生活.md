@@ -417,6 +417,10 @@ https://github.com/Fndroid/clash_for_windows_pkg
 
 [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
 
+[Night Theme Switcher](https://extensions.gnome.org/extension/2236/night-theme-switcher/)
+
+[Legacy (GTK3) Theme Scheme Auto Switcher](https://extensions.gnome.org/extension/4998/legacy-gtk3-theme-scheme-auto-switcher/)
+
 ~~[x11-gestures](https://extensions.gnome.org/extension/4033/x11-gestures/)~~
 
 ~~[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)~~
