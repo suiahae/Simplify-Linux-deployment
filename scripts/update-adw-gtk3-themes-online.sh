@@ -12,4 +12,9 @@ tar -xvJf adw-gtk3$AG3_VERSION.tar.xz -C $HOME/.local/share/themes/;
 
 cd ..;
 rm -Rf adw-gtk3$AG3_VERSION.tar.xz 2>/dev/null;
+
+# use this theme for flatpak apps
+sudo flatpak override --filesystem=xdg-data/themes;
+flatpak uninstall org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark && sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3 && sudo flatpak mask org.gtk.Gtk3theme.adw-gtk3-dark 2>/dev/null;
+
 # notify-send "All done!" "Enjoy the latest version of adw-gtk3!" -i face-smile;
