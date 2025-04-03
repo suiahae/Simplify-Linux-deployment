@@ -69,15 +69,16 @@ gg config -w node=$proxyaddress;
 # sudo apt install gnome-extensions-app gnome-tweak-tool p7zip-full wget -y; 
 sudo dnf install gnome-extensions-app gnome-tweak-tool p7zip wget -y; 
 
-# proxychains4 ./scripts/update-Qogir-theme-online.sh;
-./scripts/update-Qogir-icon-online.sh;
-./scripts/update-vimix-gtk-themes-online.sh;
+# ./scripts/update-Qogir-icon-online.sh;
+# ./scripts/update-vimix-gtk-themes-online.sh;
+./scripts/update-adw-gtk3-themes-online.sh
 
 ## 在 Flatpak 应用程序上应用 GTK 主题 [[itsfoss](https://itsfoss.com/flatpak-app-apply-theme/)]，例如：
-sudo flatpak override --filesystem=$HOME/.themes;
-sudo flatpak override --filesystem=$HOME/.local/share/icons;
-sudo flatpak override --env=GTK_THEME=vimix-light-doder;
-sudo flatpak override --env=ICON_THEME=Qogir;
+
+# sudo flatpak override --filesystem=$HOME/.themes;
+# sudo flatpak override --filesystem=$HOME/.local/share/icons;
+# sudo flatpak override --env=GTK_THEME=vimix-light-doder;
+# sudo flatpak override --env=ICON_THEME=Qogir;
 
 # 恢复默认
 # sudo flatpak override --reset
