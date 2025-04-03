@@ -2,8 +2,8 @@
 # https://extensions.gnome.org/
 # https://rpmfusion.org/Howto/NVIDIA
 
-proxytype="socks5";
 proxyhost="127.0.0.1";
+proxytype="http";
 proxyport="7890";
 proxyaddress=$proxytype"://"$proxyhost":"$proxyport;
 
@@ -15,19 +15,19 @@ export https_proxy=$proxyaddress;
 
 chmod +x scripts/*;
 
-sudo dnf install redhat-lsb-core -y 2>/dev/null;
+# sudo dnf install redhat-lsb-core -y;
 
-lsb_release -a > /tmp/lsb_release_grep;
-distributor=$(grep -oP '(?<=Distributor ID:\s)\w*' /tmp/lsb_release_grep);
-distri_fedora='Fedora';
+# lsb_release -a > /tmp/lsb_release_grep;
+# distributor=$(grep -oP '(?<=Distributor ID:\s)\w*' /tmp/lsb_release_grep);
+# distri_fedora='Fedora';
 # distri_ubuntu='Ubuntu';
 # distri_arch='Arch Linux';
 
-if [ "$distributor" != "$distri_fedora" ];
-then
-    print("Your system is not Fedora")
-    exit
-fi
+# if [ "$distributor" != "$distri_fedora" ];
+# then
+#     print("Your system is not Fedora")
+#     exit
+# fi
 # https://tylersguides.com/guides/using-a-proxy-with-dnf/
 # echo proxy=$proxyaddress | sudo tee -a /etc/dnf/dnf.conf
 
@@ -42,13 +42,13 @@ fi
 # 安装 gg (go-graft)
 sudo sh -c "$(curl -L https://github.com/mzz2017/gg/raw/main/release/go.sh)";
 # 设置节点
-gg config -w node=proxyaddress
+gg config -w node=$proxyaddress;
 
 # 改变镜像源
 # if [ "$distributor" = "$distri_ubuntu" ];
 # then
-    ./scripts/change-update-list-ubuntu.sh; # for Ubuntu 20.04 LTS
-    sudo apt update && sudo apt upgrade;
+    # ./scripts/change-update-list-ubuntu.sh; # for Ubuntu 20.04 LTS
+    # sudo apt update && sudo apt upgrade;
 # elif [ "$distributor" = "$distri_fedora" ];
 # then
     # # 更改为清华镜像源（https://mirrors.tuna.tsinghua.edu.cn/）
@@ -66,26 +66,26 @@ gg config -w node=proxyaddress
 # fi
 
 ## 安装主题
-# sudo apt install gnome-extensions-app gnome-tweak-tool p7zip-full wget -y 2>/dev/null; 
-sudo dnf install gnome-extensions-app gnome-tweak-tool p7zip wget -y 2>/dev/null; 
+# sudo apt install gnome-extensions-app gnome-tweak-tool p7zip-full wget -y; 
+sudo dnf install gnome-extensions-app gnome-tweak-tool p7zip wget -y; 
 
 # proxychains4 ./scripts/update-Qogir-theme-online.sh;
-proxychains ./scripts/update-Qogir-icon-online.sh;
-proxychains ./scripts/update-vimix-gtk-themes-online.sh;
+./scripts/update-Qogir-icon-online.sh;
+./scripts/update-vimix-gtk-themes-online.sh;
 
 ## 在 Flatpak 应用程序上应用 GTK 主题 [[itsfoss](https://itsfoss.com/flatpak-app-apply-theme/)]，例如：
-sudo flatpak override --filesystem=$HOME/.themes
-sudo flatpak override --filesystem=$HOME/.local/share/icons
-sudo flatpak override --env=GTK_THEME=vimix-light-doder
-sudo flatpak override --env=ICON_THEME=Qogir
+sudo flatpak override --filesystem=$HOME/.themes;
+sudo flatpak override --filesystem=$HOME/.local/share/icons;
+sudo flatpak override --env=GTK_THEME=vimix-light-doder;
+sudo flatpak override --env=ICON_THEME=Qogir;
 
 # 恢复默认
 # sudo flatpak override --reset
 
 
 # 安装环境
-# sudo apt install git zsh wget -y 2>/dev/null; 
-sudo dnf install git zsh wget util-linux-user -y 2>/dev/null; 
+# sudo apt install git zsh wget -y; 
+sudo dnf install git zsh wget util-linux-user -y; 
 
 # 安装 oh-my-zsh
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";
@@ -102,7 +102,7 @@ sed -i 's/plugins=(.*/plugins=(vim-interaction pip git sudo extract z wd archlin
 sed -i 's/ZSH_THEME=".*/ZSH_THEME="ys"/g' ~/.zshrc;
 
 # 安装 sqlite 以支持 zsh command-not-found
-sudo dnf install sqlite -y 2>/dev/null; 
+sudo dnf install sqlite -y; 
 
 # 设置别名
 # echo "alias pycs=proxychains" >> ~/.zshrc;
