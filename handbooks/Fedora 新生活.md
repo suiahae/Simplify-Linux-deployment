@@ -391,6 +391,12 @@ https://github.com/Fndroid/clash_for_windows_pkg
 
 从 [extensions.gnome.org](https://extensions.gnome.org/) 下载
 
+安装插件app
+
+   ```bash
+   sudo dnf install gnome-extensions-app gnome-tweak-tool p7zip wget -y; 
+   ```
+
 [User Themes](https://extensions.gnome.org/extension/19/user-themes/)
 
 [AppIndicator and KStatusNotifierItem Support](https://extensions.gnome.org/extension/615/appindicator-support/)
@@ -405,13 +411,13 @@ https://github.com/Fndroid/clash_for_windows_pkg
 
 [Removable Drive Menu](https://extensions.gnome.org/extension/7/removable-drive-menu/)
 
-[Net speed Simplified](https://extensions.gnome.org/extension/3724/net-speed-simplified/)
-
-[x11-gestures](https://extensions.gnome.org/extension/4033/x11-gestures/)
+[System Monitor](https://extensions.gnome.org/extension/6807/system-monitor/)
 
 [Clipboard Indicator](https://extensions.gnome.org/extension/779/clipboard-indicator/)
 
 [Dash to Panel](https://extensions.gnome.org/extension/1160/dash-to-panel/)
+
+~~[x11-gestures](https://extensions.gnome.org/extension/4033/x11-gestures/)~~
 
 ~~[Dash to Dock](https://extensions.gnome.org/extension/307/dash-to-dock/)~~
 
